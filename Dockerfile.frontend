@@ -1,0 +1,47 @@
+# Stage 1: Build
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Copy package.json and package-lock.json first (better caching)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --legacy-peer-deps
+
+# Copy the entire project
+COPY . .
+
+# Debug: Check the structure before build
+RUN ls -la
+
+# Build the Angular app with explicit base-href
+RUN npm run build -- --base-href=/
+
+# Debug: Check the dist structure after build
+RUN ls -la dist/
+
+# Ensure assets have proper permissions
+RUN find dist -type f -exec chmod 644 {} \; && find dist -type d -exec chmod 755 {} \;
+
+# Stage 2: Serve
+FROM nginx:alpine
+
+# Copy the build output with correct permissions
+# Option 1: If your build outputs directly to dist/
+COPY --from=builder --chown=nginx:nginx /app/dist/ /usr/share/nginx/html/
+
+# Option 2: If your build outputs to a project subfolder (uncomment if needed)
+# COPY --from=builder --chown=nginx:nginx /app/dist/your-project-name/ /usr/share/nginx/html/
+
+# Copy custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Ensure proper permissions on nginx html directory
+RUN chmod -R 755 /usr/share/nginx/html && \
+    chown -R nginx:nginx /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

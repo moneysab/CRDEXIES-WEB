@@ -1,0 +1,152 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">{{ 'GROUPS.TITLE' | translate }}</h2>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click)="openAddGroupModal()">
+          <i class="bi bi-people"></i>
+          + {{ 'GROUPS.ADD_BUTTON' | translate }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="navigateToRoles()"> {{ 'ROLES.MANAGE_TITLE' | translate }}</button>
+      </div>
+    </div>
+  
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+  
+    <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+  
+    <table class="table table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>{{ 'GROUPS.NAME' | translate }}</th>
+          <th>{{ 'GROUPS.ROLES' | translate }}</th>
+          <th>{{ 'GROUPS.ACTIONS' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of groups">
+          <td>{{ group.name }}</td>
+          <td>
+            <ng-container *ngIf="group.roles && group.roles.length > 0; else noRoles">
+              <span *ngFor="let role of group.roles; let last = last">
+                <span class="badge bg-primary me-1">{{ role.name }}</span>
+                <span *ngIf="!last">, </span>
+              </span>
+            </ng-container>
+            <ng-template #noRoles><em>{{ 'GROUPS.NO_ROLES' | translate }}</em></ng-template>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger me-2" (click)="deleteGroup(group)">
+              {{ 'GROUPS.DELETE' | translate }}
+            </button>
+            <button class="btn btn-sm btn-success me-2" (click)="openRolesModal(group)">
+              {{ 'GROUPS.MANAGE_ROLES' | translate }}
+            </button>
+            <button class="btn btn-sm btn-info me-2" (click)="openPermissionsModal(group)">
+              {{ 'GROUPS.VIEW_PERMISSIONS' | translate }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal Ajout Groupe -->
+  <div *ngIf="modalIsOpen" class="modal d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ 'GROUPS.ADD_TITLE' | translate }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <form [formGroup]="addGroupForm" (ngSubmit)="onAddGroupSubmit()">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="groupName" class="form-label">{{ 'GROUPS.NAME' | translate }}</label>
+              <input id="groupName" type="text" class="form-control" formControlName="name"
+                     [class.is-invalid]="addGroupForm.controls['name'].invalid && addGroupForm.controls['name'].touched">
+              <div class="invalid-feedback" *ngIf="addGroupForm.controls['name'].errors?.['required']">
+                {{ 'GROUPS.VALIDATION.REQUIRED' | translate }}
+              </div>
+              <div class="invalid-feedback" *ngIf="addGroupForm.controls['name'].errors?.['minlength']">
+                {{ 'GROUPS.VALIDATION.MIN_LENGTH' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">
+              {{ 'COMMON.CANCEL' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="addGroupForm.invalid">
+              {{ 'COMMON.CREATE' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Gérer les rôles -->
+  <div *ngIf="roleModalIsOpen" class="modal d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {{ 'GROUPS.MANAGE_ROLES_TITLE' | translate }} "{{ selectedGroup?.name }}"
+          </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeRoleModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="allRoles.length === 0">
+            {{ 'GROUPS.LOADING_ROLES' | translate }}
+          </div>
+          <div *ngIf="allRoles.length > 0">
+            <div *ngFor="let role of allRoles" class="form-check">
+              <input #checkbox type="checkbox" [checked]="isRoleSelected(role.id)"
+                     (change)="onRoleCheckboxChange(role.id, checkbox.checked)">
+              <label class="form-check-label">{{ role.name }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="closeRoleModal()">
+            {{ 'COMMON.CANCEL' | translate }}
+          </button>
+          <button class="btn btn-primary" (click)="saveRoles()">
+            {{ 'COMMON.SAVE' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Voir les permissions -->
+  <div *ngIf="permissionModalIsOpen" class="modal d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {{ 'GROUPS.PERMISSIONS_TITLE' | translate }} "{{ selectedGroup?.name }}"
+          </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closePermissionModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="selectedPermissions.length === 0">
+            <em>{{ 'GROUPS.NO_PERMISSIONS' | translate }}</em>
+          </div>
+          <ul *ngIf="selectedPermissions.length > 0" class="list-group">
+            <li *ngFor="let permission of selectedPermissions" class="list-group-item">
+              {{ permission.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" (click)="closePermissionModal()">
+            {{ 'COMMON.CLOSE' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

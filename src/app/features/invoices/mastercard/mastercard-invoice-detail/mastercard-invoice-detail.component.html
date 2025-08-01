@@ -1,0 +1,230 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Mastercard Invoice Details</h5>
+            <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+              <i class="ti ti-arrow-left"></i> Back to Invoices
+            </button>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div *ngIf="isLoading" class="d-flex justify-content-center py-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+          
+          <div *ngIf="!isLoading && !errorMessage && invoice">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="invoice-section">
+                  <h6 class="section-title">Invoice Information</h6>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th>Invoice Number</th>
+                          <td>{{ invoice.invoiceNumber || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Original Invoice</th>
+                          <td>{{ invoice.originalInvoiceNumber || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Document Type</th>
+                          <td>{{ invoice.documentType || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Billing Date</th>
+                          <td>{{ formatDate(invoice.billingCycleDate) }}</td>
+                        </tr>
+                        <tr>
+                          <th>Period Start</th>
+                          <td>{{ formatDate(invoice.periodStartDate) }}</td>
+                        </tr>
+                        <tr>
+                          <th>Period End</th>
+                          <td>{{ formatDate(invoice.periodEndDate) }}</td>
+                        </tr>
+                        <tr>
+                          <th>CSV File</th>
+                          <td>{{ invoice.csvFile || '–' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="invoice-section">
+                  <h6 class="section-title">Identifiers</h6>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th>Invoice ICA</th>
+                          <td>{{ invoice.invoiceIca || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Activity ICA</th>
+                          <td>{{ invoice.activityIca || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Billable ICA</th>
+                          <td>{{ invoice.billableIca || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Affiliate</th>
+                          <td>{{ invoice.affiliate || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Event ID</th>
+                          <td>{{ invoice.eventId || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Service Code</th>
+                          <td>{{ invoice.serviceCode || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Service Description</th>
+                          <td>{{ invoice.serviceCodeDescription || '–' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="invoice-section">
+                  <h6 class="section-title">Billing Details</h6>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th>Event Description</th>
+                          <td>{{ invoice.eventDescription || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>UOM</th>
+                          <td>{{ invoice.uom || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Quantity</th>
+                          <td>{{ invoice.quantityAmount || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Rate</th>
+                          <td>{{ invoice.rate || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Collection Method</th>
+                          <td>{{ invoice.collectionMethod || '–' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="invoice-section">
+                  <h6 class="section-title">Financial Information</h6>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th>VAT Charge</th>
+                          <td>{{ formatCurrency(invoice.vatCharge) }}</td>
+                        </tr>
+                        <tr>
+                          <th>VAT Currency</th>
+                          <td>{{ invoice.vatCurrency || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>VAT Code</th>
+                          <td>{{ invoice.vatCode || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>VAT Rate</th>
+                          <td>{{ invoice.vatRate || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Fee Type</th>
+                          <td>{{ invoice.feeType || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Category</th>
+                          <td>{{ invoice.category || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Subcategory</th>
+                          <td>{{ invoice.subcategory || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>Explanatory Text</th>
+                          <td>{{ invoice.sbfExplanatoryText || '–' }}</td>
+                        </tr>
+                        <tr>
+                          <th>CSV File</th>
+                          <td>{{ invoice.csvFile || '–' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="invoice-section">
+                  <h6 class="section-title">VAT Details and Classification</h6>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                    <tr>
+                      <th>VAT Code</th>
+                      <td>{{ invoice.vatCode || '–' }}</td>
+                    </tr>
+                    <tr>
+                      <th>VAT Rate</th>
+                      <td>{{ invoice.vatRate || '–' }}</td>
+                    </tr>
+                    <tr>
+                      <th>Fee Type</th>
+                      <td>{{ invoice.feeType || '–' }}</td>
+                    </tr>
+                    <tr>
+                      <th>Category</th>
+                      <td>{{ invoice.category || '–' }}</td>
+                    </tr>
+                    <tr>
+                      <th>Subcategory</th>
+                      <td>{{ invoice.subcategory || '–' }}</td>
+                    </tr>
+                    <tr>
+                      <th>Explanatory Text</th>
+                      <td>{{ invoice.sbfExplanatoryText || '–' }}</td>
+                    </tr>
+                  </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

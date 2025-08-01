@@ -1,0 +1,58 @@
+$visa-blue: #1a1f71;
+$visa-gold: #F7B600;
+$visa-light-blue: lighten($visa-blue, 60%);
+
+.visa-card {
+  border-left: 6px solid $visa-blue;
+  border-radius: 10px;
+
+  .visa-title {
+    font-weight: 600;
+    color: $visa-blue;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .info-card {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+
+    .info-item {
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+  }
+
+  .border-gold {
+    border: 2px solid $visa-gold !important;
+  }
+
+  .bg-gold {
+    background-color: $visa-gold !important;
+    color: #000;
+  }
+
+  .border-light-blue {
+    border: 1px solid $visa-light-blue !important;
+  }
+
+  .bg-light-blue {
+    background-color: $visa-light-blue !important;
+  }
+
+  .btn-primary {
+    background-color: $visa-blue;
+    border-color: $visa-blue;
+    
+    &:hover, &:focus {
+      background-color: darken($visa-blue, 10%);
+      border-color: darken($visa-blue, 10%);
+    }
+  }
+}

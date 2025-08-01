@@ -1,0 +1,205 @@
+<div class="row">
+  <!-- User Profile Card -->
+   <!--  <div class="col-lg-6 mb-4"> -->
+  <div class="col-12 col-lg-10 offset-lg-1 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'USER_PROFILE.TITLE' | translate }}</h5>
+      </div>
+      <div class="card-body">
+        <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+          </div>
+        </div>
+
+        <div *ngIf="successMessage" class="alert alert-success" role="alert">
+          {{ successMessage }}
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{ errorMessage }}
+        </div>
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="username" class="form-label">{{ 'USER_PROFILE.USERNAME' | translate }}</label>
+              <input
+                type="text"
+                id="username"
+                formControlName="username"
+                class="form-control"
+                [ngClass]="{'is-invalid': profileForm.controls['username'].invalid && profileForm.controls['username'].touched}"
+                readonly
+              >
+              <div class="invalid-feedback" *ngIf="profileForm.controls['username'].errors?.['required']">
+                {{ 'USER_PROFILE.USERNAME_REQUIRED' | translate }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="email" class="form-label">{{ 'USER_PROFILE.EMAIL' | translate }}</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{'is-invalid': profileForm.controls['email'].invalid && profileForm.controls['email'].touched}"
+                readonly
+              >
+              <div class="invalid-feedback" *ngIf="profileForm.controls['email'].errors?.['required']">
+                {{ 'USER_PROFILE.EMAIL_REQUIRED' | translate }}
+              </div>
+              <div class="invalid-feedback" *ngIf="profileForm.controls['email'].errors?.['email']">
+                {{ 'USER_PROFILE.EMAIL_INVALID' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="firstName" class="form-label">{{ 'USER_PROFILE.FIRST_NAME' | translate }}</label>
+              <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                class="form-control"
+                [ngClass]="{'is-invalid': profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched}"
+              >
+              <div class="invalid-feedback" *ngIf="profileForm.controls['firstName'].errors?.['required']">
+                {{ 'USER_PROFILE.FIRST_NAME_REQUIRED' | translate }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="lastName" class="form-label">{{ 'USER_PROFILE.LAST_NAME' | translate }}</label>
+              <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                class="form-control"
+                [ngClass]="{'is-invalid': profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched}"
+              >
+              <div class="invalid-feedback" *ngIf="profileForm.controls['lastName'].errors?.['required']">
+                {{ 'USER_PROFILE.LAST_NAME_REQUIRED' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="phoneNumber" class="form-label">{{ 'USER_PROFILE.PHONE' | translate }}</label>
+              <input
+                type="text"
+                id="phoneNumber"
+                formControlName="phoneNumber"
+                class="form-control"
+              >
+            </div>
+
+            <div class="col-md-6">
+              <label for="timezone" class="form-label">{{ 'USER_PROFILE.TIMEZONE' | translate }}</label>
+              <input
+                type="text"
+                id="timezone"
+                formControlName="timezone"
+                class="form-control"
+              >
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="locale" class="form-label">{{ 'USER_PROFILE.LOCALE' | translate }}</label>
+              <input
+                type="text"
+                id="locale"
+                formControlName="locale"
+                class="form-control"
+              >
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end mt-4">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-2"
+              routerLink="/dashboard/default"
+            >
+            {{ 'BUTTONS.CANCEL' | translate }}
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="profileForm.invalid || isLoading"
+            >
+            {{ 'BUTTONS.UPDATE_PROFILE' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection Follow-Up Card 
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>{{ 'CONNECTION_HISTORY.TITLE' | translate }}</h5>
+        <button
+          class="btn btn-sm btn-primary"
+          (click)="refreshConnectionHistory()"
+          [disabled]="loadingConnexion"
+        >
+          <i class="ti ti-refresh"></i>  {{ 'BUTTONS.REFRESH' | translate }}
+        </button>
+      </div>
+      <div class="card-body">
+        <div *ngIf="loadingConnexion" class="d-flex justify-content-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+          </div>
+        </div>
+
+        <div *ngIf="connexionError" class="alert alert-danger" role="alert">
+          {{ connexionError }}
+        </div>
+
+        <div *ngIf="!loadingConnexion && connexionHistory.length === 0" class="alert alert-info">
+          {{ 'MESSAGES.NO_HISTORY' | translate }}
+        </div>
+
+        <div *ngIf="!loadingConnexion && connexionHistory.length > 0" class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Event Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of connexionHistory">
+                <td>{{ item.attemptDate | date:'medium' }}</td>
+                <td>
+                  <span [ngClass]="{
+                    'badge bg-success': item.eventType === 'LOGIN_SUCCESS',
+                    'badge bg-danger': item.eventType === 'LOGIN_FAILURE',
+                    'badge bg-info': item.eventType === 'LOGOUT',
+                    'badge bg-warning': item.eventType === 'RESET_PASSWORD'
+                  }">
+                    {{ item.eventType }}
+                  </span>
+                </td>
+                <td>{{ item.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  -->
+</div>

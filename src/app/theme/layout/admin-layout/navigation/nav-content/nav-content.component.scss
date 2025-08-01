@@ -1,0 +1,327 @@
+:host {
+    display: block;
+    width: 100%;
+    
+    .navbar-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0;
+      background-color: #fff;
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+  
+      ul.nav {
+        padding-left: 0;
+        list-style: none;
+        margin-bottom: 0;
+      }
+      
+      ul.coded-inner-navbar {
+        flex-grow: 1;
+        margin-left: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+        z-index: 1;
+      }
+    }
+    
+    // App branding section - styled to match Mantis Pro
+    .nav-branding {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      margin-bottom: 0;
+      position: relative;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        
+        .logo-icon {
+          height: 28px;
+          width: 28px;
+          margin-right: 12px;
+          color: #2196f3;
+        }
+        
+        .app-name {
+          font-size: 18px;
+          font-weight: 600;
+          color: #333;
+        }
+      }
+      
+      .nav-version {
+        display: none;
+      }
+    }
+    
+    // User profile section - styled to match Mantis Pro
+    .nav-user-profile {
+      display: fixed;
+      align-items: center;
+      padding: 12px 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      margin-top: auto;
+      
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        margin-right: 12px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .user-info {
+        flex-grow: 1;
+        
+        .user-name {
+          font-weight: 500;
+          font-size: 14px;
+          margin: 0;
+          color: #333;
+        }
+        
+        .user-role {
+          font-size: 12px;
+          color: #666;
+          margin: 0;
+        }
+      }
+      
+      .user-menu-toggle {
+        color: #999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        i {
+          font-size: 16px;
+        }
+      }
+    }
+    
+    // Simple section headers for Mantis design
+    .nav-group-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #666;
+      margin: 15px 0 5px 0;
+      padding: 0 20px;
+    }
+  }
+  
+  // Simplified scrollbar styling for Mantis
+  ::ng-deep ng-scrollbar {
+    --scrollbar-size: 4px;
+    --scrollbar-thumb-color: rgba(251, 242, 242, 0.15);
+    --scrollbar-thumb-hover-color: rgba(0, 0, 0, 0.25);
+    --scrollbar-border-radius: 4px;
+    
+    // Scrollbar track
+    .ng-scrollbar-track {
+      background: transparent;
+    }
+    
+    // Scrollbar thumb
+    .ng-scrollbar-thumb {
+      border-radius: 4px;
+    }
+  }
+  
+  // Responsive styles for mobile devices - simplified for Mantis
+  @media (max-width: 991.98px) {
+    :host {
+      .navbar-content {
+        padding: 0;
+      }
+      
+      .nav-branding {
+        padding: 12px 15px;
+        
+        .nav-logo {
+          .logo-icon {
+            height: 24px;
+            width: 24px;
+          }
+          
+          .app-name {
+            font-size: 16px;
+          }
+        }
+      }
+      
+      // Compact user profile section on mobile
+      .nav-user-profile {
+        padding: 10px 15px;
+        
+        .user-avatar {
+          width: 32px;
+          height: 32px;
+        }
+        
+        .user-info {
+          .user-name {
+            font-size: 13px;
+          }
+          
+          .user-role {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+    
+    ::ng-deep ng-scrollbar {
+      --scrollbar-size: 3px;
+    }
+  }
+  
+  // Animations for nav items entrance
+  ::ng-deep app-nav-item {
+    display: block;
+    animation: fadeIn 0.3s ease;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  // Enhanced transition effect for collapsing/expanding groups
+  ::ng-deep .nav-group-items {
+    transition: all 0.3s ease;
+    
+    &.collapsed {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+  }
+  
+  // Add focus styles for accessibility
+  ::ng-deep a:focus-visible,
+  ::ng-deep button:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+  }
+  
+  // Active navigation item styling - simplified like Mantis
+  ::ng-deep .nav-item {
+    &.active {
+      position: relative;
+      
+      .nav-link {
+        background-color: rgba(33, 150, 243, 0.1);
+        color: #2196f3;
+        font-weight: 500;
+      }
+    }
+    
+    // Hover effect for nav items
+    .nav-link {
+      position: relative;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+        color: #2196f3;
+      }
+      
+      // Icon styling
+      .coded-micon {
+        margin-right: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        color: #666;
+      }
+      
+      // Text styling
+      .coded-mtext {
+        font-weight: 400;
+        font-size: 14px;
+      }
+    }
+  }
+  
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    :host {
+      .navbar-content {
+        background-color: #1a223f;
+        border-right-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      .nav-branding {
+        border-bottom-color: rgba(255, 255, 255, 0.05);
+        
+        .nav-logo .app-name {
+          color: #e0e0e0;
+        }
+      }
+      
+      .nav-group-title {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      .nav-user-profile {
+        border-top-color: rgba(255, 255, 255, 0.05);
+        
+        .user-avatar {
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-info {
+          .user-name {
+            color: rgba(255, 255, 255, 0.9);
+          }
+          
+          .user-role {
+            color: rgba(255, 255, 255, 0.6);
+          }
+        }
+      }
+    }
+    
+    ::ng-deep .nav-item {
+      .nav-link {
+        color: #e0e0e0;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .coded-micon {
+          color: #999;
+        }
+      }
+      
+      &.active .nav-link {
+        background-color: rgba(33, 150, 243, 0.15);
+      }
+    }
+    
+    ::ng-deep ng-scrollbar {
+      --scrollbar-thumb-color: rgba(255, 255, 255, 0.15);
+      --scrollbar-thumb-hover-color: rgba(255, 255, 255, 0.25);
+    }
+  }

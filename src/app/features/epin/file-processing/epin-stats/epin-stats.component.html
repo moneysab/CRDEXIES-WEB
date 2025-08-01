@@ -1,0 +1,186 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">EPIN Processing Statistics</h2>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-primary" (click)="navigateToUpload()">
+              <i class="ti ti-upload"></i> Upload New File
+            </button>
+            <button type="button" class="btn btn-outline-primary" (click)="navigateToJobs()">
+              <i class="ti ti-list"></i> View Jobs
+            </button>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+          
+          <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          <div *ngIf="!isLoading && statistics">
+            <!-- Summary Cards -->
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <div class="card border bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="text-muted mb-3">Total Jobs</h6>
+                    <h2 class="mb-0">{{ formatNumber(statistics.totalJobs) }}</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card border bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="text-muted mb-3">Completed Jobs</h6>
+                    <h2 class="mb-0 text-success">{{ formatNumber(statistics.completedJobs) }}</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card border bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="text-muted mb-3">Failed Jobs</h6>
+                    <h2 class="mb-0 text-danger">{{ formatNumber(statistics.failedJobs) }}</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card border bg-light">
+                  <div class="card-body text-center">
+                    <h6 class="text-muted mb-3">Success Rate</h6>
+                    <h2 class="mb-0" [ngClass]="getSuccessRateClass(statistics.successRate)">
+                      {{ formatPercentage(statistics.successRate) }}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Processing Statistics -->
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="card border">
+                  <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Job Status Distribution</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Status</th>
+                            <th>Count</th>
+                            <th>Percentage</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of statistics?.jobStatusDistribution | keyvalue">
+                            <td>
+                              <span [ngClass]="getStatusClass(item.key)">
+                                {{ item.key }}
+                              </span>
+                            </td>
+                            <td>{{ formatNumber(item.value) }}</td>
+                            <td> {{  formatPercentage((item.value / (statistics?.totalJobs || 1) * 100) ) }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="card border">
+                  <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Processing Metrics</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Total Jobs Processed</td>
+                            <td class="text-end">{{ formatNumber(statistics.totalJobs) }}</td>
+                          </tr>
+                          <tr>
+                            <td>Average Processing Time Seconds</td>
+                            <td class="text-end">{{ statistics.averageProcessingTimeSeconds }}</td>
+                          </tr>
+                          <tr>
+                            <td>Average Records Per Job</td>
+                            <td class="text-end">{{ formatNumber(statistics.averageRecordsPerJob)  }}</td>
+                          </tr>
+                          <tr>
+                            <td>Largest Job (Records)</td>
+                            <td class="text-end">{{ statistics.largestJobRecords }}</td>
+                          </tr>
+                          <tr>
+                            <td>Smallest Job (Records)</td>
+                            <td class="text-end">{{ statistics.smallestJobRecords }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="row">
+              <div class="col-12">
+                <div class="card border">
+                  <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Recent Activity</h5>
+                  </div>
+                  <div class="card-body">
+                    <div *ngIf="recentJobs && recentJobs.length > 0" class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Job ID</th>
+                            <th>File Name</th>
+                            <th>Status</th>
+                            <th>Records</th>
+                            <th>Created</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let job of recentJobs">
+                            <td>
+                              <a [routerLink]="['/epin/jobs', job.id]">{{ job.id }}</a>
+                            </td>
+                            <td>{{ job.originalFilename }}</td>
+                            <td>
+                              <span [ngClass]="getStatusClass(job.status)">
+                                {{ job.status }}
+                              </span>
+                            </td>
+                            <td>{{ formatNumber(job.totalRecords) }}</td>
+                            <td>{{ formatDate(job.processingCompletedAt) }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div *ngIf="!recentJobs || recentJobs.length === 0" class="text-center py-3">
+                      <p class="text-muted mb-0">No recent activity found.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

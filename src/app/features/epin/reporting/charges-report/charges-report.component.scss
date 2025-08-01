@@ -1,0 +1,117 @@
+$visa-blue: #1a1f71;
+$visa-gold: #F7B600;
+:host {
+    display: block;
+    padding: 1rem;
+  }
+   
+.card-header {
+  background-color: lighten($visa-blue, 70%);
+  border-bottom: 2px solid $visa-blue;
+  
+  h2 {
+    color: $visa-blue;
+  }
+}
+
+.btn-primary {
+  background-color: $visa-blue;
+  border-color: $visa-blue;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-blue, 10%);
+    border-color: darken($visa-blue, 10%);
+  }
+}
+
+
+.btn-secondary {
+  background-color: $visa-gold;
+  border-color: $visa-gold;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+  }
+}
+
+
+.btn-info {
+  background-color: #575858;
+  border-color: #575858;
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+  }
+}
+  
+  
+  table {
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.9rem;
+    border-collapse: collapse;
+    min-width: 600px; 
+  }
+  
+  th, td {
+  
+    white-space: normal; 
+    vertical-align: middle;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #dee2e6;
+  }
+  
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    border-bottom: 2px solid #dee2e6;
+  }
+ 
+tr.table-secondary {
+    font-weight: 700; 
+    background-color: #e9ecef; 
+  }
+  
+  tr.table-active {
+    font-weight: 700; 
+    background-color: #dee2e6; 
+  }
+  h4.text-visa {
+    margin-top: 1.5rem;
+   
+    color: $visa-blue;
+  }
+  
+  
+h5.text-success {
+  margin-top: 1.5rem;
+  border-left: 3px solid #198754;
+  padding-left: 0.6rem;
+}
+
+.text-visa {
+  color: $visa-blue
+}
+
+h6.text-dark {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+.business-mode-wrapper {
+  border-left: 4px solid $visa-blue;
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+
+  @media (max-width: 768px) {
+    .card-body {
+      overflow-x: auto;
+    }
+    
+  }
+  

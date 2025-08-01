@@ -1,0 +1,98 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="mb-0">{{'UPLOADED_EPIN.TITLE' | translate }}</h2>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="navigateToUpload()">
+              <i class="ti ti-upload"></i>{{ 'BUTTONS.UPLOAD_FILE' | translate }}
+            </button>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
+          
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+          
+          <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+            </div>
+          </div>
+          
+          <div *ngIf="!isLoading">
+            <div *ngIf="jobs.length === 0" class="text-center my-5">
+              <i class="ti ti-file-off fs-1 text-muted mb-3"></i>
+              <p class="lead">{{ 'MESSAGES.NO_PROCESSING_JOBS_FOUND' | translate }}</p>
+              <button class="btn btn-outline-primary" (click)="navigateToUpload()">
+                {{ 'MESSAGES.UPLOAD_FILE_TO_GET_STARTED' | translate }}
+              </button>
+            </div>
+            
+            <div *ngIf="jobs.length > 0" class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>File Name</th>
+                    <th>Total Records</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Failed Records</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let job of jobs" (click)="viewJobDetails(job.id)" class="cursor-pointer">
+                   <td>{{ job.originalFilename }}</td>
+                   <td>{{ job.totalRecords }}</td>
+                    <td><span [class]="getStatusClass(job.status)">{{ job.status }}</span></td>
+                    <td>{{ formatDate(job.processingCompletedAt) }}</td>
+                    <td>{{ job.failedRecords }}</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button 
+                          type="button" 
+                          class="btn btn-sm btn-outline-primary" 
+                          (click)="viewJobDetails(job.id); $event.stopPropagation();"
+                          title="View Details"
+                        >
+                          <i class="ti ti-eye"></i>
+                        </button>
+                        <!--
+                        <button 
+                          *ngIf="job.status === 'FAILED'"
+                          type="button" 
+                          class="btn btn-sm btn-outline-warning" 
+                          (click)="retryJob(job.id, $event)"
+                          title="Retry Job"
+                        >
+                          <i class="ti ti-refresh"></i>
+                        </button>
+                        <button 
+                          *ngIf="job.status === 'PROCESSING' || job.status === 'PENDING'"
+                          type="button" 
+                          class="btn btn-sm btn-outline-danger" 
+                          (click)="cancelJob(job.id, $event)"
+                          title="Cancel Job"
+                        >
+                          <i class="ti ti-x"></i>
+                        </button>
+                        -->
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

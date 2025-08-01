@@ -1,0 +1,10 @@
+.btn {
+  &.income-week,
+  &.income-month {
+    &.active {
+      color: var(--bs-gray-500);
+      background-color: #26262614;
+      border-color: var(--bs-gray-300);
+    }
+  }
+}

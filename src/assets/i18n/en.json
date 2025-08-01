@@ -1,0 +1,789 @@
+{
+  "Other": "Other",
+  "Menu levels": "Menu levels",
+  "Menu Level 2.1": "Menu Level 2.1",
+  "Menu Level 2.2": "Menu Level 2.2",
+  "Menu Level 2.3": "Menu Level 2.3",
+  "Menu Level 3.1": "Menu Level 3.1",
+  "Menu Level 3.2": "Menu Level 3.2",
+  "Menu Level 3.3": "Menu Level 3.3",
+  "Menu Level 4.1": "Menu Level 4.1",
+  "Menu Level 4.2": "Menu Level 4.2",
+  "Sample Page": "Sample Page",
+  "Dashboard": "Dashboard",
+  "Home": "Home",
+  "Executive Analytics": "Executive Analytics",
+  "Invoice Management": "C-Bill",
+  "MENU": {
+    "EPIN_MANAGEMENT": "C-Flow – Revenus Interchange",
+    "EPIN_FILE_PROCESSING": "File Processing",
+    "EPIN_REPORTING": "Reporting"
+  },
+  "Visa": "Visa",
+  "Invoices": "Invoices",
+  "Upload": "Upload",
+  "Upload File": "Upload File",
+  "Summary": "Summary",
+  "Service Breakdown": "Service Breakdown",
+  "Mastercard": "Mastercard",
+  "Visa Invoice Details": "Visa Invoice Details",
+  "Mastercard Invoice Details": "Mastercard Invoice Details",
+  "Mastercard Invoice Summary": "Mastercard Invoice Summary",
+  "Visa Invoice Summary": "Visa Invoice Summary",
+  "Visa Service Breakdown": "Visa Service Breakdown",
+  "History": "History",
+  "Uploading history": "Uploading History",
+  "Visa CSV File Details": "Visa CSV File Details",
+  "Mastercard CSV File Details": "Mastercard CSV File Details",
+  "Settings": "Settings",
+  "Users": "Users",
+  "Audit Trail": "Audit Trail",
+  "Create User": "Create User",
+  "Reimbursement Fee": "Reimbursement Fee",
+  "Interchange": "Interchange",
+  "Charges": "Charges",
+  "Users List": "Users List",
+  "Banks": "Banks",
+  "List of Banks": "List of Banks",
+  "Bank Creation": "Bank Creation",
+  "Update bank detail": "Update Bank Detail",
+  "Profile": "Profile",
+  "Edit Profile": "Edit Profile",
+  "View Profile": "View Profile",
+  "Change Password": "Change Password",
+  "Billing": "Billing",
+  "Support": "Support",
+  "Account Settings": "Account Settings",
+  "Privacy Center": "Privacy Center",
+  "Feedback": "Feedback",
+  "Logout": "Logout",
+  "visaAnnualFees": "Visa Annual Fees",
+  "and": "and",
+  "contact_us": "Contact us",
+  "Transaction Breakdown": "Transaction Breakdown",
+  "Access Control": "Access Control",
+  "Statistics": "Statistics",
+  "LOGIN": {
+    "TITLE": "Login",
+    "NO_ACCOUNT": "Need Support?",
+    "USERNAME": "Username or Email",
+    "USERNAME_PLACEHOLDER": "Enter username or email",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Password",
+    "REMEMBER_ME": "Keep me signed in",
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "SUBMIT_BUTTON": "Login",
+    "LOGGING_IN": "Logging in..."
+  },
+  "REQUEST_RESET_PASSWORD": {
+    "TITLE": "Reset Password",
+    "INSTRUCTIONS": "Enter your email address and we'll send you instructions to reset your password.",
+    "EMAIL_PLACEHOLDER": "Email address",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "SUBMIT_BUTTON": "Send Reset Link",
+    "REMEMBER_PASSWORD": "Remembered your password?",
+    "SIGN_IN": "Sign In",
+    "LOADING": "Loading...",
+    "SUCCESS_TITLE": "Success",
+    "ERROR_TITLE": "Error"
+  },
+  "home": {
+    "pageTitle": "Invoice Management Dashboard",
+    "buttonRefresh": "Refresh Data",
+    "loading": "Loading dashboard data...",
+    "visaAnnualFees": "Visa Annual Fees",
+    "viewInvoices": "View Invoices",
+    "viewSummary": "View Summary",
+    "annualFees": "Visa/Master Annual Fees",
+    "annualFeesCflow": "Annual net interchange",
+    "mastercardAnnualFees": "Mastercard Annual Fees",
+    "pendingInvoices": "Last Invoices",
+    "processPending": "View list",
+    "visaCategoryDistribution": "Visa fee distribution by category",
+    "mastercardCategoryDistribution": "Mastercard fee distribution by category",
+    "networkDistribution": "Fee distribution by network",
+    "uploadVisaInvoice": "Upload Visa",
+    "uploadMastercardInvoice": "Upload Mastercard",
+    "uploadInvoices": "Upload Visa/Master invoices",
+    "uploadEpinFile": "Upload Interchange files Visa/Master",
+    "upload": "Upload",
+    "viewAnalytics": "View Analytics",
+    "viewProfile": "View Profile",
+    "recentInvoiceActivity": "Recent Invoice Activity",
+    "invoiceId": "Invoice ID",
+    "network": "Network",
+    "date": "Date",
+    "amount": "Amount",
+    "View": "View",
+    "status": "Status",
+    "viewAllActivity": "View All Activity",
+    "recentUserLogins": "Recent User Logins",
+    "user": "User",
+    "eventType": "Event Type",
+    "time": "Time",
+    "viewAllLogins": "View All Actions",
+    "cflow_total": "Global interchange overview",
+    "cflow_category": "Interchange distribution by category",
+    "noVisaData": "No Visa data available.",
+    "noMastercardData": "No Mastercard data available.",
+    "period":"Period"
+    },
+  "DASHBOARD": {
+    "TITLE": "Executive Analytics Dashboard"
+  },
+  "GENERAL": {
+    "REFRESH": "Refresh",
+    "LOADING": "Loading"
+  },
+  "FILTERS": {
+    "DATE_RANGE": "Date Range",
+    "LAST_30_DAYS": "Last 30 Days",
+    "LAST_90_DAYS": "Last 90 Days",
+    "YTD": "Year to Date",
+    "CUSTOM": "Custom",
+    "TO": "to",
+    "CARD_TYPES": "Card Types",
+    "VISA": "Visa",
+    "MASTERCARD": "Mastercard",
+    "INCLUDE_BREAKDOWN": "Include Breakdown",
+    "GROUP_BY": "Group By",
+    "COMPARISON": "Comparison",
+    "SELECT_GROUPING": "Select grouping",
+    "SELECT_COMPARISON": "Select comparison",
+    "APPLIED_FILTERS": "Applied Filters",
+    "CARDS": "Cards",
+    "PERIOD": "Period",
+    "RESET_ALL": "Reset All",
+    "BILLING_DATE": "Billing Date",
+    "INVOICE_NUMBER": "Invoice Number",
+    "BILLING_PERIOD": "Billing Period",
+    "INVOICE_ID": "Invoice ID",
+    "START_DATE": "Start Date",
+    "START_DATE_PLACEHOLDER": "Start Date",
+    "END_DATE": "End Date",
+    "END_DATE_PLACEHOLDER": "End Date",
+    "USERNAME": "Username",
+    "USERNAME_PLACEHOLDER": "Username",
+    "INVOICE_NAME": "Invoice Name",
+    "INVOICE_NAME_PLACEHOLDER": "Enter invoice name",
+    "UPLOAD_DATE": "Upload Date",
+    "CARD_TYPE": "Type of Card",
+    "ALL_TYPES": "All Types",
+    "CURRENCY": "Currency",
+    "TOTAL_MIN": "Minimum total",
+    "TOTAL_MAX": "Maximum total",
+    "FEE_TYPE": "Fee type",
+    "ACTIVITY_ICA": "Activity ICA",
+    "BILLABLE_ICA": "Billable ICA",
+    "EVENT_ID": "Event ID",
+    "EVENT_DESCRIPTION": "Event description",
+    "SERVICE_CODE": "Service code",
+    "SERVICE_CODE_DESCRIPTION": "Service code description",
+    "CATEGORY": "Category",
+    "SUBCATEGORY": "Subcategory",
+    "BILLING_LINE": "Billing line",
+    "ENTITY_NAME": "Entity name",
+    "ENTITY_ID": "Entity ID",
+    "DESCRIPTION": "Description",
+    "BIN": "BIN",
+    "BUSINESS_MODE": "Business Mode",
+    "TRANSACTIONS_TYPE": "Transactions type",
+    "CLEARING_CURRENCY": "Clearing Currency",
+    "SETTLEMENT_CURRENCY": "Settlement Currency"
+  },
+  "SUMMARY": {
+    "TOTAL_CHARGES": "Total Charges",
+    "VS_PREVIOUS_PERIOD": "vs previous period",
+    "TRANSACTION_COUNT": "Transaction Count",
+    "ACROSS_ALL_CARDS": "across all cards",
+    "AVERAGE_TRANSACTION": "Average Transaction",
+    "PER_TRANSACTION": "per transaction",
+    "ANOMALIES_DETECTED": "Potential irregularities",
+    "REQUIRING_ATTENTION": "requiring attention"
+  },
+  "CHART": {
+    "BILLING_TRENDS_ANALYSIS": "Network fee trends",
+    "SERVICE_CATEGORY_BREAKDOWN": "Fee breakdown by category",
+    "AI_INSIGHTS": "AI Insights"
+  },
+  "ANOMALIES": {
+    "DETECTED_ANOMALIES": "Potential irregularities",
+    "NO_ANOMALIES": "No anomalies detected in the current period.",
+    "DESCRIPTION": "Description",
+    "EXPECTED": "Expected",
+    "ACTUAL": "Actual",
+    "DEVIATION": "Deviation",
+    "SEVERITY": "Severity"
+  },
+  "EMPTY_STATE": {
+    "NO_DATA": "No Data Available",
+    "ADJUST_FILTERS": "Adjust your filters to view analytics data"
+  },
+  "MASTERCARD_BREAKDOWN_DETAILS": {
+    "TITLE": "C-Bill - Mastercard Breakdown"
+  },
+  "VISA_BREAKDOWN_DETAILS": {
+    "TITLE": "C-Bill - Visa Breakdown"
+  },
+  "MASTERCARD_SUMMARY_DETAILS": {
+    "TITLE": "C-Bill - Mastercard Summary"
+  },
+  "VISA_SUMMARY_DETAILS": {
+    "TITLE": "C-Bill - Visa Summary"
+  },
+  "MASTERCARD_INVOICES": {
+    "TITLE": "C-Bill - Mastercard Invoices"
+  },
+  "VISA_INVOICES": {
+    "TITLE": "C-Bill - Visa Invoices"
+  },
+  "UPLOADED_EPIN.TITLE": "List of Uploaded EPIN Files",
+  "MASTERCARD_CSV.TITLE": "Mastercard Invoices of {{csvName}}",
+  "VISA_CSV.TITLE": "Visa Invoices of {{csvName}}",
+  "UPLOADED_INVOICES.TITLE": "List of Uploaded Invoices",
+  "UPLOADED_FILES.TITLE": "List of Uploaded Files",
+  "BUTTONS": {
+    "UPLOAD": "Upload",
+    "EXPORT": "Export",
+    "SUMMARY": "Summary",
+    "INVOICES": "Invoices",
+    "SEARCH": "Search",
+    "RESET": "Reset",
+    "BREAKDOWN": "Breakdown",
+    "BACK_TO_LIST": "Back to List",
+    "CLEAR_ALL": "Clear All",
+    "UPLOAD_FILE": "Upload File",
+    "UPLOAD_FILES": "Upload Files",
+    "BACK_TOCSV": "Back To CSV List",
+    "BACK_TO_HOME": "Back To Home",
+    "CHANGE_PASSWORD": "Change Password",
+    "YES": "Yes",
+    "CANCEL": "Cancel",
+    "UPDATE_PROFILE": "Update Profile",
+    "REFRESH": "Refresh",
+    "USERS_LIST": "Users List",
+    "BACK_TO_LIST_BANK": "Back To Banks List",
+    "CREATE_BANK": "Create Bank",
+    "VIEW_DETAILS": "View Details",
+    "RESET_PASSWORD": "Reset Password",
+    "BACK_TO_LOGIN": "Back to Login",
+    "SHOW_ADVANCED": "Show all filters",
+    "HIDE_ADVANCED": "Hide filters",
+    "INTERCHANGE": "Interchange",
+    "REIMBURSEMENT": "Reimbursement",
+    "CHARGES": "Charges",
+    "TABLE_VIEW": "Table",
+    "CHART_VIEW": "Chart",
+    "UPDATE":"Update",
+    "IGNORE": "Ignore",
+    "SEND": "Send",
+    "SUBMIT": "Submit"
+  },
+  "LOADING": {
+    "LOADING": "Loading",
+    "LOADING_INVOICES": "Loading invoices...",
+    "LOADING_HISTORY": "Loading history...",
+    "LOADING_USERS": "Loading users...",
+    "LOADING_BANKS": "Loading banks..."
+  },
+  "MESSAGES": {
+    "NO_INVOICES_FOUND": "No invoices found. Try adjusting your filters or upload new invoices.",
+    "NO_INVOICES_CSV": "No invoices found for file {{csvName}}. Try adjusting your filters.",
+    "NO_HISTORY": "No connection history found.",
+    "NO_HISTORY_FOUND": "No Users History found. Try adjusting your filters.",
+    "NO_USERS_FOUND": "No users found. Try adjusting your filters.",
+    "NO_BANKS_FOUND": "No banks found. Try adjusting your filters.",
+    "NO_PROCESSING_JOBS_FOUND": "No processing jobs found.",
+    "UPLOAD_FILE_TO_GET_STARTED": "Upload a file to get started.",
+    "NO_INTERCHANGE_DATA_FOUND": "No interchange data found for the selected filters.",
+    "NO_REIMBURSEMENT_DATA_FOUND": "No reimbursement data found for the selected filters.",
+    "NO_CHARGES_DATA_FOUND": "No charges data found for the selected filters.",
+    "NO_KPI_DATA_FOUND": "No KPI data found for the selected period.",
+    "TRY_ADJUSTING_FILTERS": "Try adjusting your filters or selecting a different date range.",
+    "NO_DATA": "No data found. Try adjusting your filters or upload IPM files.",
+    "NO_DATA_VISA": "Aucune donnée trouvée. Essayez d'ajuster vos filtres ou d'importer de fichiers EPIN."
+  },
+  "PAGINATION": {
+    "SHOWING": "Showing {{count}} of {{total}} items",
+    "PAGE": "Page {{current}} of {{total}}"
+  },
+  "UPLOAD": {
+    "VISA_INVOICE_TITLE": "C-Bill - Visa Upload",
+    "MASTERCARD_INVOICE_TITLE": "C-Bill - Mastercard Upload",
+    "SINGLE_FILE": "Single File",
+    "MULTIPLE_FILES": "Multiple Files",
+    "EPIN_FILE": "EPIN File",
+    "RAPPORT_FILE": "Report File",
+    "DRAG_DROP_SINGLE": "Drag and drop your file here or click to browse",
+    "DRAG_DROP_MULTIPLE": "Drag and drop multiple files here or click to browse",
+    "SUPPORTED_FORMATS": "Supported format: CSV / EXCEL files only",
+    "SELECTED_FILE": "Selected File",
+    "SELECTED_FILES": "Selected Files ({{count}})",
+    "UPLOADING_PROGRESS": "Uploading... {{progress}}%",
+    "EPIN_TITLE": "Upload Visa EPIN file",
+    "REPORT_TITLE": "Upload Visa REPORT file",
+    "IPM_TITLE": "Upload Mastercard IPM file",
+    "PROCESSING_JOBS": "View Processing Jobs"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Set New Password",
+    "OLD_PASSWORD_PLACEHOLDER": "Old Password",
+    "OLD_PASSWORD_REQUIRED": "Old Password is required",
+    "NEW_PASSWORD_PLACEHOLDER": "New Password",
+    "NEW_PASSWORD_REQUIRED": "Password is required",
+    "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters",
+    "PASSWORD_MATCH": "Passwords match",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Confirm Password",
+    "CONFIRM_PASSWORD_REQUIRED": "Please confirm your password",
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "MESSAGE": "Enter your new password below."
+  },
+  "USER_PROFILE": {
+    "TITLE": "User Profile",
+    "USERNAME": "Username",
+    "USERNAME_REQUIRED": "Username is required",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "FIRST_NAME": "First Name",
+    "FIRST_NAME_REQUIRED": "First name is required",
+    "LAST_NAME": "Last Name",
+    "LAST_NAME_REQUIRED": "Last name is required",
+    "PHONE": "Phone Number",
+    "TIMEZONE": "Timezone",
+    "LOCALE": "Locale"
+  },
+  "USER": {
+    "CREATE_TITLE": "Create a New User",
+    "CREATE": "Create User",
+    "UPDATE_TITLE": "Update User Information",
+    "USERNAME": "Username",
+    "USERNAME_REQUIRED": "Username is required.",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email is required.",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "PHONE_NUMBER": "Phone Number",
+    "TIMEZONE": "Timezone",
+    "LOCALE": "Locale",
+    "GROUPS": "Groups",
+    "EMAIL_INVALID": "The email address is not valid.",
+    "FIRST_NAME_REQUIRED": "First name is required.",
+    "LAST_NAME_REQUIRED": "Last name is required.",
+    "GROUPS_REQUIRED": "At least one group must be selected."
+  },
+  "CONNECTION_HISTORY": {
+    "TITLE": "Actions History"
+  },
+  "USER_FOLLOW_UP": {
+    "TITLE": "Users Follow Up"
+  },
+  "USER_LIST": {
+    "TITLE": "List of Users",
+    "USERNAME": "Username",
+    "PLACEHOLDER_USERNAME": "Enter username"
+  },
+  "BANK": {
+    "UPDATE_TITLE": "Udpating Bank Informations",
+    "LIST_TITLE": "List of Banks",
+    "CREATE_TITLE": "Creating Bank",
+    "BANK_NAME": "Bank Name",
+    "BANK_NAME_PLACEHOLDER": "Bank Name",
+    "BANK_NAME_REQUIRED": "Bank Name is required",
+    "BANK_CODE": "ICA",
+    "BANK_CODE_PLACEHOLDER": "Bank Code",
+    "BANK_CODE_REQUIRED": "Bank Code is required",
+    "CURRENCY": "Currency",
+    "CURRENCY_REQUIRED": "Currency is required",
+    "COUNTRY": "Country",
+    "COUNTRY_PLACEHOLDER": "Country",
+    "COUNTRY_REQUIRED": "Country is required",
+    "SUBMIT": "Create Bank",
+    "UPDATE": "Update Bank"
+  },
+  "SIGNUP": {
+    "TITLE": "Support",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "TERMS_TEXT": "By Signing up, you agree to our",
+    "TERMS_LINK": "Terms of Service",
+    "PRIVACY_LINK": "Privacy Policy",
+    "CREATE_ACCOUNT_BUTTON": "Create Account",
+    "FORM": {
+      "EMAIL": {
+        "LABEL": "Email Address",
+        "REQUIRED_ERROR": "Email is required",
+        "INVALID_ERROR": "Invalid email"
+      },
+      "USERNAME": {
+        "LABEL": "Username",
+        "REQUIRED_ERROR": "Username is required",
+        "MINLENGTH_ERROR": "Must be at least 2 characters"
+      },
+      "ROLE_ID": {
+        "LABEL": "Role ID"
+      },
+      "FIRST_NAME": {
+        "LABEL": "First Name",
+        "REQUIRED_ERROR": "First name is required"
+      },
+      "LAST_NAME": {
+        "LABEL": "Last Name",
+        "REQUIRED_ERROR": "Last name is required"
+      },
+      "PASSWORD": {
+        "LABEL": "Password",
+        "MINLENGTH_ERROR": "Password must be at least 8 characters",
+        "UPPERCASE_ERROR": "Password must contain at least one uppercase letter",
+        "LOWERCASE_ERROR": "Password must contain at least one lowercase letter",
+        "DIGIT_ERROR": "Password must contain at least one digit",
+        "SPECIAL_CHAR_ERROR": "Password must contain at least one special character"
+      },
+      "PHONE_NUMBER": {
+        "LABEL": "Phone Number",
+        "REQUIRED_ERROR": "Phone number is required"
+      },
+      "TIMEZONE": {
+        "LABEL": "Timezone",
+        "PLACEHOLDER": "Ex: Europe/Paris",
+        "REQUIRED_ERROR": "Timezone is required"
+      },
+      "LOCALE": {
+        "LABEL": "Locale",
+        "PLACEHOLDER": "Ex: FR/US",
+        "REQUIRED_ERROR": "Locale is required"
+      }
+    },
+    "CONTACT_MESSAGE": "Account creation is now managed by your administrators or managers. If you already have an account but can no longer access it, please contact us using the form below.",
+    "CONTACT_FORM": {
+      "SUBJECT": {
+        "LABEL": "Subject",
+        "REQUIRED_ERROR": "Subject is required."
+      },
+      "EMAIL": {
+        "LABEL": "Email Address",
+        "REQUIRED_ERROR": "Email is required.",
+        "INVALID_ERROR": "Invalid email format."
+      },
+      "DESCRIPTION": {
+        "LABEL": "Description",
+        "REQUIRED_ERROR": "Description is required."
+      },
+      "SEND_BUTTON": "Send Request",
+      "SUCCESS_MESSAGE": "Your request has been successfully sent.",
+      "ERROR_MESSAGE": "An error occurred. Please try again later."
+    }
+  },
+  "EMAIL_VERIFICATION": {
+    "TITLE": "Verify Your Email",
+    "INSTRUCTIONS": "Please enter the verification code sent to",
+    "YOUR_EMAIL": "your email",
+    "CODE_PLACEHOLDER": "Verification Code",
+    "CODE_REQUIRED": "Verification code is required",
+    "CODE_MINLENGTH": "Verification code must be at least 6 characters",
+    "VERIFY_BUTTON": "Verify Email",
+    "NO_CODE_RECEIVED": "Didn't receive the code?",
+    "REQUEST_NEW_CODE": "Request a new one"
+  },
+  "ERRORS": {
+    "analytics": "Failed to load trends data",
+    "generic": "An error occurred. Please try again later.",
+    "LOGIN": {
+      "invalidCredentials": "Invalid username or password. Please try again.",
+      "missingFields": "Username and password are required.",
+      "generic": "An error occurred. Please try again later."
+    },
+    "PASSWORD_RESET": {
+      "emailNotFound": "Email not found. Please check and try again.",
+      "invalidEmail": "Invalid email address. Please provide a valid email.",
+      "generic": "Failed to request password reset. Please try again later."
+    },
+    "RESET_PASSWORD": {
+      "invalidToken": "Invalid or expired token. Please request a new password reset link.",
+      "generic": "Failed to reset password. Please try again."
+    },
+    "SIGNUP": {
+      "conflict": "This Username or Email are already used. Please choose another one.",
+      "badRequest": "All fields are required."
+    },
+    "VERIFY_EMAIL": {
+      "invalidCode": "Invalid verification code. Please try again.",
+      "emailRequired": "Email is required to request a new verification code.",
+      "resendFailed": "Failed to request a new verification code. Please try again."
+    },
+    "CHANGE_PASSWORD": {
+      "invalidToken": "Invalid or expired token."
+    },
+    "PROFILE": {
+      "load": "Failed to load user profile. Please try again.",
+      "update": "Failed to update profile. Please try again.",
+      "connexionHistory": "Failed to load connection history. Please try again."
+    },
+    "BANKS": {
+      "list": "Failed to load banks. Please try again later.",
+      "load_details": "Failed to load bank details. Please try again later.",
+      "missing_id": "Invoice ID is missing.",
+      "update": "Failed to update bank information. Please try again later.",
+      "create": "Failed to create bank. Please try again later."
+    },
+    "UPLOAD": {
+      "noFile": "Please select a file to upload.",
+      "invalidExtension": "Only CSV files are supported. Please select valid CSV files.",
+      "invalidFormat": "Invalid file format. Please upload CSV files only.",
+      "fileTooLarge": "File size is too large. Please upload smaller files.",
+      "unauthorized": "Authentication error. Please log in again.",
+      "forbidden": "You do not have permission to upload files.",
+      "notFound": "Upload service not found. Please contact support.",
+      "serverError": "Server error occurred while processing your file. Please try again later.",
+      "fallback": "Failed to upload file: {{message}}. Please try again later.",
+      "failed":"Failed to upload file. Please try again."
+    },
+    "Breakdown": "Failed to load breakdown data. Please try again later.",
+    "Summary": "Failed to load summary data. Please try again later.",
+    "Invoices": "Failed to load invoices. Please try again later.",
+    "Details": "Failed to load invoice details. Please try again later.",
+    "Users": "Failed to load users. Please try again later.",
+    "History": "Failed to load history. Please try again later.",
+    "CsvFiles": "Failed to load CSV files. Please try again later.",
+    "LOAD_CHARGES_FAILED": "Failed to load Charges Data. Please try again.",
+    "LOAD_INTERCHANGE_FAILED": "Failed to load Interchange Data. Please try again.",
+    "LOAD_REIMBURSEMENT_FAILED": "Failed to load Reimbursement Data. Please try again.",
+    "LOAD_PROCESSING_JOBS_FAILED": "Failed to load processing jobs. Please try again.",
+    "RETRY_JOB_FAILED": "Failed to retry job. Please try again.",
+    "CANCEL_JOB_FAILED": "Failed to cancel job. Please try again.",
+    "LOAD_SUMMARY_FAILED": "Failed to load Summary. Please try again.",
+    "FORM_INVALID": "Please fill in all required fields correctly.",
+    "LOAD_GROUPS": "Failed to load groups.",
+    "SERVER_ERROR": "Server error, please try again later.",
+    "UNKNOWN": "An unknown error has occurred.",
+    "EMAIL_INVALID": "Invalid email address.",
+    "USERNAME_EXISTS": "Username already exists.",
+    "EMAIL_EXISTS": "Email address already exists.",
+    "GROUPS_REQUIRED": "Please select at least one group.",
+    "Summaries": "Failed to load summary data. Please try again later.",
+    "ERROR": "Error",
+    "IGNORE_FAILURE": "Unable to ignore anomaly",
+    "SEND_FAILURE": "Failed to assign anomaly",
+    "LOAD_USERS_FAILURE": "Failed to load users."
+  },
+  "SUCCESS": {
+    "PASSWORD_RESET": {
+      "instructionsSent": "Password reset instructions have been sent to your email."
+    },
+    "RESET_PASSWORD": {
+      "success": "Password reset successful! Redirecting to login..."
+    },
+    "SIGNUP": {
+      "accountCreated": "Account created successfully!"
+    },
+    "VERIFY_EMAIL": {
+      "emailVerified": "Email verified successfully! Redirecting to login...",
+      "resendSuccess": "A new verification code has been sent to your email."
+    },
+    "CHANGE_PASSWORD": {
+      "success": "Password changed successfully! Redirecting to login..."
+    },
+    "PROFILE": {
+      "update": "Profile updated successfully."
+    },
+    "BANKS": {
+      "create": "Bank created successfully.",
+      "update": "Bank information updated successfully."
+    },
+    "UPLOAD": {
+      "single": "Invoices file uploaded successfully.",
+      "multiple": "{{count}} Invoices files uploaded successfully.",
+      "epin.single": "File uploaded successfully.",
+      "epin.multiple": "{{count}} Files uploaded successfully."
+    },
+    "RETRY_JOB_SUCCESS": "Job retry initiated successfully.",
+    "CANCEL_JOB_SUCCESS": "Job cancelled successfully.",
+    "USER_CREATED": "User created successfully.",
+    "USER_UPDATED": "User updated successfully.",
+    "SUCCESS": "Success",
+    "IGNORE_SUCCESS": "Anomaly successfully ignored",
+    "SEND_SUCCESS": "Anomaly successfully assigned"
+  },
+  "VISA_SUMMARY_DETAILS_CFLOW": {
+    "TITLE": "C-Flow - Visa Summary"
+  },
+  "VISA_CHARGES_DETAILS": "Visa Charges Details",
+  "VISA_INTERCHANGE_DETAILS": "Visa Interchange Details",
+  "VISA_REIMBURSEMENT_DETAILS": "Visa Reimbursement Details",
+  "VIEW_VISA_SUMMARY": "View Visa Summary",
+  "INTERCHANGE_VALUE": "INTERCHANGE VALUE",
+  "REIMBURSEMENT_FEES": "REIMBURSEMENT FEES",
+  "VISA_CHARGES": "VISA CHARGES",
+  "VISA_CFLOW_BREAKDOWN": "Visa Breakdown: Interchange, Reimbursement & Charges",
+  "INTERCHANGE_BY_CATEGORY": "Interchange by Category",
+  "REIMBURSEMENT_BY_CATEGORY": "Reimbursement by Category",
+  "CHARGES_BY_CATEGORY": "Charges by Category",
+  "MASTERCARD_SUMMARY_CFLOW": {
+    "TITLE": "C-Flow - Mastercard Summary"
+  },
+  "MASTERCARD_TRANSACTIONS_CFLOW.TITLE": "C-Flow - Transactions Mastercard",
+  "CONTACT": {
+    "CONTACT_FORM": {
+      "TITLE": "Support",
+      "SUBJECT": "Subject",
+      "EMAIL": "Email address",
+      "DESCRIPTION": "Description",
+      "REQUIRED": "This field is required.",
+      "VALID_EMAIL": "Please enter a valid email address.",
+      "SEND": "Send",
+      "CLOSE": "Close"
+    }
+  },
+  "GROUPS": {
+  "LOAD_ERROR": "Error loading groups.",
+  "ADD_SUCCESS": "The group was created successfully.",
+  "ADD_ERROR": "Error creating the group.",
+  "DELETE_CONFIRM": "Delete the group \"{{name}}\"?",
+  "DELETE_SUCCESS": "The group was deleted successfully.",
+  "DELETE_ERROR": "Error deleting the group.",
+  "ROLES_LOAD_ERROR": "Error loading roles.",
+  "ROLES_SAVE_ERROR": "Error saving roles.",
+  "TITLE": "Management Group",
+  "ADD_BUTTON": "Add Group",
+  "NAME": "Group Name",
+  "ROLES": "Associated Roles",
+  "ACTIONS": "Actions",
+  "NO_ROLES": "No roles",
+  "DELETE": "Delete",
+  "MANAGE_ROLES": "Manage Roles",
+  "VIEW_PERMISSIONS": "View Permissions",
+  "ADD_TITLE": "Add Group",
+  "VALIDATION": {
+    "REQUIRED": "The name is required.",
+    "MIN_LENGTH": "Minimum 3 characters."
+  },
+  "MANAGE_ROLES_TITLE": "Manage Roles for the Group",
+  "LOADING_ROLES": "Loading roles...",
+  "PERMISSIONS_TITLE": "Group Permissions",
+  "NO_PERMISSIONS": "This group has no permissions."
+},
+"COMMON": {
+  "CANCEL": "Cancel",
+  "CREATE": "Create",
+  "SAVE": "Save",
+  "CLOSE": "Close"
+},
+"ROLES": {
+  "NAME": "Role Name",
+  "CREATE_TITLE": "Create Role",
+  "MANAGE_TITLE": "Role Management",
+  "MANAGE_PERMISSIONS_TITLE": "Manage Permissions",
+  "NO_PERMISSIONS": "No permissions",
+  "LOADING_PERMISSIONS": "Loading permissions...",
+  "LOAD_ERROR": "Error loading roles.",
+  "CREATE_SUCCESS": "Role was successfully created.",
+  "CREATE_ERROR": "Error while creating role.",
+  "DELETE_CONFIRM": "Delete role {{roleName}}?",
+  "DELETE_SUCCESS": "Role was successfully deleted.",
+  "DELETE_ERROR": "Error while deleting role.",
+  "PERMISSIONS_SAVE_SUCCESS": "Permissions updated successfully.",
+  "PERMISSIONS_SAVE_ERROR": "Error while saving permissions.",
+  "ADD_SUCCESS": "Role was successfully added."
+  },
+  "FOLLOWUP": {
+    "event": {
+      "login": "Login",
+      "logout": "Logout",
+      "upload": "File Upload",
+      "user": {
+        "create": "User Creation",
+        "update": "User Update",
+        "delete": "User Deletion"
+      },
+      "access": {
+        "control": "Access Control"
+      }
+    },
+    "login": {
+      "success": "{{value}}: Login successful",
+      "failed": "{{value}}: Login failed"
+    },
+    "logout": {
+      "success": "{{value}}: Logout successful",
+      "failed": "{{value}}: Logout failed"
+    },
+    "user": {
+      "create": {
+        "success": "User: {{value}} created successfully"
+      },
+      "update": {
+        "success": "User: {{value}} updated successfully"
+      },
+      "delete": {
+        "success": "User: {{value}} deleted successfully"
+      }
+    },
+    "file": {
+      "upload": {
+        "success": "File ''{{value}}'' uploaded successfully"
+      }
+    },
+    "access": {
+      "group": {
+        "create": "Group: {{value}} created",
+        "delete": "Group: {{value}} deleted",
+        "update": "Group: {{value}} updated"
+      },
+      "role": {
+        "create": "Role: {{value}} created",
+        "delete": "Role: {{value}} deleted",
+        "update": "Role: {{value}} updated"
+      }
+    }
+  },
+  "MODAL": {
+    "IGNORE_TITLE": "Ignore detected anomaly",
+    "SEND_TITLE": "Assign an anomaly",
+    "NETWORK": "Network",
+    "DESCRIPTION": "Description",
+    "COMMENT_LABEL": "Comment*",
+    "COMMENT_PLACEHOLDER": "Enter your justification here...",
+    "COMMENT_REQUIRED": "Comment is required.",
+    "ASSIGN_USERS_LABEL": "Assign to Users*",
+    "ASSIGN_USERS_REQUIRED": "You must select at least one user.",
+    "USER_SEARCH_PLACEHOLDER": "Search for a user..."
+  },
+    "DETAILS": {
+      "TITLE.VISA": "Visa Anomaly Details",
+      "TITLE.MASTERCARD": "Mastercard Anomaly Details",
+      "BACK": "Back",
+      "LOADING": "Loading...",
+      "ANOMALY_INFO": "Anomaly Information",
+      "DESCRIPTION": "Description",
+      "CATEGORY": "Category",
+      "SEVERITY": "Severity",
+      "DEVIATION": "Deviation",
+      "EXPECTED": "Expected",
+      "ACTUAL": "Actual",
+      "DETECTION_DATE": "Detection Date",
+      "INVOICE_INFO": "Linked Invoice Information"
+    },
+    "ALERTS": {
+      "VISA_MISSING": "The Visa invoice has not been uploaded for more than one month.",
+      "MASTER_MISSING": "The Mastercard invoice has not been uploaded for more than 7 days.",
+      "TITLE": "Invoice Alert"
+    },
+    "VISA_TRANSACTIONS":{
+      "TRANSACTIONS_BY_CURRENCY": "Transactions by Currency",
+      "AVERAGE_BY_CURRENCY": "Average Amount by Currency",
+      "TRANSACTIONS_BY_BIN": "Transactions by BIN",
+      "AVERAGE_BY_BIN": "Average Amount by BIN",
+      "TOTAL_BY_BUSINESS_MODE": "Total by Business Mode",
+      "AVERAGE_BY_BUSINESS_MODE": "Average by Business Mode",
+      "ERROR_LOADING_TRANSACTIONS": "Error loading transactions data: ",
+      "ERROR_LOADING_FILTERS": "Error loading available filters: ",
+     "VISA_TRANSACTIONS_REPORT": "Visa Transactions Report",
+     "TRANSACTIONS_BY_BUSINESS_MODE": "Transactions by Business Mode",
+    "SUMMARY_BY_CURRENCY": "Summary by Settlement Currency",
+    "SETTLEMENT_CURRENCY": "Settlement Currency ",
+    "BIN_SUMMARY": "BIN Summary",
+    "BUSINESS_MODE_DETAILS": "Business Mode Details"
+
+    }
+
+}

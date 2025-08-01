@@ -1,0 +1,315 @@
+<div class="container-fluid">
+  <!-- Page Title -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{ 'home.pageTitle' | translate }}</h5>
+        <button class="btn btn-sm btn-light-primary" (click)="loadStatsData()">
+          <i class="ti ti-refresh me-1"></i>{{ 'home.buttonRefresh' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="row" *ngIf="isLoading">
+    <div class="col-12">
+      <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">{{ 'home.loading' | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div class="row" *ngIf="hasError && !isLoading">
+    <div class="col-12">
+      <div class="alert alert-danger">
+        <i class="ti ti-alert-circle me-2"></i>{{ errorMessage }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div *ngIf="!isLoading && !hasError">
+    <!-- Summary Cards Row -->
+    <div class="row">
+      <!-- Visa Invoices Card -->
+      <div class="col-sm-6 col-md-4 mb-4">
+        <div class="card summary-card visa-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div class="avatar avatar-md bg-light-primary rounded">
+                  <i class="ti ti-credit-card text-visa f-20"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-0 text-muted">{{ 'home.annualFees' | translate }}</h6>
+                <h4 class="mb-0 mt-1">{{ formatNumber( visaInvoiceCount + mastercardInvoiceCount )}}<i
+                    class="ti ti-currency-dollar"></i></h4>
+              </div>
+            </div>
+            <div class="mt-3">
+              <button class="btn btn-sm btn-light-visa w-100" (click)="navigateToInvoices('visa')">
+                <i class="ti ti-eye me-1"></i> {{ 'home.viewInvoices' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mastercard Invoices Card -->
+      <div class="col-sm-6 col-md-4 mb-4">
+        <div class="card summary-card mastercard-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div class="avatar avatar-md bg-light-secondary rounded">
+                  <i class="ti ti-credit-card text-mastercard f-20"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-0 text-muted">{{ 'home.annualFeesCflow' | translate }}</h6>
+                <h4 class="mb-0 mt-1">
+                {{ formatCurrency(kpis?.total?.total?.totalAmount,selectedCurrencyCode) }}
+                  <i class="ti ti">{{ kpis?.total?.total?.totalAmountSign }}</i>
+                </h4>
+                <div ngbDropdown *ngIf="availableFilters?.settlementCurrencyCodes?.length > 1" class="dropdown mt-1">
+                  <a ngbDropdownToggle class="text-muted small" href="#" (click)="$event.preventDefault()">
+                    {{ 'BANK.CURRENCY' | translate }}
+                  </a>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem *ngFor="let currency of availableFilters?.settlementCurrencyCodes"
+                      (click)="selectCurrency(currency.code)">
+                      {{ currency.label }}: {{ formatNumber(kpiByCurrency[currency.code]?.total?.total?.totalAmount) }}
+                      {{ kpiByCurrency[currency.code]?.total?.total?.totalAmountSign }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <button class="btn btn-sm btn-light-mastercard w-100" (click)="navigateToSummary()">
+                <i class="ti ti-eye me-1"></i> {{ 'home.viewSummary' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>     
+
+      <!-- Pending Invoices Card -->
+      <div class="col-sm-6 col-md-4 mb-4">
+        <div class="card summary-card amount-card" [ngbTooltip]="getInvoiceAlertTooltip()" container="body"
+          triggers="mouseenter:mouseleave">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+
+              <div class="flex-shrink-0">
+                <div class="avatar avatar-md rounded" [ngClass]="{
+                    'bg-light-info': !(showVisaAlert || showMasterAlert),
+                    'bg-warning': showVisaAlert || showMasterAlert
+                  }">
+                  <i class="ti" [ngClass]="{
+                  'ti-upload text-success f-20': !(showVisaAlert || showMasterAlert),
+                  'ti-alert-triangle text-danger f-20 alert-icon': showVisaAlert || showMasterAlert
+                }"></i>
+                </div>
+              </div>
+
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-0 text-muted">{{ 'home.pendingInvoices' | translate }}</h6>
+                <h6 class="mb-0 mt-0">Visa : {{ formatDateCsv(uploadVisa) }}</h6>
+                <h6 class="mb-0 mt-0">Master : {{ formatDateCsv(uploadMastercard) }}</h6>
+              </div>
+            </div>
+            <div class="mt-3">
+              <button class="btn btn-sm btn-light-analytics w-100" (click)="navigateToCsv()">
+                <i class="ti ti-eye me-1"></i> {{ 'home.processPending' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div *ngIf="canAccessVisa || canAccessMastercard" class="row">
+
+        <!-- Visa Chart or Placeholder -->
+        <div class="col-md-4 mb-4">
+          <app-card [cardTitle]="'home.visaCategoryDistribution' | translate" [headerClass]="'border-bottom'">
+            <ng-container *ngIf="visaStats; else noVisaData">
+              <div id="visa-network-distribution-chart">
+                <apx-chart [series]="[visaStats.acquisition, visaStats.issuer, visaStats.both]"
+                  [chart]="visaSummaryOptions.chart" [labels]="visaSummaryOptions.labels"
+                  [dataLabels]="visaSummaryOptions.dataLabels" [colors]="visaSummaryOptions.colors"
+                  [legend]="visaSummaryOptions.legend" [tooltip]="visaSummaryOptions.tooltip"
+                  [plotOptions]="visaSummaryOptions.plotOptions"></apx-chart>
+              </div>
+            </ng-container>
+            <ng-template #noVisaData>
+              <div class="empty-chart-placeholder">
+                <div class="text-center p-4 text-visa">
+                  <i class="ti ti-database-off fs-2 mb-2"></i><br>
+                  {{ 'home.noVisaData' | translate }}
+                </div>
+              </div>
+            </ng-template>
+          </app-card>
+        </div>
+        <!-- Mastercard Chart or Placeholder -->
+        <div class="col-md-4 mb-4">
+          <app-card [cardTitle]="'home.mastercardCategoryDistribution' | translate" [headerClass]="'border-bottom'">
+            <ng-container *ngIf="mastercardStats; else noMastercardData">
+              <div id="mastercard-network-distribution-chart">
+                <apx-chart [series]="[mastercardStats.acquisition, mastercardStats.issuer, mastercardStats.both]"
+                  [chart]="mastercardSummaryOptions.chart" [labels]="mastercardSummaryOptions.labels"
+                  [dataLabels]="mastercardSummaryOptions.dataLabels" [colors]="mastercardSummaryOptions.colors"
+                  [legend]="mastercardSummaryOptions.legend" [tooltip]="mastercardSummaryOptions.tooltip"
+                  [plotOptions]="mastercardSummaryOptions.plotOptions"></apx-chart>
+              </div>
+            </ng-container>
+            <ng-template #noMastercardData>
+              <div class="empty-chart-placeholder">
+                <div class="text-center p-4 text-mastercard">
+                  <i class="ti ti-database-off fs-2 mb-2"></i><br>
+                  {{ 'home.noMastercardData' | translate }}
+                </div>
+              </div>
+            </ng-template>
+          </app-card>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <app-card [cardTitle]="'home.networkDistribution' | translate" [headerClass]="'border-bottom'">
+            <div id="network-distribution-chart">
+              <apx-chart [series]="[visaInvoiceCount, mastercardInvoiceCount]"
+                [chart]="networkDistributionOptions.chart" [labels]="networkDistributionOptions.labels"
+                [dataLabels]="networkDistributionOptions.dataLabels" [colors]="networkDistributionOptions.colors"
+                [legend]="networkDistributionOptions.legend" [tooltip]="networkDistributionOptions.tooltip"
+                [plotOptions]="networkDistributionOptions.plotOptions"></apx-chart>
+            </div>
+          </app-card>
+        </div>
+      </div>
+
+      <div *ngIf="canAccessVisa || canAccessMastercard" class="row">
+        <div class="col-md-6 mb-4">
+          <app-card [cardTitle]="totalTitle" [headerClass]="'border-bottom'">
+            <apx-chart [series]="barChart.series" [chart]="barChart.chart" [xaxis]="barChart.xaxis"
+              [yaxis]="barChart.yaxis" [tooltip]="barChart.tooltip" [dataLabels]="barChart.dataLabels"
+              [colors]="barChart.colors">
+            </apx-chart>
+
+          </app-card>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+          <app-card [cardTitle]="totalCategoryTitle" [headerClass]="'border-bottom'">
+            <apx-chart [series]="totalPieChart.series" [chart]="totalPieChart.chart" [xaxis]="totalPieChart.xaxis"
+              [yaxis]="totalPieChart.yaxis" [tooltip]="totalPieChart.tooltip" [dataLabels]="totalPieChart.dataLabels"
+              [colors]="totalPieChart.colors" [plotOptions]="totalPieChart.plotOptions">
+            </apx-chart>
+          </app-card>
+        </div>
+      </div>
+
+      <!-- KPI Metrics Row -->
+      <div class="row">
+        <!-- Upload Invoice Action -->
+        <div class="col-sm-6 col-md-4 mb-4">
+          <div class="card summary-card visa-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                  <div class="avatar avatar-md bg-light-primary rounded">
+                    <i class="ti ti-upload text-visa f-20"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0 text-visa">{{ 'home.uploadInvoices' | translate }}</h6>
+                </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-sm btn-light-visa w-100" (click)="navigateToUpload('visa')">
+                  <i class="ti ti-upload me-1"></i>{{ 'home.upload' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Export Reports Action -->
+        <!-- Upload Invoice Action -->
+        <div class="col-sm-6 col-md-4 mb-4">
+          <div class="card summary-card mastercard-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                  <div class="avatar avatar-md bg-light-primary rounded">
+                    <i class="ti ti-upload text-mastercard f-20"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0 text-mastercard">{{ 'home.uploadEpinFile' | translate }}</h6>
+                </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-sm btn-light-mastercard w-100" (click)="navigateToEpin()">
+                  <i class="ti ti-upload me-1"></i> {{ 'home.upload' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Analytics Action -->
+        <div *ngIf="isManager" class="col-sm-6 col-md-4 mb-4">
+          <div class="card summary-card amount-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                  <div class="avatar avatar-md bg-light-info rounded">
+                    <i class="ti ti-chart-bar text-success f-20"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0 text-success">{{ 'home.viewAnalytics' | translate }}</h6>
+                </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-sm btn-light-analytics w-100" (click)="navigateToAnalytics()">
+                  <i class="ti ti-chart-bar me-1"></i>{{ 'home.View' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!isManager" class="col-sm-6 col-md-4 mb-4">
+          <div class="card summary-card user-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                  <div class="avatar avatar-md bg-light-info rounded">
+                    <i class="ti ti-user text-primary f-20"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0 text-primary">{{ 'home.viewProfile' | translate }}</h6>
+                </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-sm btn-light-primary w-100" (click)="navigateToProfile()">
+                  <i class="ti ti-user me-1"></i> {{ 'home.View' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

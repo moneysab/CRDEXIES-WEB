@@ -1,0 +1,70 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <i class="ti ti-mail auth-icon"></i>
+        </div>
+        <h3 class="mb-4">{{ 'EMAIL_VERIFICATION.TITLE' | translate }}</h3>
+        
+        <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+          </div>
+        </div>
+
+        <div *ngIf="isSuccess" class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+
+        <div *ngIf="isError" class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+
+        <div *ngIf="!isSuccess || resendRequested">
+          <p class="mb-4">
+            {{ 'EMAIL_VERIFICATION.INSTRUCTIONS' | translate }} 
+            <strong>{{'EMAIL_VERIFICATION.YOUR_EMAIL' | translate}}</strong>
+          </p>
+
+          <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="{{'EMAIL_VERIFICATION.CODE_PLACEHOLDER' | translate}}"
+                formControlName="otp"
+                [ngClass]="{'is-invalid': verifyForm.controls['otp'].invalid && verifyForm.controls['otp'].touched}"
+              >
+              <div class="invalid-feedback text-start" *ngIf="verifyForm.controls['otp'].errors?.['required']">
+                {{ 'EMAIL_VERIFICATION.CODE_REQUIRED' | translate }}
+              </div>
+              <div class="invalid-feedback text-start" *ngIf="verifyForm.controls['otp'].errors?.['minlength']">
+                {{ 'EMAIL_VERIFICATION.CODE_MINLENGTH' | translate }}
+              </div>
+            </div>
+            
+            <button 
+              type="submit" 
+              class="btn btn-primary mb-4 w-100"
+              [disabled]="verifyForm.invalid || isLoading"
+            >
+            {{ 'EMAIL_VERIFICATION.VERIFY_BUTTON' | translate }}
+            </button>
+          </form>
+
+          <p>
+            {{ 'EMAIL_VERIFICATION.NO_CODE_RECEIVED' | translate }} 
+            <a href="javascript:void(0)" (click)="requestNewCode()" [class.disabled]="isLoading">
+              {{ 'EMAIL_VERIFICATION.REQUEST_NEW_CODE' | translate }}
+            </a>
+          </p>
+        </div>
+
+        <p class="mb-0 mt-3">
+          <a routerLink="/login" class="f-w-400">{{ 'BUTTONS.BACK_TO_LOGIN' | translate }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

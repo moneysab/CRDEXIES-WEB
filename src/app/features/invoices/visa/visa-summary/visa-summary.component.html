@@ -1,0 +1,231 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="mb-0" *ngIf="activeProvider === 'visa'">{{ 'VISA_SUMMARY_DETAILS.TITLE' | translate }}</h2>
+    <h2 class="mb-0" *ngIf="activeProvider === 'mastercard'" style="color: #FF6600;">{{ 'MASTERCARD_SUMMARY_DETAILS.TITLE' | translate }}</h2>
+    
+    <!-- Provider Tabs -->
+    <ul class="nav nav-tabs card-header-tabs mt-2">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeProvider === 'visa'"
+           [ngClass]="{'visa-tab': activeProvider === 'visa'}"
+           href="javascript:void(0)"
+           (click)="setActiveProvider('visa')">
+          <i class="ti ti-credit-card me-1"></i>Visa
+        </a>
+      </li>
+      <li *ngIf="canAccessMastercard" class="nav-item">
+        <a class="nav-link" [class.active]="activeProvider === 'mastercard'"
+           [ngClass]="{'mastercard-tab': activeProvider === 'mastercard'}"
+           href="javascript:void(0)"
+           (click)="setActiveProvider('mastercard')">
+          <i class="ti ti-credit-card me-1" style="color: #FF6600;"></i>Mastercard
+        </a>
+      </li>
+    </ul>
+    
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-end mt-3">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click)="navigateToUpload()">
+          <i class="bi bi-upload"></i>  {{ 'BUTTONS.UPLOAD' | translate }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="    exportSummaryToCsv()">
+          <i class="bi bi-file-earmark-excel"></i>  {{ 'BUTTONS.EXPORT' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary" (click)="navigateToBreakdown()">
+          <i class="bi bi-graph-up"></i> {{ 'BUTTONS.BREAKDOWN' | translate }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="navigateToInvoice()">
+          <i class="bi bi-pie-chart"></i> {{ 'BUTTONS.INVOICES' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+     <!-- Filter Form -->
+     <form [formGroup]="filterForm" (ngSubmit)="applyFilter()" class="mb-4">
+      <div class="row g-3">
+        <div class="col-md-2">
+          <label class="form-label">{{ 'FILTERS.START_DATE' | translate }}</label>
+          <input type="date" class="form-control" formControlName="startDate">
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">{{ 'FILTERS.END_DATE' | translate }}</label>
+          <input type="date" class="form-control" formControlName="endDate">
+        </div>
+
+
+        <div class="col-md-3">
+          <label for="billingPeriod" class="form-label">{{ 'FILTERS.BILLING_PERIOD' | translate }}</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="{{ 'FILTERS.BILLING_PERIOD' | translate }}"
+          formControlName="billingPeriod"
+        >
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">{{ 'FILTERS.CURRENCY' | translate }}</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="ti ti-currency-dollar"></i></span>
+            <select class="form-select" formControlName="billingCurrency" aria-label="Currency Selection">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">{{ 'FILTERS.FEE_TYPE' | translate }}</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="ti ti-filter"></i></span>
+            <select class="form-select" formControlName="type" aria-label="Type Selection">
+              <option value="">{{ 'FILTERS.ALL_TYPES' | translate }}</option>
+              <option value="ISSR">Issuer</option>
+              <option value="ACQR">Acquirer</option>
+              <option value="BOTH">Both</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="invoiceId" class="form-label">{{ 'FILTERS.INVOICE_ID' | translate }}</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="{{'FILTERS.INVOICE_ID' | translate}}"
+          formControlName="invoiceId"
+        >
+        </div>
+        <div class="col-md-3">
+          <label for="invoiceId" class="form-label">{{ 'FILTERS.BILLING_LINE' | translate }}</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="{{'FILTERS.BILLING_LINE' | translate}}"
+          formControlName="billingLine"
+        >
+        </div>
+        <div class="col-md-3">
+          <label for="invoiceId" class="form-label">{{ 'FILTERS.ENTITY_ID' | translate }}</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="{{'FILTERS.ENTITY_ID' | translate}}"
+          formControlName="entityId"
+        >
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <div class="btn-group w-100">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-search"></i> {{ 'BUTTONS.SEARCH' | translate }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="resetFilter()">
+              <i class="bi bi-x-circle"></i>  {{ 'BUTTONS.RESET' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="text-end mt-2 mb-3">
+            <button (click)="toggleView()" class="btn btn-primary">
+        {{ showChart ? ('BUTTONS.TABLE_VIEW' | translate) : ('BUTTONS.CHART_VIEW' | translate) }}
+      </button>
+    </div>
+        
+     <!-- Loading Spinner -->
+     <div *ngIf="isLoading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+      </div>
+      <p class="mt-2">{{ 'LOADING.LOADING_INVOICES' | translate }}...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage && !isLoading" class="alert alert-danger" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      {{ errorMessage }}
+    </div>
+
+    <!-- No Data Message -->
+    <div *ngIf="!isLoading && !errorMessage && invoices.length === 0" class="alert alert-info" role="alert">
+      <i class="bi bi-info-circle-fill me-2"></i>
+      {{ 'MESSAGES.NO_INVOICES_FOUND' | translate }}
+    </div>  
+ 
+    <div *ngIf="showChart && !isLoading && invoices.length > 0" class="chart-container">
+      <apx-chart
+      [series]="chartSeries"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [plotOptions]="chartOptions.plotOptions"
+      [dataLabels]="chartOptions.dataLabels"
+      [stroke]="chartOptions.stroke"
+      [fill]="chartOptions.fill"
+      [tooltip]="chartOptions.tooltip"
+      [colors]="chartOptions.colors"
+      [legend]="chartOptions.legend"
+    ></apx-chart>
+    
+    </div>
+ 
+          <!-- Invoices Table -->
+    <div *ngIf="!showChart && !isLoading && invoices.length > 0" class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead> 
+                  <tr>
+                    <th scope="col">Billing Date</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col" class="amount-column">Distribution</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let invoice of invoices">
+                    <td data-label="Billing date">{{ invoice.billing_date || '–' }}</td>
+                    <td data-label="total">{{ invoice.total_charges_USD || '–' }}</td>
+                    <td data-label="Distribution" class="amount-column">
+                      <ng-container *ngIf="invoice.currency_distribution">
+                        <ng-container *ngFor="let entry of invoice.currency_distribution | keyvalue">
+                          {{ entry.key }}: {{ entry.value }}<br />
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="!invoice.currency_distribution">–</ng-container>
+                    </td>
+                  </tr>
+                </tbody>
+       </table>
+     </div> 
+              
+         
+      <!-- Pagination -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+          {{ 'PAGINATION.SHOWING' | translate:{count: invoices.length, total: totalElements} }}
+        </div>
+        <div class="mb-2">
+          {{ 'PAGINATION.PAGE' | translate:{current: currentPage + 1, total: totalPages} }}
+        </div>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 0">
+              <a class="page-link" href="javascript:void(0)" (click)="previousPage(); $event.preventDefault()">
+                <i class="ti ti-chevron-left"></i>
+              </a>
+            </li>
+            <li class="page-item active">
+              <span class="page-link">{{ currentPage + 1 }}</span>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage + 1 >= totalPages">
+              <a class="page-link" href="javascript:void(0)" (click)="nextPage(); $event.preventDefault()">
+                <i class="ti ti-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  
+    </div>
+  </div>
+  

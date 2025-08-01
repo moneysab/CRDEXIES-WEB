@@ -1,0 +1,155 @@
+// Data table specific styles
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--pc-sidebar-caption-color);
+  
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+:host ::ng-deep {
+  // Table styles - inherits from global table styles
+  .table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    
+    // Add subtle animation for hover states
+    tbody tr {
+      transition: all 0.2s ease;
+    }
+  }
+  
+  // Status badges with Mantis Pro styling
+  .badge {
+    padding: 0.35em 0.65em;
+    font-size: 75%;
+    font-weight: 500;
+    border-radius: 4px;
+    
+    &.bg-light-success {
+      background-color: var(--success-bg-subtle, var(--success-light));
+      color: var(--success-text, var(--success-dark));
+    }
+    
+    &.bg-light-warning {
+      background-color: var(--warning-bg-subtle, var(--warning-light));
+      color: var(--warning-text, var(--warning-dark));
+    }
+    
+    &.bg-light-danger {
+      background-color: var(--danger-bg-subtle, var(--error-light));
+      color: var(--danger-text, var(--error-dark));
+    }
+    
+    &.bg-light-info {
+      background-color: var(--info-bg-subtle, var(--info-light));
+      color: var(--info-text, var(--info-dark));
+    }
+    
+    &.bg-light-secondary {
+      background-color: var(--secondary-bg-subtle, var(--secondary-light));
+      color: var(--secondary-text, var(--secondary-dark));
+    }
+  }
+  
+  // Status indicators (dot style)
+  .status-indicator {
+    display: inline-flex;
+    align-items: center;
+    
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    &.status-success::before {
+      background-color: var(--bs-success);
+    }
+    
+    &.status-warning::before {
+      background-color: var(--bs-warning);
+    }
+    
+    &.status-danger::before {
+      background-color: var(--bs-danger);
+    }
+    
+    &.status-info::before {
+      background-color: var(--bs-info);
+    }
+  }
+  
+  // Loading spinner with Mantis Pro styling
+  .spinner-border {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--bs-primary);
+  }
+  
+  // Error state
+  .alert-danger {
+    background-color: var(--danger-bg-subtle, var(--error-light));
+    color: var(--danger-text, var(--error-dark));
+    border: none;
+    border-radius: 8px;
+    
+    i {
+      font-size: 1.25rem;
+    }
+  }
+  
+  // Action buttons
+  .btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin-left: 4px;
+    
+    i {
+      font-size: 1rem;
+    }
+    
+    &.btn-light-primary {
+      background-color: var(--primary-bg-subtle);
+      color: var(--primary-text);
+      border: none;
+      
+      &:hover {
+        background-color: var(--bs-primary);
+        color: #fff;
+      }
+    }
+    
+    &.btn-light-danger {
+      background-color: var(--danger-bg-subtle, var(--error-light));
+      color: var(--danger-text, var(--error-dark));
+      border: none;
+      
+      &:hover {
+        background-color: var(--bs-danger);
+        color: #fff;
+      }
+    }
+  }
+}

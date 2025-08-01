@@ -1,0 +1,107 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <h2>{{ 'ROLES.MANAGE_TITLE' | translate }}</h2>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" (click)="openAddRoleModal()">+ {{ 'ROLES.CREATE_TITLE' | translate }}</button>
+      <button type="button"class="btn btn-secondary" (click)="navigateToGroup()">{{ 'GROUPS.TITLE' | translate }}</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center p-3">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <table class="table table-hover mt-2">
+    <thead>
+      <tr>
+        <th>{{ 'ROLES.NAME' | translate }}</th>
+        <th>Permissions Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roles">
+        <td>{{ role.name }}</td>
+        <td>
+          <span *ngIf="role.permissions.length === 0">
+            <em>{{ 'ROLES.NO_PERMISSIONS' | translate }}</em>
+          </span>
+          <span *ngIf="role.permissions.length > 0" class="badge bg-primary me-1">
+            {{ role.permissions.length }}
+          </span>
+        </td>
+        <td>
+
+          <button class="btn btn-sm btn-danger me-2" (click)="deleteRole(role)">
+            {{ 'GROUPS.DELETE' | translate }}
+          </button>
+          <button class="btn btn-sm btn-success me-2" (click)="openPermissionsModal(role)">
+            {{ 'ROLES.MANAGE_PERMISSIONS_TITLE' | translate }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Ajouter rôle -->
+<div *ngIf="modalIsOpen" class="modal d-block" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form [formGroup]="addRoleForm" (ngSubmit)="onAddRoleSubmit()">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ 'ROLES.CREATE_TITLE' | translate }}</h5>
+          <button class="btn-close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="groupName" class="form-label">{{ 'ROLES.NAME' | translate }}</label>
+            <input id="groupName" type="text" class="form-control" formControlName="name"
+              [class.is-invalid]="addRoleForm.controls['name'].invalid && addRoleForm.controls['name'].touched">
+            <div class="invalid-feedback" *ngIf="addRoleForm.controls['name'].errors?.['required']">
+              {{ 'GROUPS.VALIDATION.REQUIRED' | translate }}
+            </div>
+            <div class="invalid-feedback" *ngIf="addRoleForm.controls['name'].errors?.['minlength']">
+              {{ 'GROUPS.VALIDATION.MIN_LENGTH' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">
+            {{ 'COMMON.CANCEL' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="addRoleForm.invalid">
+            {{ 'COMMON.CREATE' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal permissions -->
+<div *ngIf="modalPermissionsOpen" class="modal d-block">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>{{ 'ROLES.MANAGE_PERMISSIONS_TITLE' | translate }} {{ selectedRole?.name }}</h5>
+        <button class="btn-close" (click)="closePermissionsModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="permissions.length === 0">{{ 'ROLES.LOADING_PERMISSIONS' | translate }}</div>
+        <div *ngFor="let perm of permissions" class="form-check">
+          <input #checkbox type="checkbox" class="form-check-input" [checked]="selectedPermissions.has(perm.id)"
+            (change)="onPermissionCheckboxChange(perm.id, checkbox.checked)">
+          <label class="form-check-label">{{ perm.name }}</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closePermissionsModal()">
+          {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button class="btn btn-primary" (click)="savePermissions()">
+          {{ 'COMMON.SAVE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

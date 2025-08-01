@@ -1,0 +1,56 @@
+/**======================================================================
+=========================================================================
+Template Name: MAntis Angular - Angular Admin Template
+Author: codedThemes
+Support: https://codedthemes.support-hub.io/
+File: style.css
+=========================================================================
+=================================================================================== */
+
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/variables-dark';
+
+@import 'scss/settings/color-variables';
+@import 'scss/settings/theme-variables';
+@import 'scss/settings/bootstrap-variables';
+
+// bootstrap import
+@import 'scss/bootstrap/bootstrap.scss';
+
+body.mantis-ltr {
+  @import 'node_modules/bootstrap/scss/utilities';
+  @import 'node_modules/bootstrap/scss/utilities/api';
+}
+body.mantis-rtl {
+  @import 'scss/theme/layouts/RTL/style-rtl-utility.scss';
+  @import 'node_modules/bootstrap/scss/utilities/api';
+}
+
+// main framework
+@import 'scss/theme/generic.scss';
+@import 'scss/theme/general.scss';
+
+@import 'scss/theme/components/components.scss';
+
+// theme
+@import 'scss/theme/layouts/menu/sidebar.scss';
+@import 'scss/theme/layouts/navbar/navbar.scss';
+@import 'scss/theme/layouts/pc-common.scss';
+@import 'scss/theme/layouts/breadcrumb/breadcrumb.scss';
+@import 'scss/theme/layouts/footer/footer.scss';
+@import 'scss/theme/layouts/menu/horizontal.scss';
+@import 'scss/theme/layouts/menu/compact.scss';
+
+// isRTLMode
+@import 'scss/theme/layouts/RTL/rtl.scss';
+
+// font
+@import 'scss/fonts/feather.css';
+@import 'scss/fonts/fontawesome.css';
+@import 'scss/fonts/material.css';
+@import 'scss/fonts/tabler-icons.min.css';
+
+@import 'scss/theme/layouts/dark-mode/dark.scss';
+
+@import 'scss/theme/style-preset.scss';

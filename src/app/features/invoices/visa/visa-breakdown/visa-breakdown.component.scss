@@ -1,0 +1,263 @@
+$visa-blue: #1a1f71;
+$visa-gold: #F7B600;
+$mastercard-orange: #FF6600;
+$mastercard-yellow: #F79E1B;
+
+// Custom styles for invoice list
+:host {
+  display: block;
+}
+
+// Provider tabs styling
+.nav-tabs {
+  .nav-item {
+    .nav-link {
+      &.active {
+        &.visa-tab {
+          color: $visa-blue;
+          border-color: $visa-blue;
+          border-bottom-color: transparent;
+          
+          &:hover {
+            border-color: $visa-blue $visa-blue transparent;
+          }
+        }
+        
+        &.mastercard-tab {
+          color: $mastercard-orange;
+          border-color: $mastercard-orange;
+          border-bottom-color: transparent;
+          
+          &:hover {
+            border-color: $mastercard-orange $mastercard-orange transparent;
+          }
+        }
+      }
+      
+      &.visa-tab:not(.active) {
+        color: $visa-blue;
+        
+        &:hover {
+          border-color: transparent transparent $visa-blue;
+        }
+      }
+      
+      &.mastercard-tab:not(.active) {
+        color: $mastercard-orange;
+        
+        &:hover {
+          border-color: transparent transparent $mastercard-orange;
+        }
+      }
+    }
+  }
+}
+
+// Table header styling
+th {
+  cursor: pointer;
+  user-select: none;
+  background-color: lighten($visa-blue, 65%);
+  
+  &:hover {
+    background-color: lighten($visa-blue, 60%);
+  }
+  
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+// Currency column styling
+.currency-column {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+// Date column styling
+.date-column {
+  white-space: nowrap;
+}
+
+// Card header styling
+.card-header {
+  background-color: lighten($visa-blue, 70%);
+  border-bottom: 2px solid $visa-blue;
+  
+  h2 {
+    color: $visa-blue;
+  }
+}
+
+// Primary button styling
+.btn-primary {
+  background-color: $visa-blue;
+  border-color: $visa-blue;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-blue, 10%);
+    border-color: darken($visa-blue, 10%);
+  }
+}
+
+// Secondary button styling
+.btn-secondary {
+  background-color: $visa-gold;
+  border-color: $visa-gold;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+  }
+}
+
+// Info button styling
+.btn-info {
+  background-color: $visa-gold;
+  border-color: $visa-gold;
+  color: #212529;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+    color: #212529;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+
+  table {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  th, td {
+    vertical-align: middle;
+    padding: 0.75rem;
+  }
+
+  td.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+}
+
+// Pagination styling
+.pagination {
+  .page-item {
+    &.active .page-link {
+      background-color: lighten($visa-blue, 50%);;
+      border-color: $visa-blue;
+    }
+    
+    .page-link {
+      color: black;
+      
+      &:hover {
+        background-color: lighten($visa-blue, 70%);
+      }
+    }
+  }
+}
+
+// Table row hover effect
+tbody tr {
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: lighten($visa-gold, 40%) !important;
+  }
+}
+
+// Mastercard specific styling
+:host(.mastercard-active) {
+  .card-header {
+    background-color: lighten($mastercard-orange, 35%);
+    border-bottom: 2px solid $mastercard-orange;
+    
+    h2 {
+      color: $mastercard-orange;
+    }
+  }
+  
+  .btn-primary {
+    background-color: $mastercard-orange;
+    border-color: $mastercard-orange;
+    
+    &:hover, &:focus {
+      background-color: darken($mastercard-orange, 10%);
+      border-color: darken($mastercard-orange, 10%);
+    }
+  }
+  
+  .btn-secondary {
+    background-color: $mastercard-yellow;
+    border-color: $mastercard-yellow;
+    
+    &:hover, &:focus {
+      background-color: darken($mastercard-yellow, 10%);
+      border-color: darken($mastercard-yellow, 10%);
+    }
+  }
+  
+  .btn-info {
+    background-color: $mastercard-yellow;
+    border-color: $mastercard-yellow;
+    
+    &:hover, &:focus {
+      background-color: darken($mastercard-yellow, 10%);
+      border-color: darken($mastercard-yellow, 10%);
+    }
+  }
+  
+  th {
+    background-color: lighten($mastercard-orange, 45%);
+    
+    &:hover {
+      background-color: lighten($mastercard-orange, 40%);
+    }
+  }
+  
+  .pagination {
+    .page-item {
+      &.active .page-link {
+        background-color: lighten($mastercard-orange, 30%);
+        border-color: $mastercard-orange;
+      }
+      
+      .page-link {
+        &:hover {
+          background-color: lighten($mastercard-orange, 45%);
+        }
+      }
+    }
+  }
+  
+  tbody tr {
+    &:hover {
+      background-color: lighten($mastercard-yellow, 40%) !important;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+    
+    .btn {
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem !important;
+    }
+  }
+  
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}

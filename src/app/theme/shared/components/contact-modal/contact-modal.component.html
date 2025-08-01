@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ 'CONTACT.CONTACT_FORM.TITLE' | translate }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()"></button>
+  </div>
+  
+  <div *ngIf="successMessage" class="alert alert-success mt-2">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-2">{{ errorMessage }}</div>
+  
+  <div class="modal-body">
+    <form [formGroup]="contactForm">
+        <div class="mb-3">
+          <label for="subject">{{ 'CONTACT.CONTACT_FORM.SUBJECT' | translate }}*</label>
+          <input id="subject" type="text" class="form-control" formControlName="subject">
+          <div *ngIf="contactForm.controls['subject'].invalid && contactForm.controls['subject'].touched" class="text-danger">
+            {{ 'CONTACT.CONTACT_FORM.REQUIRED' | translate }}
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="email">{{ 'CONTACT.CONTACT_FORM.EMAIL' | translate }}*</label>
+          <input id="email" type="email" class="form-control" formControlName="email" [readonly]="isAuthenticated">
+          <div *ngIf="contactForm.controls['email'].invalid && contactForm.controls['email'].touched" class="text-danger">
+            {{ 'CONTACT.CONTACT_FORM.VALID_EMAIL' | translate }}
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="description">{{ 'CONTACT.CONTACT_FORM.DESCRIPTION' | translate }}*</label>
+          <textarea id="description" class="form-control" rows="4" formControlName="description"></textarea>
+          <div *ngIf="contactForm.controls['description'].invalid && contactForm.controls['description'].touched" class="text-danger">
+            {{ 'CONTACT.CONTACT_FORM.REQUIRED' | translate }}
+          </div>
+        </div>
+      </form>
+  
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">
+      {{ 'CONTACT.CONTACT_FORM.CLOSE' | translate }}
+    </button>
+    <button type="button" class="btn btn-primary" [disabled]="contactForm.invalid || isLoading" (click)="onSubmit()">
+      <span *ngIf="!isLoading">{{ 'CONTACT.CONTACT_FORM.SEND' | translate }}</span>
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+    </button>
+  </div>
+  

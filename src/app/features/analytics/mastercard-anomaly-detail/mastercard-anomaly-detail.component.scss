@@ -1,0 +1,33 @@
+$mc-yellow: #e0aa3e;
+$mc-gold: #F7B600;
+
+.mc-title {
+  color: $mc-yellow;
+  font-weight: 600;
+}
+
+.mc-card {
+  border-left: 4px solid $mc-yellow;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.section-title {
+  color: $mc-gold;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-card {
+  background-color: #f8f9fc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}

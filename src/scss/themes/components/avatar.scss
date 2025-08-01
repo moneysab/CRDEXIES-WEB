@@ -1,0 +1,130 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--bs-light);
+  color: var(--bs-dark);
+  font-weight: 500;
+  vertical-align: middle;
+  text-align: center;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+  font-size: 1.25rem;
+  
+  // Avatar sizes
+  &.avatar-xs {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+  
+  &.avatar-sm {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+  
+  &.avatar-md {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+  
+  &.avatar-lg {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+  }
+  
+  &.avatar-xl {
+    width: 80px;
+    height: 80px;
+    font-size: 1.75rem;
+  }
+  
+  // Avatar with image
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  // Avatar with status indicator
+  .avatar-status {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    
+    &.bg-success {
+      background-color: var(--bs-success) !important;
+    }
+    
+    &.bg-warning {
+      background-color: var(--bs-warning) !important;
+    }
+    
+    &.bg-danger {
+      background-color: var(--bs-danger) !important;
+    }
+    
+    &.bg-info {
+      background-color: var(--bs-info) !important;
+    }
+  }
+  
+  // Avatar with square shape
+  &.avatar-square {
+    border-radius: 8px;
+  }
+  
+  // Avatar with border
+  &.avatar-bordered {
+    border: 2px solid var(--bs-white);
+  }
+}
+
+// Avatar group
+.avatar-group {
+  display: inline-flex;
+  
+  .avatar {
+    margin-right: -8px;
+    border: 2px solid var(--bs-white);
+    
+    &:hover {
+      z-index: 1;
+    }
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  // Avatar group sizes
+  &.avatar-group-sm .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+  
+  &.avatar-group-lg .avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 1.25rem;
+  }
+}
+
+// Avatar with initials and background colors
+@each $color, $value in $theme-colors {
+  .avatar-#{$color} {
+    background-color: var(--#{$color}-bg-subtle, shift-color($value, $soft-bg-level));
+    color: var(--#{$color}-text, $value);
+  }
+}

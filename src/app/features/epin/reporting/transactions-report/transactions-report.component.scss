@@ -1,0 +1,126 @@
+$visa-blue: #1a1f71;
+$visa-gold: #F7B600;
+$visa-light-blue: lighten($visa-blue, 60%);
+
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+.card-header {
+  background-color: lighten($visa-blue, 70%);
+  border-bottom: 2px solid $visa-blue;
+  
+  h2 {
+    color: $visa-blue;
+    font-weight: 600;
+  }
+  h4 {
+    color: $visa-gold;
+    font-weight: 600;
+  }
+}
+
+.section-header {
+  background-color: lighten($visa-gold, 70%);
+  border-bottom: 2px solid $visa-gold;
+  h4 {
+    color: $visa-gold;
+    font-weight: 600;
+  }
+}
+
+.btn-primary {
+  background-color: $visa-blue;
+  border-color: $visa-blue;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-blue, 10%);
+    border-color: darken($visa-blue, 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: $visa-gold;
+  border-color: $visa-gold;
+  color: #212529;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+  }
+}
+
+.currency-summary-header, .currency-header {
+  background-color: lighten($visa-light-blue, 8%) ;
+  
+  h4 {
+    font-weight: 500;
+    color: $visa-gold;
+  }
+}
+
+
+.chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 100%;
+  }
+
+.business-mode-card {
+  background-color: lighten($visa-light-blue, 8%);
+  border-color: $visa-light-blue !important;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transform: translateY(-1px);
+  }
+}
+
+.text-visa {
+  color: $visa-blue;
+  font-weight: 500;
+}
+
+.text-success {
+  color: #198754 ;
+}
+
+.text-danger {
+  color: #dc3545 ;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba($visa-blue, 0.05);
+}
+
+.border {
+  border: 1px solid #dee2e6 ;
+}
+
+.rounded {
+  border-radius: 0.375rem ;
+}
+
+.rounded-top {
+  border-top-left-radius: 0.375rem ;
+  border-top-right-radius: 0.375rem ;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 0.5rem;
+  }
+  
+  .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .business-mode-card .row > div {
+    margin-bottom: 0.5rem;
+  }
+}

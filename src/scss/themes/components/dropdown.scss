@@ -1,0 +1,171 @@
+.dropdown-toggle {
+  &.arrow-none {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.pc-header {
+  .dropdown-menu {
+    animation: 0.3s ease-in-out 0s normal forwards 0.3s fadeIn;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translate3d(0, 8px, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.dropdown-menu {
+  --bs-dropdown-zindex: 8;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  
+  .dropdown-header {
+    padding: 12px 16px;
+    color: var(--pc-heading-color);
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .dropdown-divider {
+    margin: 8px 0;
+    opacity: 0.1;
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: var(--pc-sidebar-color);
+    
+    i {
+      font-size: 18px;
+      margin-right: 10px;
+
+      &.material-icons-two-tone {
+        vertical-align: bottom;
+        font-size: 22px;
+        background-color: var(--pc-header-color);
+      }
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+    }
+
+    .float-right, .float-end {
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    
+    &.active,
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: var(--primary-bg-subtle);
+      color: var(--primary-text);
+      i {
+        &.material-icons-two-tone {
+          background-color: var(--primary-text);
+        }
+      }
+    }
+  }
+}
+
+// Dropdown with notifications
+.dropdown-notification {
+  width: 320px;
+  max-height: 400px;
+  
+  .dropdown-body {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  
+  .list-group-item {
+    border: none;
+    padding: 12px 16px;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: var(--bs-light);
+    }
+    
+    .avatar {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+// Dropdown with user profile
+.dropdown-user-profile {
+  width: 280px;
+  
+  .dropdown-header {
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .nav-tabs {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    
+    .nav-link {
+      padding: 10px 16px;
+      font-size: 14px;
+      color: var(--pc-sidebar-color);
+      border: none;
+      
+      &.active {
+        color: var(--bs-primary);
+        background-color: transparent;
+        border-bottom: 2px solid var(--bs-primary);
+      }
+    }
+  }
+  
+  .profile-notification-scroll {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+}
+
+.dropdown-menu-dark {
+  background-color: var(--dark-layout-color, #1a223f);
+  
+  .dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    
+    &.active,
+    &:active,
+    &:focus,
+    &:hover {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .dropdown-header {
+    color: #fff;
+  }
+}

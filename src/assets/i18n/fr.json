@@ -1,0 +1,787 @@
+{
+  "Other": "Autre",
+  "Menu levels": "Niveaux de menu",
+  "Menu Level 2.1": "Niveau de menu 2.1",
+  "Menu Level 2.2": "Niveau de menu 2.2",
+  "Menu Level 2.3": "Niveau de menu 2.3",
+  "Menu Level 3.1": "Niveau de menu 3.1",
+  "Menu Level 3.2": "Niveau de menu 3.2",
+  "Menu Level 3.3": "Niveau de menu 3.3",
+  "Menu Level 4.1": "Niveau de menu 4.1",
+  "Menu Level 4.2": "Niveau de menu 4.2",
+  "Sample Page": "Page d'exemple",
+  "Home": "Accueil",
+  "Executive Analytics": "Analyse de données",
+  "Dashboard": "Tableau de bord",
+  "Invoice Management": "C-Bill",
+  "MENU": {
+    "EPIN_MANAGEMENT": "C-Flow – Revenus Interchange",
+    "EPIN_FILE_PROCESSING": "Traitement de fichiers",
+    "EPIN_REPORTING": "Rapports"
+  },
+  "Visa": "Visa",
+  "Invoices": "Factures",
+  "Upload": "Importer une facture",
+  "Upload File": "Importer un fichier",
+  "Summary": "Résumé",
+  "Service Breakdown": "Répartition par service",
+  "Mastercard": "Mastercard",
+  "Visa Invoice Details": "Détails de la facture Visa",
+  "Mastercard Invoice Details": "Détails de la facture Mastercard",
+  "Mastercard Invoice Summary": "Résumé des factures Mastercard",
+  "Visa Invoice Summary": "Résumé des factures Visa",
+  "Visa Service Breakdown": "Répartition des services Visa",
+  "History": "Historique",
+  "Uploading history": "Historique des Importations",
+  "Visa CSV File Details": "Détails du fichier CSV Visa",
+  "Mastercard CSV File Details": "Détails du fichier CSV Mastercard",
+  "Settings": "Paramètres",
+  "Users": "Utilisateurs",
+  "Audit Trail": "Historique des actions",
+  "Create User": "Créer un utilisateur",
+  "Reimbursement Fee": "Frais de Remboursement",
+  "Interchange": "Interchange",
+  "Charges": "Charges",
+  "Users List": "Liste des utilisateurs",
+  "Banks": "Banques",
+  "List of Banks": "Liste des banques",
+  "Bank Creation": "Création de banque",
+  "Update bank detail": "Mise à jour de la banque",
+  "Edit Profile": "Modifier le profil",
+  "View Profile": "Voir le profil",
+  "Change Password": "Changer le mot de passe",
+  "Billing": "Factures",
+  "Profile": "Profil",
+  "Support": "Assistance",
+  "Account Settings": "Paramètres du compte",
+  "Privacy Center": "Centre de confidentialité",
+  "Feedback": "Retour d’expérience",
+  "Logout": "Déconnexion",
+  "visaAnnualFees": "Frais annuels Visa",
+  "and": "et",
+  "contact_us": "Contactez-nous",
+  "Transaction Breakdown": "Détail des transactions",
+  "Access Control": "Contrôle d'accès",
+  "Statistics": "Statistiques",
+  "LOGIN": {
+    "TITLE": "Connexion",
+    "NO_ACCOUNT": "Besoin de support ?",
+    "USERNAME": "Nom d'utilisateur ou Email",
+    "USERNAME_PLACEHOLDER": "Entrez votre nom d'utilisateur ou email",
+    "PASSWORD": "Mot de passe",
+    "PASSWORD_PLACEHOLDER": "Mot de passe",
+    "REMEMBER_ME": "Rester connecté",
+    "FORGOT_PASSWORD": "Mot de passe oublié ?",
+    "SUBMIT_BUTTON": "Se connecter",
+    "LOGGING_IN": "Connexion en cours..."
+  },
+  "REQUEST_RESET_PASSWORD": {
+    "TITLE": "Réinitialiser le mot de passe",
+    "INSTRUCTIONS": "Entrez votre adresse email et nous vous enverrons les instructions pour réinitialiser votre mot de passe.",
+    "EMAIL_PLACEHOLDER": "Adresse email",
+    "EMAIL_REQUIRED": "L'email est requis",
+    "EMAIL_INVALID": "Veuillez entrer une adresse email valide",
+    "SUBMIT_BUTTON": "Envoyer le lien de réinitialisation",
+    "REMEMBER_PASSWORD": "Vous vous souvenez de votre mot de passe ?",
+    "SIGN_IN": "Se connecter"
+  },
+  "home": {
+    "pageTitle": "Tableau de bord de gestion des factures",
+    "buttonRefresh": "Actualiser les données",
+    "loading": "Chargement des données du tableau de bord...",
+    "visaAnnualFees": "Frais annuels Visa",
+    "annualFees": "Frais annuels Visa/Master",
+    "annualFeesCflow": "Interchange annuel net",
+    "viewInvoices": "Voir les factures",
+    "viewSummary": "Voir le rapport",
+    "mastercardAnnualFees": "Frais annuels Master",
+    "pendingInvoices": "Dernières factures",
+    "processPending": "Voir la liste",
+    "visaCategoryDistribution": "Répartition frais Visa par domaine",
+    "mastercardCategoryDistribution": "Répartition frais Master par domaine",
+    "networkDistribution": " Répartition des frais par Réseau",
+    "uploadVisaInvoice": "Importation Visa",
+    "uploadMastercardInvoice": "Importation Mastercard",
+    "uploadEpinFile": "Import de fichier Interchange Visa/Master",
+    "uploadInvoices": "Import factures Visa/Master",
+    "upload": "Importer",
+    "viewAnalytics": "Consulter les analyses",
+    "viewProfile": "Voir le profil",
+    "View": "Voir",
+    "recentInvoiceActivity": "Activité récente des factures",
+    "invoiceId": "ID Facture",
+    "network": "Réseau",
+    "date": "Date",
+    "amount": "Montant",
+    "status": "Statut",
+    "viewAllActivity": "Voir toute l'activité",
+    "recentUserLogins": "Connexions récentes des utilisateurs",
+    "user": "Utilisateur",
+    "eventType": "événement",
+    "time": "Heure",
+    "viewAllLogins": "Voir toutes les actions",
+    "cflow_total": "Vue globale d'interchange",
+    "cflow_category": "Répartition interchange par domaine",
+    "noVisaData": "Aucune donnée Visa disponible.",
+    "noMastercardData": "Aucune donnée Mastercard disponible.",
+    "period":"Période"
+
+  },
+  "DASHBOARD": {
+    "TITLE": "Analyse de facturation"
+  },
+  "GENERAL": {
+    "REFRESH": "Actualiser",
+    "LOADING": "Chargement"
+  },
+  "FILTERS": {
+    "DATE_RANGE": "Plage de dates",
+    "LAST_30_DAYS": "30 derniers jours",
+    "LAST_90_DAYS": "90 derniers jours",
+    "YTD": "Année en cours",
+    "CUSTOM": "Personnalisé",
+    "TO": "à",
+    "CARD_TYPES": "Types de cartes",
+    "VISA": "Visa",
+    "MASTERCARD": "Mastercard",
+    "INCLUDE_BREAKDOWN": "Inclure le détail",
+    "GROUP_BY": "Grouper par",
+    "COMPARISON": "Comparaison",
+    "SELECT_GROUPING": "Sélectionner un regroupement",
+    "SELECT_COMPARISON": "Sélectionner une comparaison",
+    "APPLIED_FILTERS": "Filtres appliqués",
+    "CARDS": "Cartes",
+    "PERIOD": "Période",
+    "RESET_ALL": "Réinitialiser tout",
+    "BILLING_DATE": "Date de facturation",
+    "INVOICE_ID": "Facture ID",
+    "BILLING_PERIOD": "Période",
+    "INVOICE_NUMBER": "Numéro de facture",
+    "START_DATE": "Date de début",
+    "START_DATE_PLACEHOLDER": "Date de début",
+    "END_DATE": "Date de fin",
+    "END_DATE_PLACEHOLDER": "Date de fin",
+    "USERNAME": "Nom d'utilisateur",
+    "USERNAME_PLACEHOLDER": "Nom d'utilisateur",
+    "INVOICE_NAME": "Nom de la facture",
+    "INVOICE_NAME_PLACEHOLDER": "Entrez le nom de la facture",
+    "UPLOAD_DATE": "Date d'import",
+    "CARD_TYPE": "Type de carte",
+    "ALL_TYPES": "Tous types",
+    "CURRENCY": "Devise",
+    "TOTAL_MIN": "Total min",
+    "TOTAL_MAX": "Total max",
+    "FEE_TYPE": "Type de frais",
+    "ACTIVITY_ICA": "ICA activité",
+    "BILLABLE_ICA": "ICA facturable",
+    "EVENT_ID": "ID événement",
+    "EVENT_DESCRIPTION": "Description événement",
+    "SERVICE_CODE": "Code service",
+    "SERVICE_CODE_DESCRIPTION": "Description du code service",
+    "CATEGORY": "Catégorie",
+    "SUBCATEGORY": "Sous-catégorie",
+    "BILLING_LINE": "Ligne de facturation",
+    "ENTITY_NAME": "Nom de l'entité",
+    "ENTITY_ID": "ID de l'entité",
+    "DESCRIPTION": "Description",
+    "BIN": "BIN",
+    "BUSINESS_MODE": "Mode Business",
+    "TRANSACTIONS_TYPE": "Type de transactions",
+    "CLEARING_CURRENCY": "Devise d'interchange",
+    "SETTLEMENT_CURRENCY": "Devise de règlement"
+  },
+  "SUMMARY": {
+    "TOTAL_CHARGES": "Total des frais",
+    "VS_PREVIOUS_PERIOD": "vs. la période précédente",
+    "TRANSACTION_COUNT": "Nombre de transactions",
+    "ACROSS_ALL_CARDS": "sur toutes les cartes",
+    "AVERAGE_TRANSACTION": "Transaction moyenne",
+    "PER_TRANSACTION": "par transaction",
+    "ANOMALIES_DETECTED": "Irrégularités potentielles",
+    "REQUIRING_ATTENTION": "nécessitant attention"
+  },
+  "CHART": {
+    "BILLING_TRENDS_ANALYSIS": "Tendances des frais réseaux",
+    "SERVICE_CATEGORY_BREAKDOWN": "Répartition des frais par domaine",
+    "AI_INSIGHTS": "Analyse IA"
+  },
+  "ANOMALIES": {
+    "DETECTED_ANOMALIES": "Irrégularités potentielles",
+    "NO_ANOMALIES": "Aucune anomalie détectée pour la période actuelle.",
+    "DESCRIPTION": "Description",
+    "EXPECTED": "Attendu",
+    "ACTUAL": "Réel",
+    "DEVIATION": "Écart",
+    "SEVERITY": "Sévérité"
+  },
+  "EMPTY_STATE": {
+    "NO_DATA": "Aucune donnée disponible",
+    "ADJUST_FILTERS": "Ajustez vos filtres pour afficher les données analytiques"
+  },
+  "MASTERCARD_BREAKDOWN_DETAILS": {
+    "TITLE": "C-Bill - Répartition Mastercard"
+  },
+  "VISA_BREAKDOWN_DETAILS": {
+    "TITLE": "C-Bill - Répartition Visa"
+  },
+  "MASTERCARD_SUMMARY_DETAILS": {
+    "TITLE": "C-Bill - Résumé Mastercard"
+  },
+  "VISA_SUMMARY_DETAILS": {
+    "TITLE": "C-Bill - Résumé Visa"
+  },
+  "MASTERCARD_INVOICES": {
+    "TITLE": "C-Bill - Factures Mastercard"
+  },
+  "VISA_INVOICES": {
+    "TITLE": "C-Bill - Factures Visa"
+  },
+  "MASTERCARD_CSV.TITLE": "Factures Mastercard de {{csvName}}",
+  "VISA_CSV.TITLE": "Factures Visa de {{csvName}}",
+  "UPLOADED_INVOICES.TITLE": "Liste des factures importées",
+  "UPLOADED_EPIN.TITLE": "Liste des fichiers importées",
+  "BUTTONS": {
+    "UPLOAD": "Importer",
+    "EXPORT": "Exporter",
+    "SUMMARY": "Résumé",
+    "INVOICES": "Factures",
+    "SEARCH": "Rechercher",
+    "RESET": "Réinitialiser",
+    "BREAKDOWN": "Répartition ",
+    "BACK_TO_LIST": "Retour à la liste",
+    "CLEAR_ALL": "Tout effacer",
+    "UPLOAD_FILE": "Importer le fichier",
+    "UPLOAD_FILES": "Importer les fichiers",
+    "BACK_TOCSV": "Retour à la liste CSV",
+    "BACK_TO_HOME": "Retour à l'accueil",
+    "CHANGE_PASSWORD": "Changer le mot de passe",
+    "YES": "Oui",
+    "CANCEL": "Annuler",
+    "UPDATE_PROFILE": "Mettre à jour",
+    "REFRESH": "Actualiser",
+    "USERS_LIST": "Liste des utilisateurs",
+    "BACK_TO_LIST_BANK": "Retour à la liste des banques",
+    "CREATE_BANK": "Créer une banque",
+    "VIEW_DETAILS": "Voir détails",
+    "RESET_PASSWORD": "Réinitialiser le mot de passe",
+    "BACK_TO_LOGIN": "Retour à la connexion",
+    "SHOW_ADVANCED": "Afficher tous les filtres",
+    "HIDE_ADVANCED": "Masquer les filtres",
+    "INTERCHANGE": "Interchange",
+    "REIMBURSEMENT": "Remboursement",
+    "CHARGES": "Charges",
+    "TABLE_VIEW": "Vue Tables",
+    "CHART_VIEW": "Vue Graphiques",
+    "UPDATE":"Mettre à jour",
+    "IGNORE": "Ignorer",
+    "SEND": "Remonter",
+    "SUBMIT": "Envoyer"
+  },
+  "LOADING": {
+    "LOADING": "Chargement",
+    "LOADING_INVOICES": "Chargement des factures...",
+    "LOADING_HISTORY": "Chargement de l'historique...",
+    "LOADING_USERS": "Chargement des utilisateurs...",
+    "LOADING_BANKS": "Chargement des banques..."
+  },
+  "MESSAGES": {
+    "NO_INVOICES_FOUND": "Aucune facture trouvée. Essayez d'ajuster vos filtres ou d'importer de nouvelles factures.",
+    "NO_INVOICES_CSV": "Aucune facture trouvée pour le fichier {{csvName}}. Essayez d'ajuster vos filtres.",
+    "NO_HISTORY": "Aucun historique de connexion trouvé.",
+    "NO_HISTORY_FOUND": "Aucun historique d'utilisateur trouvé. Essayez d'ajuster vos filtres.",
+    "NO_USERS_FOUND": "Aucun utilisateur trouvé. Essayez d’ajuster vos filtres.",
+    "NO_BANKS_FOUND": "Aucune banque trouvée. Essayez d'ajuster vos filtres.",
+    "NO_PROCESSING_JOBS_FOUND": "Aucun traitement trouvé.",
+    "UPLOAD_FILE_TO_GET_STARTED": "Importez un fichier pour commencer.",
+    "NO_INTERCHANGE_DATA_FOUND": "Aucune donnée d’interchange trouvée pour les filtres sélectionnés.",
+    "NO_REIMBURSEMENT_DATA_FOUND": "Aucune donnée de remboursement trouvée pour les filtres sélectionnés.",
+    "NO_CHARGES_DATA_FOUND": "Aucune donnée de charges trouvée pour les filtres sélectionnés.",
+    "NO_KPI_DATA_FOUND": "Aucune donnée KPI trouvée pour la période sélectionnée.",
+    "TRY_ADJUSTING_FILTERS": "Essayez d’ajuster vos filtres ou de sélectionner une autre période.",
+    "NO_DATA": "Aucune donnée trouvée. Essayez d'ajuster vos filtres ou d'importer de fichiers IPM.",
+    "NO_DATA_VISA": "Aucune donnée trouvée. Essayez d'ajuster vos filtres ou d'importer de fichiers EPIN."
+  },
+  "PAGINATION": {
+    "SHOWING": "Affichage de {{count}} éléments sur {{total}}",
+    "PAGE": "Page {{current}} sur {{total}}"
+  },
+  "UPLOAD": {
+    "VISA_INVOICE_TITLE": "C-Bill - Importation Visa",
+    "MASTERCARD_INVOICE_TITLE": "C-Bill - Importation Mastercard",
+    "SINGLE_FILE": "Fichier unique",
+    "MULTIPLE_FILES": "Fichiers multiples",
+    "EPIN_FILE": "Fichier EPIN",
+    "RAPPORT_FILE": "Fichier de rapport",
+    "DRAG_DROP_SINGLE": "Glissez-déposez votre fichier ici ou cliquez pour parcourir",
+    "DRAG_DROP_MULTIPLE": "Glissez-déposez plusieurs fichiers ici ou cliquez pour parcourir",
+    "SUPPORTED_FORMATS": "Formats supportés : fichiers CSV / EXCEL uniquement",
+    "SELECTED_FILE": "Fichier sélectionné",
+    "SELECTED_FILES": "Fichiers sélectionnés ({{count}})",
+    "UPLOADING_PROGRESS": "Importation... {{progress}}%",
+    "EPIN_TITLE": "Import de fichier EPIN Visa",
+    "REPORT_TITLE": "Import de fichier de rapport Visa",
+    "IPM_TITLE": "Import de fichier IPM Mastercard",
+    "PROCESSING_JOBS": "Visualisation des traitements"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Définir un nouveau mot de passe",
+    "OLD_PASSWORD_PLACEHOLDER": "Ancien mot de passe",
+    "OLD_PASSWORD_REQUIRED": "L'ancien mot de passe est requis",
+    "NEW_PASSWORD_PLACEHOLDER": "Nouveau mot de passe",
+    "NEW_PASSWORD_REQUIRED": "Le mot de passe est requis",
+    "PASSWORD_MIN_LENGTH": "Le mot de passe doit contenir au moins 8 caractères",
+    "PASSWORD_MATCH": "Les mots de passe correspondent",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Confirmer le mot de passe",
+    "CONFIRM_PASSWORD_REQUIRED": "Veuillez confirmer votre mot de passe",
+    "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas",
+    "MESSAGE": "Entrez votre nouveau mot de passe."
+  },
+  "USER_PROFILE": {
+    "TITLE": "Profil Utilisateur",
+    "USERNAME": "Nom d'utilisateur",
+    "USERNAME_REQUIRED": "Le nom d'utilisateur est requis",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "L'email est requis",
+    "EMAIL_INVALID": "Veuillez entrer une adresse email valide",
+    "FIRST_NAME": "Prénom",
+    "FIRST_NAME_REQUIRED": "Le prénom est requis",
+    "LAST_NAME": "Nom",
+    "LAST_NAME_REQUIRED": "Le nom est requis",
+    "PHONE": "Téléphone",
+    "TIMEZONE": "Fuseau horaire",
+    "LOCALE": "Langue"
+  },
+  "USER": {
+    "CREATE_TITLE": "Créer un nouvel utilisateur",
+    "CREATE": "Créer l'utilisateur",
+    "UPDATE_TITLE": "Mettre à jour l'utilisateur",
+    "USERNAME": "Nom d'utilisateur",
+    "USERNAME_REQUIRED": "Le nom d'utilisateur est obligatoire.",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "L'email est obligatoire.",
+    "FIRST_NAME": "Prénom",
+    "LAST_NAME": "Nom",
+    "PHONE_NUMBER": "Numéro de téléphone",
+    "TIMEZONE": "Fuseau horaire",
+    "LOCALE": "Langue",
+    "GROUPS": "Groupes",
+    "EMAIL_INVALID": "L'adresse e-mail n'est pas valide.",
+    "FIRST_NAME_REQUIRED": "Le prénom est requis.",
+    "LAST_NAME_REQUIRED": "Le nom de famille est requis.",
+    "GROUPS_REQUIRED": "Au moins un groupe doit être sélectionné."
+  },
+  "CONNECTION_HISTORY": {
+    "TITLE": "Historique des Actions"
+  },
+  "USER_FOLLOW_UP": {
+    "TITLE": "Suivi des Utilisateurs"
+  },
+  "USER_LIST": {
+    "TITLE": "Liste des Utilisateurs",
+    "USERNAME": "Nom d'utilisateur",
+    "PLACEHOLDER_USERNAME": "Saisir le nom d'utilisateur"
+  },
+  "BANK": {
+    "UPDATE_TITLE": "Mise à jour des informations bancaires",
+    "LIST_TITLE": "Liste des Banques",
+    "CREATE_TITLE": "Création de Banque",
+    "BANK_NAME": "Nom de la Banque",
+    "BANK_NAME_PLACEHOLDER": "Nom de la Banque",
+    "BANK_NAME_REQUIRED": "Le nom de la banque est requis",
+    "BANK_CODE": "ICA",
+    "BANK_CODE_PLACEHOLDER": "Code Banque",
+    "BANK_CODE_REQUIRED": "Le code de la banque est requis",
+    "CURRENCY": "Devise",
+    "CURRENCY_REQUIRED": "La devise est requise",
+    "COUNTRY": "Pays",
+    "COUNTRY_PLACEHOLDER": "Pays",
+    "COUNTRY_REQUIRED": "Le pays est requis",
+    "SUBMIT": "Créer la Banque",
+    "UPDATE": "Mettre à jour"
+  },
+  "SIGNUP": {
+    "TITLE": "Support",
+    "ALREADY_HAVE_ACCOUNT": "Vous avez déjà un compte ? Connectez-vous",
+    "TERMS_TEXT": "En vous inscrivant, vous acceptez nos",
+    "TERMS_LINK": "Conditions d'utilisation",
+    "PRIVACY_LINK": "Politique de confidentialité",
+    "CREATE_ACCOUNT_BUTTON": "Créer un compte",
+    "FORM": {
+      "EMAIL": {
+        "LABEL": "Adresse email",
+        "REQUIRED_ERROR": "L'email est obligatoire",
+        "INVALID_ERROR": "Email invalide"
+      },
+      "USERNAME": {
+        "LABEL": "Nom d'utilisateur",
+        "REQUIRED_ERROR": "Le nom d'utilisateur est obligatoire",
+        "MINLENGTH_ERROR": "Doit contenir au moins 2 caractères"
+      },
+      "ROLE_ID": {
+        "LABEL": "ID du rôle"
+      },
+      "FIRST_NAME": {
+        "LABEL": "Prénom",
+        "REQUIRED_ERROR": "Le prénom est obligatoire"
+      },
+      "LAST_NAME": {
+        "LABEL": "Nom",
+        "REQUIRED_ERROR": "Le nom est obligatoire"
+      },
+      "PASSWORD": {
+        "LABEL": "Mot de passe",
+        "MINLENGTH_ERROR": "Le mot de passe doit contenir au moins 8 caractères",
+        "UPPERCASE_ERROR": "Le mot de passe doit contenir au moins une majuscule",
+        "LOWERCASE_ERROR": "Le mot de passe doit contenir au moins une minuscule",
+        "DIGIT_ERROR": "Le mot de passe doit contenir au moins un chiffre",
+        "SPECIAL_CHAR_ERROR": "Le mot de passe doit contenir au moins un caractère spécial"
+      },
+      "PHONE_NUMBER": {
+        "LABEL": "Numéro de téléphone",
+        "REQUIRED_ERROR": "Le numéro de téléphone est obligatoire"
+      },
+      "TIMEZONE": {
+        "LABEL": "Fuseau horaire",
+        "PLACEHOLDER": "Ex: Europe/Paris",
+        "REQUIRED_ERROR": "Le fuseau horaire est obligatoire"
+      },
+      "LOCALE": {
+        "LABEL": "Langue",
+        "PLACEHOLDER": "Ex: FR/US",
+        "REQUIRED_ERROR": "La langue est obligatoire"
+      }
+    },
+    "CONTACT_MESSAGE": "La création de compte est désormais gérée par vos administrateurs ou managers. Si vous avez déjà un compte mais que vous ne pouvez plus y accéder, veuillez nous contacter via le formulaire ci-dessous.",
+    "CONTACT_FORM": {
+      "SUBJECT": {
+        "LABEL": "Objet",
+        "REQUIRED_ERROR": "L'objet est obligatoire."
+      },
+      "EMAIL": {
+        "LABEL": "Adresse e-mail",
+        "REQUIRED_ERROR": "L'e-mail est obligatoire.",
+        "INVALID_ERROR": "Format d'e-mail invalide."
+      },
+      "DESCRIPTION": {
+        "LABEL": "Description",
+        "REQUIRED_ERROR": "La description est obligatoire."
+      },
+      "SEND_BUTTON": "Envoyer la demande",
+      "SUCCESS_MESSAGE": "Votre demande a été envoyée avec succès.",
+      "ERROR_MESSAGE": "Une erreur est survenue. Merci de réessayer plus tard."
+    }
+  },
+  "EMAIL_VERIFICATION": {
+    "TITLE": "Vérifiez votre email",
+    "INSTRUCTIONS": "Veuillez entrer le code de vérification envoyé à",
+    "YOUR_EMAIL": "votre email",
+    "CODE_PLACEHOLDER": "Code de vérification",
+    "CODE_REQUIRED": "Le code de vérification est requis",
+    "CODE_MINLENGTH": "Le code de vérification doit contenir au moins 6 caractères",
+    "VERIFY_BUTTON": "Vérifier l'email",
+    "NO_CODE_RECEIVED": "Vous n'avez pas reçu le code ?",
+    "REQUEST_NEW_CODE": "Demander un nouveau code"
+  },
+  "ERRORS": {
+    "generic": "Une erreur est survenue. Veuillez réessayer plus tard.",
+    "analytics": "Échec du chargement des données de tendances",
+    "LOGIN": {
+      "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide. Veuillez réessayer.",
+      "missingFields": "Le nom d'utilisateur et le mot de passe sont obligatoires.",
+      "generic": "Une erreur est survenue. Veuillez réessayer plus tard."
+    },
+    "PASSWORD_RESET": {
+      "emailNotFound": "Email non trouvé. Veuillez vérifier et réessayer.",
+      "invalidEmail": "Adresse email invalide. Veuillez fournir une adresse valide.",
+      "generic": "La demande de réinitialisation a échoué. Veuillez réessayer plus tard."
+    },
+    "RESET_PASSWORD": {
+      "invalidToken": "Jeton invalide ou expiré. Veuillez demander un nouveau lien de réinitialisation.",
+      "generic": "La réinitialisation du mot de passe a échoué. Veuillez réessayer."
+    },
+    "SIGNUP": {
+      "conflict": "Nom d’utilisateur ou email déjà utilisé. Veuillez en choisir un autre.",
+      "badRequest": "Tous les champs sont obligatoires."
+    },
+    "VERIFY_EMAIL": {
+      "invalidCode": "Code de vérification invalide. Veuillez réessayer.",
+      "emailRequired": "L'email est requis pour demander un nouveau code de vérification.",
+      "resendFailed": "Échec de la demande de nouveau code de vérification. Veuillez réessayer."
+    },
+    "CHANGE_PASSWORD": {
+      "invalidToken": "Jeton invalide ou expiré."
+    },
+    "PROFILE": {
+      "load": "Échec du chargement du profil utilisateur. Veuillez réessayer.",
+      "update": "Échec de la mise à jour du profil. Veuillez réessayer.",
+      "connexionHistory": "Échec du chargement de l’historique de connexion. Veuillez réessayer."
+    },
+    "BANKS": {
+      "list": "Échec du chargement des banques. Veuillez réessayer.",
+      "load_details": "Échec du chargement des détails de la banque. Veuillez réessayer plus tard.",
+      "missing_id": "L'identifiant de la facture est manquant.",
+      "update": "Échec de la mise à jour des informations bancaires. Veuillez réessayer plus tard.",
+      "create": "Échec de la création de la banque. Veuillez réessayer plus tard."
+    },
+    "UPLOAD": {
+      "noFile": "Veuillez sélectionner un fichier à importer.",
+      "invalidExtension": "Seuls les fichiers CSV sont pris en charge. Veuillez sélectionner des fichiers CSV valides.",
+      "invalidFormat": "Format de fichier invalide. Veuillez téléverser uniquement des fichiers CSV.",
+      "fileTooLarge": "La taille du fichier est trop grande. Veuillez téléverser des fichiers plus petits.",
+      "unauthorized": "Erreur d'authentification. Veuillez vous reconnecter.",
+      "forbidden": "Vous n'avez pas l'autorisation de téléverser des fichiers.",
+      "notFound": "Service d'importation introuvable. Veuillez contacter le support.",
+      "serverError": "Une erreur serveur s'est produite lors du traitement de votre fichier. Veuillez réessayer plus tard.",
+      "fallback": "Échec d'importation : {{message}}. Veuillez réessayer plus tard.",
+      "failed":"Échec d'importation. Veuillez réessayer."
+    },
+    "Breakdown": "Échec du chargement des données de répartition. Veuillez réessayer.",
+    "Invoices": "Échec du chargement des factures. Veuillez réessayer.",
+    "Details": "Échec du chargement des détails de la facture. Veuillez réessayer.",
+    "Summary": "Échec du chargement du résumé des factures. Veuillez réessayer.",
+    "Users": "Échec du chargement des utilisateurs. Veuillez réessayer.",
+    "History": "Échec du chargement de l'historique des actions. Veuillez réessayer.",
+    "CsvFiles": "Échec du chargement des factures CSV. Veuillez réessayer.",
+    "LOAD_CHARGES_FAILED": "Échec du chargement des données de charges. Veuillez réessayer.",
+    "LOAD_INTERCHANGE_FAILED": "Échec du chargement des données d’interchange. Veuillez réessayer.",
+    "LOAD_REIMBURSEMENT_FAILED": "Échec du chargement des données de remboursement. Veuillez réessayer.",
+    "LOAD_PROCESSING_JOBS_FAILED": "Échec du chargement des traitements. Veuillez réessayer.",
+    "RETRY_JOB_FAILED": "Échec de la relance du traitement. Veuillez réessayer.",
+    "CANCEL_JOB_FAILED": "Échec de l’annulation du traitement. Veuillez réessayer.",
+    "LOAD_SUMMARY_FAILED": "Échec du chargement du résumé. Veuillez réessayer.",
+    "FORM_INVALID": "Veuillez remplir tous les champs obligatoires correctement.",
+    "LOAD_GROUPS": "Échec du chargement des groupes.",
+    "SERVER_ERROR": "Erreur serveur, veuillez réessayer plus tard.",
+    "UNKNOWN": "Une erreur inconnue est survenue.",
+    "EMAIL_INVALID": "Adresse email invalide.",
+    "USERNAME_EXISTS": "Le nom d'utilisateur existe déjà.",
+    "EMAIL_EXISTS": "L'adresse email existe déjà.",
+    "GROUPS_REQUIRED": "Veuillez sélectionner au moins un groupe.",
+    "Summaries": "Échec du chargement des résumés. Veuillez réessayer.",
+    "ERROR": "Erreur",
+    "IGNORE_FAILURE": "Impossible d'ignorer l'anomalie",
+    "SEND_FAILURE": "Échec de l'envoi de l'anomalie",
+     "LOAD_USERS_FAILURE": "Impossible de charger les utilisateurs."
+  },
+  "SUCCESS": {
+    "PASSWORD_RESET": {
+      "instructionsSent": "Les instructions de réinitialisation du mot de passe ont été envoyées à votre email."
+    },
+    "RESET_PASSWORD": {
+      "success": "Réinitialisation du mot de passe réussie ! Redirection vers la connexion..."
+    },
+    "SIGNUP": {
+      "accountCreated": "Compte créé avec succès !"
+    },
+    "VERIFY_EMAIL": {
+      "emailVerified": "Email vérifié avec succès ! Redirection vers la connexion...",
+      "resendSuccess": "Un nouveau code de vérification a été envoyé à votre email."
+    },
+    "CHANGE_PASSWORD": {
+      "success": "Mot de passe changé avec succès ! Redirection vers la connexion..."
+    },
+    "PROFILE": {
+      "update": "Profil mis à jour avec succès."
+    },
+    "BANKS": {
+      "create": "Banque créée avec succès.",
+      "update": "Informations bancaires mises à jour avec succès."
+    },
+    "UPLOAD": {
+      "single": "Le fichier de factures a été importé avec succès.",
+      "multiple": "{{count}} fichiers de factures ont été importés avec succès.",
+      "epin.single": "Le fichier a été importé avec succès.",
+      "epin.multiple": "{{count}} Fichiers ont été importés avec succès."
+    },
+    "RETRY_JOB_SUCCESS": "Relance du traitement effectuée avec succès.",
+    "CANCEL_JOB_SUCCESS": "Annulation du traitement effectuée avec succès.",
+    "USER_CREATED": "Utilisateur créé avec succès.",
+    "USER_UPDATED": "Utilisateur mis à jour avec succès.",
+  	"SUCCESS": "Succès",
+    "IGNORE_SUCCESS": "Anomalie ignorée avec succès",
+    "SEND_SUCCESS": "Anomalie assignée avec succès"
+  },
+  "VISA_SUMMARY_DETAILS_CFLOW": {
+    "TITLE": "C-Flow - Résumé Visa"
+  },
+  "VISA_CHARGES_DETAILS": "Détails des charges Visa",
+  "VISA_INTERCHANGE_DETAILS": "Détails de l’interchange Visa",
+  "VISA_REIMBURSEMENT_DETAILS": "Détails du remboursement Visa",
+  "VIEW_VISA_SUMMARY": "Voir Résumé Visa",
+  "INTERCHANGE_VALUE": "VALEURS D'INTERCHANGE",
+  "REIMBURSEMENT_FEES": "FRAIS DE REMBOURSEMENT",
+  "VISA_CHARGES": "FRAIS VISA",
+  "VISA_CFLOW_BREAKDOWN": "Répartition Total Visa : Interchange, Remboursement, Charges",
+  "INTERCHANGE_BY_CATEGORY": "Interchange par catégorie",
+  "REIMBURSEMENT_BY_CATEGORY": "Remboursement par catégorie",
+  "CHARGES_BY_CATEGORY": "Charges par catégorie",
+  "MASTERCARD_SUMMARY_CFLOW": {
+    "TITLE": "C-Flow - Résumé Mastercard"
+  },
+  "MASTERCARD_TRANSACTIONS_CFLOW.TITLE": "C-Flow - Transactions Mastercard",
+  "CONTACT": {
+    "CONTACT_FORM": {
+      "TITLE": "Support",
+      "SUBJECT": "Objet",
+      "EMAIL": "Adresse e-mail",
+      "DESCRIPTION": "Description",
+      "REQUIRED": "Ce champ est requis.",
+      "VALID_EMAIL": "Veuillez saisir une adresse e-mail valide.",
+      "SEND": "Envoyer",
+      "CLOSE": "Fermer"
+    }
+  },
+  "GROUPS": {
+    "LOAD_ERROR": "Erreur lors du chargement des groupes.",
+    "ADD_SUCCESS": "Le groupe a été créé avec succès.",
+    "ADD_ERROR": "Erreur lors de la création du groupe.",
+    "DELETE_CONFIRM": "Supprimer le groupe \"{{name}}\" ?",
+    "DELETE_SUCCESS": "Le groupe a été supprimé avec succès.",
+    "DELETE_ERROR": "Erreur lors de la suppression du groupe.",
+    "ROLES_LOAD_ERROR": "Erreur lors du chargement des rôles.",
+    "ROLES_SAVE_ERROR": "Erreur lors de l’enregistrement des rôles.",
+    "TITLE": "Gestion des groupes",
+    "ADD_BUTTON": "Ajouter un groupe",
+    "NAME": "Nom du groupe",
+    "ROLES": "Rôles associés",
+    "ACTIONS": "Actions",
+    "NO_ROLES": "Pas de rôle",
+    "DELETE": "Supprimer",
+    "MANAGE_ROLES": "Gérer les rôles",
+    "VIEW_PERMISSIONS": "Voir les permissions",
+    "ADD_TITLE": "Ajouter un groupe",
+    "VALIDATION": {
+      "REQUIRED": "Le nom est requis.",
+      "MIN_LENGTH": "Minimum 3 caractères."
+    },
+    "MANAGE_ROLES_TITLE": "Gérer les rôles pour le groupe",
+    "LOADING_ROLES": "Chargement des rôles...",
+    "PERMISSIONS_TITLE": "Permissions du groupe",
+    "NO_PERMISSIONS": "Ce groupe n'a aucune permission."
+  },
+  "COMMON": {
+    "CANCEL": "Annuler",
+    "CREATE": "Créer",
+    "SAVE": "Enregistrer",
+    "CLOSE": "Fermer"
+  },
+  "ROLES": {
+   "NAME": "Nom du rôle",
+    "CREATE_TITLE": "Créer un rôle",
+    "MANAGE_TITLE": "Gestion des rôles",
+    "MANAGE_PERMISSIONS_TITLE": "Gérer les permissions",
+    "NO_PERMISSIONS": "Aucune permission",
+    "LOADING_PERMISSIONS": "Chargement des permissions...",
+    "LOAD_ERROR": "Erreur de chargement des rôles.",
+    "CREATE_SUCCESS": "Le rôle a été créé avec succès.",
+    "CREATE_ERROR": "Erreur lors de la création du rôle.",
+    "DELETE_CONFIRM": "Supprimer le rôle {{roleName}} ?",
+    "DELETE_SUCCESS": "Le rôle a été supprimé avec succès.",
+    "DELETE_ERROR": "Erreur lors de la suppression du rôle.",
+    "PERMISSIONS_SAVE_SUCCESS": "Les permissions ont été mises à jour avec succès.",
+    "PERMISSIONS_SAVE_ERROR": "Erreur lors de la sauvegarde des permissions.",
+    "ADD_SUCCESS": "Le rôle a été ajouté avec succès."
+  },
+  "FOLLOWUP": {
+    "event": {
+      "login": "Connexion",
+      "logout": "Déconnexion",
+      "upload": "Import de fichier",
+      "user": {
+        "create": "Création d'utilisateur",
+        "update": "Mise à jour d'utilisateur",
+        "delete": "Suppression d'utilisateur"
+      },
+      "access": {
+        "control": "Contrôle d'accès"
+      }
+    },
+    "login": {
+      "success": "{{value}}: Connexion réussie",
+      "failed": "{{value}}: Échec de la connexion"
+    },
+    "logout": {
+      "success": "{{value}}: Déconnexion réussie",
+      "failed": "{{value}}: Échec de la déconnexion"
+    },
+    "user": {
+      "create": {
+        "success": "Utilisateur: {{value}} créé avec succès"
+      },
+      "update": {
+        "success": "Utilisateur: {{value}} mis à jour avec succès"
+      },
+      "delete": {
+        "success": "Utilisateur: {{value}} supprimé avec succès"
+      }
+    },
+    "file": {
+      "upload": {
+        "success": "Fichier: {{value}} importé avec succès"
+      }
+    },
+    "access": {
+      "group": {
+        "create": "Groupe: {{value}} créé",
+        "delete": "Groupe: {{value}} supprimé",
+        "update": "Groupe: {{value}} mis à jour"
+      },
+      "role": {
+        "create": "Rôle: {{value}} créé",
+        "delete": "Rôle: {{value}} supprimé",
+        "update": "Rôle: {{value}} mis à jour"
+      }
+    }
+  },
+  "MODAL": {
+    "IGNORE_TITLE": "Ignorer l’anomalie détectée",
+    "SEND_TITLE": "Assigner une anomalie",
+    "NETWORK": "Réseau",
+    "DESCRIPTION": "Description",
+    "COMMENT_LABEL": "Commentaire*",
+    "COMMENT_PLACEHOLDER": "Entrez votre justification ici...",
+    "COMMENT_REQUIRED": "Le commentaire est requis.",
+    "ASSIGN_USERS_LABEL": "Assigner à des Utilisateurs*",
+    "ASSIGN_USERS_REQUIRED": "Vous devez sélectionner au moins un utilisateur.",
+    "USER_SEARCH_PLACEHOLDER": "Rechercher un utilisateur..."
+  },
+    "DETAILS": {
+      "TITLE.VISA": "Détails de l’anomalie VISA",
+      "TITLE.MASTERCARD": "Détails de l’anomalie MASTERCARD",
+      "BACK": "Retour",
+      "LOADING": "Chargement...",
+      "ANOMALY_INFO": "Informations sur l’anomalie",
+      "DESCRIPTION": "Description",
+      "CATEGORY": "Catégorie",
+      "SEVERITY": "Sévérité",
+      "DEVIATION": "Écart",
+      "EXPECTED": "Valeur attendue",
+      "ACTUAL": "Valeur réelle",
+      "DETECTION_DATE": "Date de détection",
+      "INVOICE_INFO": "Informations de la facture liée"
+    },
+    "ALERTS": {
+      "VISA_MISSING": "La facture Visa n'a pas été chargée depuis plus d'un mois.",
+      "MASTER_MISSING": "La facture Mastercard n'a pas été chargée depuis plus de 7 jours.",
+      "TITLE": "Attention aux factures"
+    },
+    "VISA_TRANSACTIONS":{
+    "TRANSACTIONS_BY_CURRENCY": "Transactions par devise",
+    "AVERAGE_BY_CURRENCY": "Montant moyen par devise",
+    "TRANSACTIONS_BY_BIN": "Transactions par BIN",
+    "AVERAGE_BY_BIN": "Montant moyen par BIN",
+    "TOTAL_BY_BUSINESS_MODE": "Total par mode business",
+    "AVERAGE_BY_BUSINESS_MODE": "Moyenne par mode business",
+    "ERROR_LOADING_TRANSACTIONS": "Erreur lors du chargement des données de transactions : ",
+    "ERROR_LOADING_FILTERS": "Erreur lors du chargement des filtres disponibles : ",
+    "VISA_TRANSACTIONS_REPORT": "Rapport des transactions Visa",
+    "TRANSACTIONS_BY_BUSINESS_MODE": "Transactions par mode business",
+    "SUMMARY_BY_CURRENCY": "Résumé par devise de règlement",
+    "SETTLEMENT_CURRENCY": "Devise de règlement ",
+    "BIN_SUMMARY": "Résumé BIN",
+    "BUSINESS_MODE_DETAILS": "Détails du mode business"
+    }
+  
+  
+
+}

@@ -1,0 +1,487 @@
+<div class="row">
+  <!-- Page Title and Refresh Button -->
+  <div class="col-12 mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">{{ 'DASHBOARD.TITLE' | translate }}</h5>
+      <button class="btn btn-sm btn-light-primary" (click)="loadTrendsData(); loadAnomalies()">
+        <i class="ti ti-refresh me-1"></i> {{ 'GENERAL.REFRESH' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Filter Controls Card -->
+  <div class="col-12 mb-4">
+    <app-card [showHeader]="false" blockClass="filter-section">
+      <form [formGroup]="filterForm">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="filter-title">{{ 'FILTERS.DATE_RANGE' | translate }}</div>
+
+            <!-- Date Preset Buttons -->
+            <div class="date-preset-buttons mb-2">
+              <button type="button" class="btn-preset" [class.active]="activeDatePreset === '30d'"
+                (click)="setDateRange('30d')">{{ 'FILTERS.LAST_30_DAYS' | translate }}</button>
+              <button type="button" class="btn-preset" [class.active]="activeDatePreset === '90d'"
+                (click)="setDateRange('90d')">{{ 'FILTERS.LAST_90_DAYS' | translate }}</button>
+              <button type="button" class="btn-preset" [class.active]="activeDatePreset === 'ytd'"
+                (click)="setDateRange('ytd')">{{ 'FILTERS.YTD' | translate }}</button>
+              <button type="button" class="btn-preset" [class.active]="activeDatePreset === 'custom'"
+                (click)="setDateRange('custom')">{{ 'FILTERS.CUSTOM' | translate }}</button>
+            </div>
+
+            <!-- Date Inputs -->
+            <div class="input-group">
+              <input type="date" class="form-control" formControlName="startDate">
+              <span class="input-group-text">{{ 'FILTERS.TO' | translate }}</span>
+              <input type="date" class="form-control" formControlName="endDate">
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="filter-title">{{ 'FILTERS.CARD_TYPES' | translate }}</div>
+
+            <!-- Card Type Toggle Buttons -->
+            <div class="card-type-toggle">
+              <button *ngIf="canAccessVisa" type="button" class="btn-card-type visa"
+                [class.active]="isCardTypeSelected('VISA')" (click)="toggleCardType('VISA')">
+                <i class="ti ti-credit-card"></i> {{ 'Visa' | translate }}
+              </button>
+              <button *ngIf="canAccessMastercard" type="button" class="btn-card-type mastercard"
+                [class.active]="isCardTypeSelected('MASTERCARD')" (click)="toggleCardType('MASTERCARD')">
+                <i class="ti ti-credit-card"></i> {{ 'Mastercard' | translate }}
+              </button>
+            </div>
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" formControlName="includeBreakdown" id="includeBreakdown">
+              <label class="form-check-label" for="includeBreakdown">
+                {{ 'FILTERS.INCLUDE_BREAKDOWN' | translate }}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="filter-title">{{ 'FILTERS.GROUP_BY' | translate }}</div>
+            <ng-select id="groupBy" [items]="groupByOptions" bindLabel="name" bindValue="id" formControlName="groupBy"
+              placeholder="{{ 'FILTERS.SELECT_GROUPING' | translate }}" [clearable]="false" [searchable]="false"
+              class="ng-select-sm">
+            </ng-select>
+          </div>
+
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="filter-title">{{ 'FILTERS.COMPARISON' | translate }}</div>
+            <ng-select id="comparisonPeriod" [items]="comparisonOptions" bindLabel="name" bindValue="id"
+              formControlName="comparisonPeriod" placeholder="{{ 'FILTERS.SELECT_COMPARISON' | translate }}"
+              [clearable]="false" [searchable]="false" class="ng-select-sm">
+            </ng-select>
+
+
+          </div>
+        </div>
+
+        <!-- Applied Filters -->
+        <div class="applied-filters mt-2" *ngIf="hasActiveFilters()">
+          <div class="filter-title">{{ 'FILTERS.APPLIED_FILTERS' | translate }}:</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-light-primary text-primary p-2 d-flex align-items-center"
+              *ngIf="filterForm.value.cardTypes?.length < cardTypeOptions.length">
+              {{ 'FILTERS.CARDS' | translate }}: {{getSelectedCardTypesLabel()}}
+              <i class="ti ti-x ms-1 cursor-pointer" (click)="resetCardTypes()"></i>
+            </span>
+            <span class="badge bg-light-primary text-primary p-2" *ngIf="activeDatePreset">
+              {{ 'FILTERS.PERIOD' | translate }}: {{getActiveDatePresetLabel()}}
+              <i class="ti ti-x ms-1 cursor-pointer" (click)="resetDateRange()"></i>
+            </span>
+            <button class="btn btn-sm btn-light-secondary ms-auto" (click)="resetAllFilters()">
+              {{ 'FILTERS.RESET_ALL' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+  <!-- Loading State -->
+  <div class="col-12" *ngIf="isLoading">
+    <div class="d-flex justify-content-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div class="col-12" *ngIf="hasError && !isLoading">
+    <div class="alert alert-danger" role="alert">
+      <i class="ti ti-alert-circle me-2"></i>
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  @if (!isLoading && !hasError && trendsData) {
+  <!-- Executive Summary Cards -->
+  <div class="col-sm-6 col-md-3">
+    <app-card [showHeader]="false" blockClass="bg-primary text-white">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0">
+          <div class="avatar avatar-md bg-primary rounded">
+            <i class="f-20 text-white ti ti-currency-dollar"></i>
+
+          </div>
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <h6 class="mb-0 text-white-50">{{ 'SUMMARY.TOTAL_CHARGES' | translate }}</h6>
+          <h4 class="mb-0 mt-1 text-white">{{ formatNumber(getTotalAmount()) }}<i class="ti ti-currency-dollar"></i>
+          </h4>
+        </div>
+      </div>
+      <div class="mt-3 d-flex align-items-center">
+        <span class="badge bg-primary-dark me-2">
+          <i class="ti ti-trending-{{ getGrowthIcon(trendsData.comparisonData.percentageChange) }} me-1"></i>
+          {{ formatPercentage(trendsData.comparisonData.percentageChange) }}
+        </span>
+        <p class="mb-0 text-white-50 text-sm">
+          {{ 'SUMMARY.VS_PREVIOUS_PERIOD' | translate }}
+        </p>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <app-card [showHeader]="false" blockClass="bg-success text-white">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0">
+          <div class="avatar avatar-md bg-success rounded">
+
+            <i class="f-20 text-white ti ti-currency-dollar"></i>
+          </div>
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <h6 class="mb-0 text-white-50">{{ 'SUMMARY.TOTAL_CHARGES' | translate }} VISA</h6>
+          <h4 class="mb-0 mt-1 text-white">{{ formatNumber(getTotalByCardType('VISA')) }}<i
+              class="ti ti-currency-dollar"></i></h4>
+        </div>
+      </div>
+      <div class="mt-3">
+        <p class="mb-0 text-white-20 text-sm">
+          VISA : {{ getPercentageByCardType('VISA') | number:'1.2-2' }}%
+        </p>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <app-card [showHeader]="false" blockClass="bg-info text-white">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0">
+          <div class="avatar avatar-md bg-info rounded">
+
+            <i class="f-20 text-white ti ti-currency-dollar"></i>
+          </div>
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <h6 class="mb-0 text-white-50">{{ 'SUMMARY.TOTAL_CHARGES' | translate }} MASTER</h6>
+          <h4 class="mb-0 mt-1 text-white">{{ formatNumber(getTotalByCardType('MASTERCARD')) }}<i
+              class="ti ti-currency-dollar"></i></h4>
+        </div>
+      </div>
+      <div class="mt-3">
+        <p class="mb-0 text-white-20 text-sm">
+          MASTERCARD : {{ getPercentageByCardType('MASTERCARD') | number:'1.2-2' }}%
+        </p>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <app-card [showHeader]="false" blockClass="bg-warning text-dark">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0">
+          <div class="avatar avatar-md bg-warning rounded">
+            <i class="ti ti-alert-triangle text-white f-20"></i>
+          </div>
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <h6 class="mb-0 text-dark-50">{{ 'SUMMARY.ANOMALIES_DETECTED' | translate }}</h6>
+          <h4 class="mb-0 mt-1 text-dark">{{ anomalies.length }}  <a (click)="scrollToAnomalies()" class="btn btn-sm btn-outline-dark">
+            <i class="ti ti-eye me-1"></i>
+          </a>
+        </h4> 
+        </div>
+      </div>
+      <div class="mt-3">
+        <p class="mb-0 text-dark-50 text-sm">
+          {{ 'SUMMARY.REQUIRING_ATTENTION' | translate }}
+        </p>
+      </div>
+    </app-card>
+  </div>
+
+  <!-- Trends Chart -->
+  <div class="col-md-12 col-xl-8">
+    <app-card [cardTitle]="'CHART.BILLING_TRENDS_ANALYSIS' | translate" [headerClass]="'border-bottom'">
+      <div id="trends-chart">
+        <apx-chart [series]="trendsChartOptions.series" [chart]="trendsChartOptions.chart"
+          [xaxis]="trendsChartOptions.xaxis" [stroke]="trendsChartOptions.stroke" [tooltip]="trendsChartOptions.tooltip"
+          [dataLabels]="trendsChartOptions.dataLabels" [legend]="trendsChartOptions.legend"
+          [colors]="trendsChartOptions.colors" [markers]="trendsChartOptions.markers" [grid]="trendsChartOptions.grid"
+          [yaxis]="trendsChartOptions.yaxis" [title]="trendsChartOptions.title"
+          [fill]="trendsChartOptions.fill"></apx-chart>
+      </div>
+    </app-card>
+  </div>
+
+  <!-- Service Category Breakdown -->
+  <div class="col-md-12 col-xl-4"
+    *ngIf="trendsData?.serviceCategoryTrends && trendsData.serviceCategoryTrends.length > 0">
+    <app-card [cardTitle]="'CHART.SERVICE_CATEGORY_BREAKDOWN' | translate" [headerClass]="'border-bottom'">
+      <div id="category-chart">
+        <apx-chart [series]="categoryChartOptions.series" [chart]="categoryChartOptions.chart"
+          [labels]="categoryChartOptions.labels" [dataLabels]="categoryChartOptions.dataLabels"
+          [colors]="categoryChartOptions.colors" [legend]="categoryChartOptions.legend"
+          [tooltip]="categoryChartOptions.tooltip" [fill]="categoryChartOptions.fill"
+          [stroke]="categoryChartOptions.stroke"></apx-chart>
+      </div>
+      <div class="table-responsive mt-3">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>Service Category</th>
+              <th>Amount</th>
+              <th>% of Total</th>
+              <th>Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of trendsData.serviceCategoryTrends">
+              <td>{{ category.serviceCategory }}</td>
+              <td>{{ formatCurrency(category.totalAmount) }}</td>
+              <td>{{ formatPercentage(category.percentageOfTotal) }}</td>
+              <td [ngClass]="getGrowthClass(category.growthRate)">
+                <i class="ti ti-trending-{{ getGrowthIcon(category.growthRate) }}"></i>
+                {{ formatPercentage(category.growthRate) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+
+  <!-- AI Insights -->
+  <div class="col-md-12" *ngIf="trendsData.insights && trendsData.insights.length > 0">
+    <app-card [cardTitle]="'CHART.AI_INSIGHTS' | translate" [headerClass]="'border-bottom'"
+      [cardClass]="'bg-light-primary'">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-0" *ngFor="let insight of trendsData.insights">
+          <i class="ti ti-check-circle text-primary me-2"></i> {{ insight }}
+        </li>
+      </ul>
+    </app-card>
+  </div>
+
+  <!-- Anomalies -->
+  <div id="anomaliesTable" class="col-md-12">
+    <app-card [cardTitle]="'ANOMALIES.DETECTED_ANOMALIES' | translate " [headerClass]="'border-bottom'">
+      <ng-template #headerOptionsTemplate>
+        <button class="btn btn-sm btn-primary" (click)="ExportAnomaliesToExcel()">
+          <i class="ti ti-download"></i> {{ 'BUTTONS.EXPORT' | translate }}
+        </button>
+      </ng-template>
+      <!-- Loading state for anomalies -->
+      <div *ngIf="isLoadingAnomalies" class="d-flex justify-content-center my-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoadingAnomalies && anomalies.length === 0" class="alert alert-info">
+        {{ 'ANOMALIES.NO_ANOMALIES' | translate }}
+      </div>
+      <div *ngIf="!isLoadingAnomalies && anomalies.length > 0" class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>{{'ANOMALIES.DESCRIPTION' | translate }}</th>
+              <th>{{'ANOMALIES.EXPECTED' | translate }}</th>
+              <th>{{'ANOMALIES.ACTUAL' | translate }}</th>
+              <th>{{'ANOMALIES.DEVIATION' | translate }}</th>
+              <th>{{'ANOMALIES.SEVERITY' | translate }}</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let anomaly of anomalies">
+              <td class="description-cell">
+                <strong>{{ anomaly.cardType }}</strong>: {{ anomaly.description }}
+                <div class="small text-muted">{{ anomaly.serviceCode }}</div>
+              </td>
+              <td>{{ formatCurrency(anomaly.expectedValue) }}</td>
+              <td>{{ formatCurrency(anomaly.actualValue) }}</td>
+              <td [ngClass]="getGrowthClass(anomaly.deviationPercentage)">
+                <i class="ti ti-trending-{{ getGrowthIcon(anomaly.deviationPercentage) }}"></i>
+                {{ formatPercentage(anomaly.deviationPercentage) }}
+              </td>
+              <td>
+                <span class="badge" [ngClass]="getSeverityClass(anomaly.severity)">
+                  {{ anomaly.severity }}
+                </span>
+              </td>
+              <td> <button (click)="getDetailAnomalies(anomaly.cardType.toLowerCase(), anomaly.anomalyId)"
+                  class="btn btn-sm btn-primary me-1">
+                  <i class="ti ti-eye"></i> {{ 'home.View' | translate }}
+                </button>
+
+                <button class="btn btn-sm btn-warning me-1" (click)="openIgnoreModal(anomaly)">
+                  <i class="ti ti-alert-triangle me-1"></i> {{ 'BUTTONS.IGNORE' | translate }}
+                </button>
+
+                <button class="btn btn-sm btn-violet  me-1" (click)="openSendModal(anomaly)">
+                  <i class="ti ti-send me-1"></i>{{ 'BUTTONS.SEND' | translate }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+
+  }
+
+  <!-- Empty State -->
+  <div class="col-12" *ngIf="!isLoading && !hasError && !trendsData">
+    <div class="text-center my-5">
+      <i class="ti ti-chart-bar text-muted" style="font-size: 48px;"></i>
+      <h4 class="mt-3">{{ 'EMPTY_STATE.NO_DATA' | translate }}</h4>
+      <p class="text-muted">{{ 'EMPTY_STATE.ADJUST_FILTERS' | translate }}</p>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Modal Ignorer une anomalie -->
+<div *ngIf="ignoreModalIsOpen" class="modal d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <form (ngSubmit)="submitIgnore()" #ignoreForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ 'MODAL.IGNORE_TITLE' | translate }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeIgnoreModal()"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="fw-bold mb-2">{{ 'MODAL.NETWORK' | translate }} : {{ selectedAnomaly?.cardType }}</p>
+          <p class="text-muted">{{ 'MODAL.DESCRIPTION' | translate }} : {{ selectedAnomaly?.description }} </p>
+
+          <div class="mb-3">
+            <label for="comment" class="form-label">{{'MODAL.COMMENT_LABEL' | translate }}</label>
+            <textarea class="form-control" id="comment" rows="3" [(ngModel)]="ignoreComment" name="comment" required
+              placeholder="{{'MODAL.COMMENT_PLACEHOLDER' | translate }}" #commentField="ngModel"></textarea>
+
+            <!-- Message d'erreur rouge -->
+            <div *ngIf="commentField.invalid && commentField.touched" class="text-danger mt-1">
+              {{ 'MODAL.COMMENT_REQUIRED' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-warning" [disabled]="!ignoreForm.form.valid">
+            <i class="ti ti-alert-triangle me-1"></i> {{ 'BUTTONS.IGNORE' | translate }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="closeIgnoreModal()">
+            {{ 'BUTTONS.CANCEL' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Envoyer une anomalie -->
+<div *ngIf="sendModalIsOpen" class="modal d-block bg-dark bg-opacity-50" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <form (ngSubmit)="submitSend()" #sendForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ 'MODAL.SEND_TITLE' | translate }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeSendModal()"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="fw-bold mb-2">{{ 'MODAL.NETWORK' | translate }} : {{ selectedAnomaly?.cardType }}</p>
+          <p class="text-muted">{{ 'MODAL.DESCRIPTION' | translate }} : {{ selectedAnomaly?.description }} </p>
+
+          <div class="mb-3">
+            <label for="sendComment" class="form-label">{{ 'MODAL.COMMENT_LABEL' | translate }}</label>
+            <textarea class="form-control" id="sendComment" rows="3" [(ngModel)]="sendComment" name="sendComment"
+              required placeholder="{{'MODAL.COMMENT_PLACEHOLDER' | translate}}" #sendCommentField="ngModel"></textarea>
+            <div *ngIf="sendCommentField.invalid && sendCommentField.touched" class="text-danger mt-1">
+              {{ 'MODAL.COMMENT_REQUIRED' | translate }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="assignedUsers" class="form-label">{{ 'MODAL.ASSIGN_USERS_LABEL' | translate }}</label>
+          
+            <div class="mb-2">
+              <span *ngFor="let user of selectedUsers()" class="badge bg-primary me-1" style="cursor: pointer;">
+                {{ user.username }}
+                <button type="button" class="btn-close btn-close-white btn-sm ms-1" aria-label="Close" (click)="removeUser(user.id)"></button>
+              </span>
+            </div>
+          
+            <input
+              type="text"
+              class="form-control mb-2"
+              name="search"
+              [(ngModel)]="userSearchTerm"
+              (input)="filterUsers()"
+              placeholder="{{'MODAL.USER_SEARCH_PLACEHOLDER' | translate}}"
+            />
+          
+            <div class="users border rounded p-2">
+              <div class="form-check" *ngFor="let user of filteredUsersList">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [id]="'user-' + user.id"
+                  [value]="user.id"
+                  [checked]="selectedUserIds.includes(user.id)"
+                  (change)="toggleUserSelection(user.id)"
+                />
+                <label class="form-check-label" [for]="'user-' + user.id">
+                  {{ user.username }} ({{ user.email }})
+                </label>
+              </div>
+            </div>
+          
+            <input
+              type="hidden"
+              name="assignedTo"
+              [(ngModel)]="selectedUserIds"
+              #assignedUsersField="ngModel"
+              required
+            />
+          
+            <div *ngIf="assignedUsersField.invalid && assignedUsersField.touched" class="text-danger mt-1">
+              {{ 'MODAL.ASSIGN_USERS_REQUIRED' | translate }}
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!sendForm.form.valid">
+            <i class="ti ti-send me-1"></i>  {{ 'BUTTONS.SEND' | translate }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="closeSendModal()">
+            {{ 'BUTTONS.CANCEL' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">{{ 'UPLOAD.IPM_TITLE' | translate }}</h2>
+            <!-- Provider Tabs -->
+          <ul class="nav nav-tabs card-header-tabs mt-2">
+            <li class="nav-item" *ngIf="canAccessVisa">
+              <a class="nav-link" [class.active]="activeProvider === 'visa'"
+                 [ngClass]="{'visa-tab': activeProvider === 'visa'}"
+                 href="javascript:void(0)"
+                 (click)="setActiveProvider('visa')">
+                <i class="ti ti-credit-card me-1"></i>Visa
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeProvider === 'mastercard'"
+                 [ngClass]="{'mastercard-tab': activeProvider === 'mastercard'}"
+                 href="javascript:void(0)"
+                 (click)="setActiveProvider('mastercard')">
+                <i class="ti ti-credit-card me-1" style="color: #FF6600;"></i>Mastercard
+              </a>
+            </li>
+          </ul>
+          
+            <div class="d-flex justify-content-between mt-3">
+              <div class="btn-group" role="group">
+                <button 
+                  type="button" 
+                  class="btn" 
+                  [class.btn-primary]="uploadMode === 'single'" 
+                  [class.btn-outline-primary]="uploadMode !== 'single'"
+                  (click)="switchUploadMode('single')"
+                >
+                  <i class="ti ti-file-upload"></i> {{ 'UPLOAD.SINGLE_FILE' | translate }}
+                </button>
+                <button 
+                  type="button" 
+                  class="btn" 
+                  [class.btn-primary]="uploadMode === 'multiple'" 
+                  [class.btn-outline-primary]="uploadMode !== 'multiple'"
+                  (click)="switchUploadMode('multiple')"
+                >
+                  <i class="ti ti-files"></i> {{ 'UPLOAD.MULTIPLE_FILES' | translate }}
+                </button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" (click)="navigateToJobs()">
+                  <i class="ti ti-list"></i> {{ 'UPLOAD.PROCESSING_JOBS' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div *ngIf="uploadSuccess" class="alert alert-success" role="alert">
+              {{ resultMessage }}
+            </div>
+            
+            <div *ngIf="uploadError" class="alert alert-danger" role="alert">
+              {{ resultMessage }}
+            </div>
+            
+            <div class="upload-container">
+              <div class="upload-area mb-4"
+                   (dragover)="onFileSelected($event)"
+                   (dragenter)="onFileSelected($event)"
+                   (dragleave)="$event.preventDefault()"
+                   (drop)="onFileSelected($event)">
+                <input
+                  type="file"
+                  id="epinFileInput"
+                  class="file-input"
+                  [multiple]="uploadMode === 'multiple'"
+                  (change)="onFileSelected($event)"
+                >
+                <label for="epinFileInput" class="file-upload-label">
+                  <div class="upload-icon">
+                    <i class="ti ti-cloud-upload"></i>
+                  </div>
+                  <div class="upload-text">
+                    <span *ngIf="uploadMode === 'single'">
+                      {{ 'UPLOAD.DRAG_DROP_SINGLE' | translate }}
+                    </span>
+                    <span *ngIf="uploadMode === 'multiple'">
+                      {{ 'UPLOAD.DRAG_DROP_MULTIPLE' | translate }}
+                    </span>
+                  </div>
+                </label>
+              </div>
+              
+              <div *ngIf="selectedFiles.length > 0" class="selected-files mb-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <h6 class="mb-0">
+                    {{ uploadMode === 'single' ? 
+                    ('UPLOAD.SELECTED_FILE' | translate) : 
+                    ('UPLOAD.SELECTED_FILES' | translate:{count: selectedFiles.length}) }}
+                  </h6>
+                  <button type="button" class="btn btn-sm btn-outline-danger" (click)="clearSelectedFiles()">
+                    <i class="ti ti-trash"></i> {{ 'BUTTONS.CLEAR_ALL' | translate }}
+                  </button>
+                </div>
+                
+                <div class="file-list">
+                  <div class="file-item" *ngFor="let file of selectedFiles; let i = index">
+                    <div class="file-icon">
+                      <i [class]="getFileIcon(file.name)"></i>
+                    </div>
+                    <div class="file-info">
+                      <div class="file-name">{{ file.name }}</div>
+                      <div class="file-size">{{ formatFileSize(file.size) }}</div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-icon btn-danger" (click)="removeFile(i)">
+                      <i class="ti ti-x"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div *ngIf="isUploading" class="upload-progress mb-4">
+                <label>{{ 'UPLOAD.UPLOADING_PROGRESS' | translate:{progress: uploadProgress} }}</label>
+                <div class="progress">
+                  <div 
+                    class="progress-bar bg-primary" 
+                    role="progressbar" 
+                    [style.width.%]="uploadProgress" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+              </div>
+              
+              <div class="d-flex justify-content-end">
+                <button 
+                  type="button" 
+                  class="btn btn-primary" 
+                  [disabled]="selectedFiles.length === 0 || isUploading" 
+                  (click)="uploadFiles()"
+                >
+                  <i class="ti ti-upload"></i> 
+                  {{ uploadMode === 'single' ? 
+                  ('BUTTONS.UPLOAD_FILE' | translate) : 
+                  ('BUTTONS.UPLOAD_FILES' | translate) }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

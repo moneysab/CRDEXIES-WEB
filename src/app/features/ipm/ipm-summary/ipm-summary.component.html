@@ -1,0 +1,166 @@
+<div class="card">
+    <!-- Header -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2 class="mb-0" style="color: #FF6600;">{{'MASTERCARD_SUMMARY_CFLOW.TITLE'| translate }}</h2>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="exportToExcel()">
+                <i class="bi bi-x-circle"></i> {{ 'BUTTONS.EXPORT' | translate }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="resetFilters()">
+                <i class="bi bi-x-circle"></i> {{ 'BUTTONS.RESET' | translate }}
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Card Body -->
+    <div class="card-body">
+        <!-- Filter Form -->
+        <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">{{ 'FILTERS.START_DATE' | translate }}</label>
+                    <input type="date" class="form-control" formControlName="startDate">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">{{ 'FILTERS.END_DATE' | translate }}</label>
+                    <input type="date" class="form-control" formControlName="endDate">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Businness Service</label>
+                    <input type="text" class="form-control" formControlName="businessServiceId">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Summary Type</label>
+                    <input type="text" class="form-control" formControlName="summaryType">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Member ID</label>
+                    <select class="form-select" formControlName="memberId">
+                        <option value=""></option>
+                        <option *ngFor="let m of members" [value]="m">{{ m }}</option>
+                      </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Acceptance Brand</label>
+                    <select class="form-select" formControlName="acceptanceBrand">
+                        <option value=""></option>
+                        <option *ngFor="let b of acceptanceBrands" [value]="b">{{ b }}</option>
+                      </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label">{{ 'FILTERS.CURRENCY' | translate }}</label>
+                    <select class="form-select" formControlName="currencyCode">
+                        <option value=""></option>
+                        <option *ngFor="let c of currencies" [value]="c">{{ c }}</option>
+                      </select>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end">
+                    <div class="btn-group w-100">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> {{ 'BUTTONS.SEARCH' | translate }}
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="resetFilters()">
+                            <i class="bi bi-x-circle"></i> {{ 'BUTTONS.RESET' | translate }}
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="text-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}</span>
+            </div>
+            <p class="mt-2">{{ 'LOADING.LOADING' | translate }}</p>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage && !isLoading" class="alert alert-danger" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            {{ errorMessage }}
+        </div>
+
+        <!-- No Data Message -->
+        <div *ngIf="!isLoading && !errorMessage && summaries.length === 0" class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            {{ 'MESSAGES.NO_DATA' | translate }}
+        </div>
+
+        <!-- Summary Table -->
+        <div *ngIf="!isLoading && summaries.length > 0" class="table-responsive">
+            <table class="table table-striped table-hover w-100">
+                <thead>
+                    <tr>
+                        <th>Member ID</th>
+                        <th>Brand</th>
+                        <th>Business Service</th>
+                        <th>Service Level</th>
+                        <th>Summary Type</th>
+                        <th>Currency</th>
+                        <th>Run Date</th>
+                        <th>Reconciliation</th>
+                        <th>Fee</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let summary of summaries">
+                        <td>{{ summary.memberId }}</td>
+                        <td>{{ summary.acceptanceBrand }}</td>
+                        <td>{{ summary.businessServiceId }}</td>
+                        <td>{{ summary.businessServiceLevel }}</td>
+                        <td class="text-wrap">{{ summary.summaryType }}</td>
+                        <td>{{ summary.currencyCode }}</td>
+                        <td>{{ formatDate(summary.runDate) }}</td>
+                        <td>
+                            {{ summary.reconAmount | number:'1.2-2' }} {{ summary.reconCrDrIndicator }}
+                        </td>
+                        <td>
+                            {{ summary.feeAmount | number:'1.2-2' }} {{ summary.feeCrDrIndicator }}
+                        </td>
+                        <td>
+                            <a [routerLink]="['/ipm/summary', summary.id]" class="btn btn-sm btn-primary me-1">
+                                <i class="ti ti-eye"></i> {{ 'home.View' | translate }}
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
+                {{ 'PAGINATION.SHOWING' | translate:{count: summaries.length, total: totalElements} }}
+            </div>
+            <div class="mb-2">
+                {{ 'PAGINATION.PAGE' | translate:{current: currentPage + 1, total: totalPages} }}
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="currentPage === 0">
+                        <a class="page-link" href="javascript:void(0)"
+                            (click)="previousPage(); $event.preventDefault()">
+                            <i class="ti ti-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <span class="page-link">{{ currentPage + 1 }}</span>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage + 1 >= totalPages">
+                        <a class="page-link" href="javascript:void(0)" (click)="nextPage(); $event.preventDefault()">
+                            <i class="ti ti-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

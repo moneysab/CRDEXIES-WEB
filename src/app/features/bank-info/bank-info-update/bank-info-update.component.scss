@@ -1,0 +1,60 @@
+$bank-bleu: #3266d8;
+$bank-neutral: #2634b8;
+$bank-tea: #2340a1f3;
+
+.card-header {
+    background-color: lighten($bank-neutral, 48%);
+    border-bottom: 2px solid $bank-neutral;
+
+    h2 {
+        color: darken($bank-tea, 15%);
+    }
+}
+
+.btn-primary {
+    background-color: $bank-bleu;
+    border-color: $bank-bleu;
+
+    &:hover,
+    &:focus {
+        background-color: darken($bank-bleu, 10%);
+        border-color: darken($bank-bleu, 10%);
+    }
+}
+.btn-info {
+    background-color: $bank-neutral;
+    border-color: $bank-neutral;
+    color: #212529;
+    
+    &:hover, &:focus {
+      background-color: darken($bank-neutral, 10%);
+      border-color: darken($bank-neutral, 10%);
+      color: #212529;
+    }
+  }
+.invalid-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+    text-align: left;
+}
+
+.alert {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

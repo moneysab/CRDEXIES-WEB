@@ -1,0 +1,357 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2 class="mb-0">{{ 'VISA_SUMMARY_DETAILS_CFLOW.TITLE' | translate }}</h2>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" (click)="navigateToUpload()">
+        <i class="bi bi-upload"></i>{{ 'BUTTONS.UPLOAD' | translate }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="goToInterchangeReport()">
+        <i class="bi bi-file-earmark-excel"></i>{{ 'BUTTONS.INTERCHANGE' | translate }}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="goToReimbursementReport()">
+        <i class="bi bi-graph-up"></i> {{ 'BUTTONS.REIMBURSEMENT' | translate }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="goToChargesReport()">
+        <i class="bi bi-pie-chart"></i> {{ 'BUTTONS.CHARGES' | translate }}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="exportKpisToCsv()">
+        <i class="bi bi-upload"></i>{{ 'BUTTONS.EXPORT' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="kpiForm" (ngSubmit)="applyFilters()" class="row g-2 align-items-end">
+      <div class="col-md-2">
+        <label for="startDate" class="form-label">{{ 'FILTERS.START_DATE' | translate }}</label>
+        <input type="date" class="form-control" id="startDate" formControlName="startDate" [max]="getToday()" />
+      </div>
+      <div class="col-md-2">
+        <label for="endDate" class="form-label">{{ 'FILTERS.END_DATE' | translate }}</label>
+        <input type="date" class="form-control" id="endDate" formControlName="endDate" [max]="getToday()" />
+      </div>
+      <div class="col-md-2">
+        <label for="binCode" class="form-label">{{ 'FILTERS.BIN' | translate }}</label>
+        <input type="text" class="form-control" id="binCode" placeholder="Bin" formControlName="binCode" />
+      </div>
+      <div class="col-md-2">
+        <label for="currencyCode" class="form-label">{{ 'BANK.CURRENCY' | translate }}</label>
+        <select class="form-select" formControlName="currencyCode">
+          <option value="978">EUR</option>
+          <option value="840">USD</option>
+        </select>
+      </div>
+      <div class="col-md-2 d-grid">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search me-1"></i> {{ 'BUTTONS.SEARCH' | translate }}
+        </button>
+      </div>
+
+      <div class="col-md-2 d-grid">
+        <button type="button" class="btn btn-secondary" (click)="resetFilters()">
+          <i class="bi bi-arrow-counterclockwise me-1"></i> {{ 'BUTTONS.RESET' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="d-flex align-items-center justify-content-end gap-2 pe-3 flex-wrap">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" [class.active]="displayMode === 'table'"
+        (click)="setDisplayMode('table')">
+        <i class="bi bi-table me-1"></i> {{ 'BUTTONS.TABLE_VIEW' | translate }}
+      </button>
+      <button type="button" class="btn btn-secondary" [class.active]="displayMode === 'chart'"
+        (click)="setDisplayMode('chart')">
+        <i class="bi bi-bar-chart me-1"></i> {{ 'BUTTONS.CHART_VIEW' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">{{ 'LOADING.LOADING' | translate }}...</span>
+    </div>
+  </div>
+  <!-- KPI Data Table -->
+  <div *ngIf="!isLoading">
+    <div *ngIf="!kpis || (!kpis.interchangeValue && !kpis.reimbursementFees && !kpis.visaCharges && !kpis.total)"
+      class="text-center my-5">
+      <i class="ti ti-chart-bar-off fs-1 text-muted mb-3"></i>
+      <p class="lead">{{ 'MESSAGES.NO_KPI_DATA_FOUND' | translate }}</p>
+      <p class="text-muted">{{ 'MESSAGES.TRY_ADJUSTING_FILTERS' | translate }}</p>
+    </div>
+  </div>
+
+
+  <div *ngIf="!error" class="row mt-4">
+    <div *ngIf="displayMode === 'table' && !isLoading">
+      <div class="col-12 mb-4">
+        <div class="invoice-section">
+          <h2 class="table-title">{{ 'INTERCHANGE_VALUE' | translate }} <button class="btn btn-sm btn-secondary"
+              (click)="goToInterchangeReport()">
+              <i class="ti ti-eye"></i> {{ 'BUTTONS.VIEW_DETAILS' | translate }}
+            </button></h2>
+          <div class="table-container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="text-end">COUNT</th>
+                  <th class="text-end">CREDIT AMOUNT</th>
+                  <th class="text-end">DEBIT AMOUNT</th>
+                  <th class="text-end">TOTAL AMOUNT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="kpis?.interchangeValue?.acquirer">
+                  <th>TOTAL ACQUIRER</th>
+                  <td class="text-end">{{ kpis.interchangeValue.acquirer.creditCount }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.acquirer.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.acquirer.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.acquirer.totalAmount | number:'1.2-2' }}{{
+                    kpis.interchangeValue.acquirer.totalAmountSign }}</td>
+                </tr>
+                <tr *ngIf="kpis?.interchangeValue?.issuer">
+                  <th>TOTAL ISSUER</th>
+                  <td class="text-end">{{ kpis.interchangeValue.issuer.creditCount }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.issuer.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.issuer.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.issuer.totalAmount | number:'1.2-2' }}{{
+                    kpis.interchangeValue.issuer.totalAmountSign }}</td>
+                </tr>
+                <tr *ngIf="kpis?.interchangeValue?.other">
+                  <th>TOTAL OTHER</th>
+                  <td class="text-end">{{ kpis.interchangeValue.other.creditCount }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.other.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.other.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.other.totalAmount | number:'1.2-2' }}{{
+                    kpis.interchangeValue.other.totalAmountSign }}</td>
+                </tr>
+                <tr *ngIf="kpis?.interchangeValue?.total">
+                  <th>TOTAL INTERCHANGE VALUE</th>
+                  <td class="text-end">{{ kpis.interchangeValue.total.creditCount }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.total.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.total.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.interchangeValue.total.totalAmount | number:'1.2-2' }}{{
+                    kpis.interchangeValue.total.totalAmountSign }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 mb-4">
+        <div class="invoice-section">
+          <h2 class="table-title">{{ 'REIMBURSEMENT_FEES' | translate }} <button class="btn btn-sm btn-secondary"
+              (click)="goToReimbursementReport()">
+              <i class="ti ti-eye"></i> {{ 'BUTTONS.VIEW_DETAILS' | translate }}
+            </button></h2>
+          <div class="table-container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="text-end">CREDIT AMOUNT</th>
+                  <th class="text-end">DEBIT AMOUNT</th>
+                  <th class="text-end">TOTAL AMOUNT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="kpis?.reimbursementFees?.acquirer">
+                  <th>TOTAL ACQUIRER</th>
+                  <td class="text-end">{{ kpis.reimbursementFees.acquirer.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.acquirer.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.acquirer.totalAmount | number:'1.2-2' }}{{
+                    kpis.reimbursementFees.acquirer.totalAmountSign }}</td>
+                </tr>
+                <tr *ngIf="kpis?.reimbursementFees?.issuer">
+                  <th>TOTAL ISSUER</th>
+                  <td class="text-end">{{ kpis.reimbursementFees.issuer.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.issuer.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.issuer.totalAmount | number:'1.2-2' }}{{
+                    kpis.reimbursementFees.issuer.totalAmountSign }}</td>
+                </tr>
+                <tr *ngIf="kpis?.reimbursementFees?.other">
+                  <th>TOTAL OTHER</th>
+                  <td class="text-end">{{ kpis.reimbursementFees.other.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.other.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.other.totalAmount | number:'1.2-2' }}{{
+                    kpis.reimbursementFees.other.totalAmountSign }}</td>
+                </tr>
+                <tr *ngIf="kpis?.reimbursementFees?.total">
+                  <th>TOTAL REIMBURSEMENT FEES</th>
+                  <td class="text-end">{{ kpis.reimbursementFees.total.creditAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.total.debitAmount | number:'1.2-2' }}</td>
+                  <td class="text-end">{{ kpis.reimbursementFees.total.totalAmount | number:'1.2-2' }}{{
+                    kpis.reimbursementFees.total.totalAmountSign }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+
+
+    <div class="col-12 mb-4">
+      <div class="invoice-section">
+        <h2 class="table-title">{{ 'VISA_CHARGES' | translate }} <button class="btn btn-sm btn-secondary"
+            (click)="goToChargesReport()">
+            <i class="ti ti-eye"></i> {{ 'BUTTONS.VIEW_DETAILS' | translate }}
+          </button></h2>
+        <div class="table-container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="text-end">CREDIT AMOUNT</th>
+                <th class="text-end">DEBIT AMOUNT</th>
+                <th class="text-end">TOTAL AMOUNT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="kpis?.visaCharges?.acquirer">
+                <th>TOTAL ACQUIRER</th>
+                <td class="text-end">{{ kpis.visaCharges.acquirer.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.acquirer.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.acquirer.totalAmount | number:'1.2-2' }}{{
+                  kpis.visaCharges.acquirer.totalAmountSign }}</td>
+              </tr>
+              <tr *ngIf="kpis?.visaCharges?.issuer">
+                <th>TOTAL ISSUER</th>
+                <td class="text-end">{{ kpis.visaCharges.issuer.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.issuer.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.issuer.totalAmount | number:'1.2-2' }}{{
+                  kpis.visaCharges.issuer.totalAmountSign }}</td>
+              </tr>
+              <tr *ngIf="kpis?.visaCharges?.other">
+                <th>TOTAL OTHER</th>
+                <td class="text-end">{{ kpis.visaCharges.other.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.other.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.other.totalAmount | number:'1.2-2' }}{{
+                  kpis.visaCharges.other.totalAmountSign }}</td>
+              </tr>
+              <tr *ngIf="kpis?.visaCharges?.total">
+                <th>TOTAL VISA CHARGES</th>
+                <td class="text-end">{{ kpis.visaCharges.total.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.total.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.visaCharges.total.totalAmount | number:'1.2-2' }}{{
+                  kpis.visaCharges.total.totalAmountSign }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-12 mb-4">
+      <div class="invoice-section">
+        <h2 class="table-title">TOTAL</h2>
+        <div class="table-container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="text-end">CREDIT AMOUNT</th>
+                <th class="text-end">DEBIT AMOUNT</th>
+                <th class="text-end">TOTAL AMOUNT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="kpis?.total?.acquirer">
+                <th>TOTAL ACQUIRER</th>
+                <td class="text-end">{{ kpis.total.acquirer.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.acquirer.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.acquirer.totalAmount | number:'1.2-2' }}{{
+                  kpis.total.acquirer.totalAmountSign }}</td>
+              </tr>
+              <tr *ngIf="kpis?.total?.issuer">
+                <th>TOTAL ISSUER</th>
+                <td class="text-end">{{ kpis.total.issuer.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.issuer.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.issuer.totalAmount | number:'1.2-2' }}{{
+                  kpis.total.issuer.totalAmountSign }}</td>
+              </tr>
+              <tr *ngIf="kpis?.total?.other">
+                <th>TOTAL OTHER</th>
+                <td class="text-end">{{ kpis.total.other.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.other.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.other.totalAmount | number:'1.2-2' }}{{
+                  kpis.total.other.totalAmountSign }}</td>
+              </tr>
+              <tr *ngIf="kpis?.total?.total">
+                <th>NET SETTLEMENT AMOUNT</th>
+                <td class="text-end">{{ kpis.total.total.creditAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.total.debitAmount | number:'1.2-2' }}</td>
+                <td class="text-end">{{ kpis.total.total.totalAmount | number:'1.2-2' }}{{
+                  kpis.total.total.totalAmountSign }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div *ngIf="displayMode === 'chart' && !isLoading">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <app-card [cardTitle]="'INTERCHANGE_BY_CATEGORY' | translate" [headerClass]="'border-bottom visa-title'">
+            <div id="category-distribution-chart">
+              <div class="chart-container visa-blue-text">Total Net : {{kpis.interchangeValue.total.totalAmount | number:'1.2-2'}}
+                {{kpis.interchangeValue.total.totalAmountSign }}</div>
+              <apx-chart *ngIf="interchangePieChart.series" [series]="interchangePieChart.series"
+                [chart]="interchangePieChart.chart" [labels]="interchangePieChart.labels"
+                [legend]="interchangePieChart.legend" [tooltip]="interchangePieChart.tooltip"></apx-chart>
+            </div>
+          </app-card>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <app-card [cardTitle]="'REIMBURSEMENT_BY_CATEGORY' | translate" [headerClass]="'border-bottom visa-title'">
+            <div id="category-distribution-chart">
+              <div class="chart-container visa-blue-text">Total Net : {{kpis.reimbursementFees.total.totalAmount | number:'1.2-2' }}
+                {{kpis.reimbursementFees.total.totalAmountSign }}</div>
+              <apx-chart *ngIf="reimbursementChart.series" [series]="reimbursementChart.series"
+                [chart]="reimbursementChart.chart" [labels]="reimbursementChart.labels"
+                [legend]="reimbursementChart.legend" [tooltip]="reimbursementChart.tooltip"></apx-chart>
+            </div>
+          </app-card>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <app-card [cardTitle]="'CHARGES_BY_CATEGORY' | translate" [headerClass]="'border-bottom visa-title'">
+            <div id="category-distribution-chart">
+              <div class="chart-container visa-blue-text">Total Net : {{kpis.visaCharges.total.totalAmount | number:'1.2-2' }}
+                {{kpis.visaCharges.total.totalAmountSign }}</div>
+
+              <apx-chart *ngIf="chargesChart.series" [series]="chargesChart.series" [chart]="chargesChart.chart"
+                [labels]="chargesChart.labels" [legend]="chargesChart.legend"
+                [tooltip]="chargesChart.tooltip"></apx-chart>
+            </div>
+          </app-card>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <app-card [cardTitle]="'VISA_CFLOW_BREAKDOWN' | translate" [headerClass]="'border-bottom visa-title'">
+            <apx-chart *ngIf="barChart?.series" [series]="barChart.series" [chart]="barChart.chart"
+              [xaxis]="barChart.xaxis" [yaxis]="barChart.yaxis" [tooltip]="barChart.tooltip"
+              [dataLabels]="barChart.dataLabels" [plotOptions]="barChart.plotOptions" [colors]="barChart.colors">
+            </apx-chart>
+          </app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

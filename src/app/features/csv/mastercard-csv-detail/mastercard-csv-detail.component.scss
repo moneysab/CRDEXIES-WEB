@@ -1,0 +1,124 @@
+// Mastercard brand colors
+$mastercard-red: #F79E1B;
+$mastercard-orange: #F79E1B;
+$mastercard-yellow: #F79E1B;
+
+// Custom styles for Mastercard invoice list
+:host {
+  display: block;
+}
+
+// Table header styling
+th {
+  cursor: pointer;
+  user-select: none;
+  background-color: lighten($mastercard-orange, 45%);
+  
+  &:hover {
+    background-color: lighten($mastercard-orange, 40%);
+  }
+  
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+// Currency column styling
+.currency-column {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+// Date column styling
+.date-column {
+  white-space: nowrap;
+}
+
+// Card header styling
+.card-header {
+  background-color: lighten($mastercard-orange, 48%);
+  border-bottom: 2px solid $mastercard-orange;
+  
+  h2 {
+    color: darken($mastercard-orange, 15%);
+  }
+}
+
+// Primary button styling
+.btn-primary {
+  background-color: $mastercard-red;
+  border-color: $mastercard-red;
+  
+  &:hover, &:focus {
+    background-color: darken($mastercard-red, 10%);
+    border-color: darken($mastercard-red, 10%);
+  }
+}
+
+// Secondary button styling
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  
+  &:hover, &:focus {
+    background-color: darken(#6c757d, 10%);
+    border-color: darken(#6c757d, 10%);
+  }
+}
+
+// Info button styling
+.btn-info {
+  background-color: $mastercard-yellow;
+  border-color: $mastercard-yellow;
+  color: #212529;
+  
+  &:hover, &:focus {
+    background-color: darken($mastercard-yellow, 10%);
+    border-color: darken($mastercard-yellow, 10%);
+    color: #212529;
+  }
+}
+
+// Pagination styling
+.pagination {
+  .page-item {
+    &.active .page-link {
+      background-color: $mastercard-orange;
+      border-color: $mastercard-orange;
+    }
+    
+    .page-link {
+      color: black;
+      
+      &:hover {
+        background-color: lighten($mastercard-orange, 45%);
+      }
+    }
+  }
+}
+
+// Table row hover effect
+tbody tr {
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: lighten($mastercard-yellow, 40%) !important;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+    
+    .btn {
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem !important;
+    }
+  }
+  
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}

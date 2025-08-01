@@ -1,0 +1,113 @@
+<!-- Vertical layout -->
+@if (layout === 'vertical') {
+  <ng-scrollbar style="height: calc(100vh - 127px)" visibility="hover" [dir]="direction" id="nav-ps-mantis" appearance="compact">
+    <div class="navbar-content">
+      <ul class="nav coded-inner-navbar" (click)="fireOutClick()" (mouseleave)="navMob()">
+        @for (item of navigations; track item) {
+          @if (item.type === 'group') {
+            <app-nav-group [item]="item"></app-nav-group>
+          } @else if (item.type === 'collapse') {
+            <app-nav-collapse [item]="item" [parentRole]="item.role!"></app-nav-collapse>
+          } @else if (item.type === 'item') {
+            <app-nav-item [item]="item" [parentRole]="item.role!"></app-nav-item>
+          }
+        }
+      </ul>
+      
+    </div>
+  </ng-scrollbar>
+  <div class="user-profile-section">
+    <ul class="list-unstyled">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0 me-2">
+          <div class="user-images">
+            <img src="assets/images/user/avatar-1.jpg" alt="user" class="img-fluid rounded-circle" />
+          </div>
+        </div>
+        <div class="flex-grow-1">
+       
+          <p class="mb-0 text-muted">{{ userRole}}</p>
+        </div>
+        <div class="avatar avatar-xs btn-link-secondary" ngbDropdown>
+          <i antIcon theme="outline" type="right" ngbDropdownToggle></i>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem (click)="logout()">{{'Logout'|translate}}</button>
+            <button ngbDropdownItem [routerLink]="['/profile']">{{'Profile'|translate}}</button>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+} @else if (layout === 'horizontal') {
+  <div class="navbar-content sidenav-horizontal" id="layout-sidenav">
+    <a class="sidenav-horizontal-prev" [ngClass]="prevDisabled" (click)="scrollMinus()"></a>
+    <div #navbarWrapper class="sidenav-horizontal-wrapper">
+      <ul
+        #navbarContent
+        id="side-nav-horizontal"
+        class="nav coded-inner-navbar sidenav-inner"
+        (click)="fireLeave()"
+        (mouseleave)="fireLeave()"
+      >
+        @for (item of navigations; track item) {
+          @if (item.type === 'group') {
+            <app-nav-group [item]="item"></app-nav-group>
+          } @else if (item.type === 'collapse') {
+            <app-nav-collapse [item]="item" [parentRole]="item.role!"></app-nav-collapse>
+          } @else if (item.type === 'item') {
+            <app-nav-item [item]="item" [parentRole]="item.role!"></app-nav-item>
+          }
+        }
+      </ul>
+    </div>
+    <a class="sidenav-horizontal-next" [ngClass]="nextDisabled" (click)="scrollPlus()"></a>
+  </div>
+}
+
+<!-- Compact Layout -->
+<div class="navbar-content">
+  @if (layout === 'compact') {
+    <ng-scrollbar style="height: calc(100vh - 80px)" id="nav-ps-mantis" visibility="hover" [dir]="direction">
+      <ul class="nav coded-inner-navbar" (click)="fireOutClick()" (mouseleave)="navMob()">
+        @for (item of navigations; track item) {
+          @if (item.type === 'group') {
+            <app-nav-group [item]="item" (showCollapseItem)="subMenuCollapse(item)"></app-nav-group>
+          } @else if (item.type === 'collapse') {
+            <app-nav-collapse [item]="item" [parentRole]="item.role!"></app-nav-collapse>
+          } @else if (item.type === 'item') {
+            <app-nav-item [item]="item" [parentRole]="item.role!"></app-nav-item>
+          }
+        }
+      </ul>
+    </ng-scrollbar>
+  }
+</div>
+@if (layout === 'compact') {
+  @if (collapseItem) {
+    <div class="pc-compact-submenu">
+      <div class="pc-compact-title">
+        <div class="d-flex align-items-center">
+          <div class="flex-shrink-0">
+            <div class="avatar avatar-xs bg-light-primary">
+              <i antIcon type="{{ collapseItem.icon }}" theme="outline"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-2">
+            <h5 class="mb-0">{{ collapseItem.title }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-item">
+        <ng-scrollbar style="height: calc(100vh - 70px)" visibility="hover" [dir]="direction">
+          @for (item of collapseItem.children; track item) {
+            @if (item.type === 'item') {
+              <!-- <app-nav-item [item]="item" [parentRole]="item.role && item.role.length > 0 ? item.role : null"></app-nav-item> -->
+            } @else if (item.type === 'collapse') {
+              <!-- <app-nav-collapse [item]="item" [parentRole]="item.role && item.role.length > 0 ? item.role : null"></app-nav-collapse> -->
+            }
+          }
+        </ng-scrollbar>
+      </div>
+    </div>
+  }
+}

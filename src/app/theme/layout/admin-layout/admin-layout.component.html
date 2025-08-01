@@ -1,0 +1,57 @@
+<app-navigation
+  class="pc-sidebar"
+  [ngClass]="{
+    'navbar-collapsed': navCollapsed,
+    'theme-horizontal': this.mantisConfig['layout'] === 'horizontal',
+    'theme-compact': this.mantisConfig['layout'] === 'compact',
+    'mob-open': navCollapsedMob
+  }"
+  (NavCollapse)="this.navCollapsed = !this.navCollapsed"
+/>
+<app-nav-bar
+  (NavCollapsedMob)="navMobClick()"
+  (NavCollapse)="this.navCollapsed = !this.navCollapsed"
+  (Customize)="this.styleSelectorToggle = !this.styleSelectorToggle"
+/>
+<div class="pc-container">
+  <div class="coded-wrapper">
+    <div class="coded-content">
+      <div class="coded-inner-content">
+        <app-breadcrumb [dashboard]="true" />
+        <div class="main-body">
+          <div class="page-wrapper">
+            <router-outlet />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pc-menu-overlay" (click)="closeMenu()" (keydown)="handleKeyDown($event)" tabindex="0"></div>
+</div>
+<footer class="pc-footer">
+  <div class="footer-wrapper container-fluid">
+    <div class="row">
+      <div class="col my-1">
+        <p class="m-0">
+          Copyright &copy;Moneysab 2025
+        </p>
+      </div>
+      <div class="col-auto my-1">
+        <ul class="list-inline footer-link mb-0">
+          <!--
+          <li class="list-inline-item"><a href="https://moneysab.fr/contact" target="_blank">Home</a></li>
+          <li class="list-inline-item">
+            <a href="https://moneysab.fr/politique-de-confidentialite" target="_blank">Privacy Policy</a>
+          </li>
+             -->
+          <li class="list-inline-item"><a 
+            href="javascript:void(0)" 
+            (click)="openContactModal()" 
+            style="cursor:pointer"
+          >{{'contact_us'|translate}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<app-configuration />

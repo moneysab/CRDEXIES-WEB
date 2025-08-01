@@ -1,0 +1,60 @@
+<svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Background -->
+  <rect x="0" y="0" width="240" height="120" rx="10" ry="10" fill="#141414"/>
+  
+  <!-- MS Symbol (inspired by Ant Design's logo structure) -->
+  <g transform="translate(30, 30) scale(1.2)">
+    <path d="M4.63564 15.8644L6.94797 13.552L6.95038 13.5496H11.3006L9.56969 15.2806L9.12278 15.7275L7.35024 17.5L7.56977 17.7201L17.5 27.6498L27.6498 17.5L25.8766 15.7275L25.7518 15.602L23.6994 13.5496H28.0496L28.052 13.552L29.8644 15.3644L32 17.5L17.5 32L3 17.5L4.63564 15.8644ZM17.5 3L25.8784 11.3784H21.5282L17.5 7.35024L13.4718 11.3784H9.12158L17.5 3Z" fill="#096DD9"/>
+    <path d="M7.35037 17.5L9.12292 15.7275L9.56982 15.2805L7.8395 13.5496H6.95051L6.9481 13.552L4.63577 15.8644L6.85522 18.073L7.35037 17.5Z" fill="url(#paint0_linear)"/>
+    <path d="M25.8765 15.7275L27.6496 17.5L27.4741 17.6755L27.4747 17.6761L29.8643 15.3644L28.0519 13.552L28.0495 13.5496H27.8734L25.7516 15.602L25.8765 15.7275Z" fill="url(#paint1_linear)"/>
+    <path d="M6.9453 13.5496L6.94771 13.552L9.12253 15.7275L17.4998 24.1041L28.0542 13.5496H6.9453Z" fill="#1890FF"/>
+  </g>
+  
+  <!-- MS-BILLING Text -->
+  <text x="90" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="#F0F0F0">MS</text>
+  <text x="125" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#F0F0F0">BILLING</text>
+  
+  <!-- Card/Bank Network Elements -->
+  <g transform="translate(90, 55)">
+    <!-- Visa-like Card -->
+    <rect x="0" y="0" width="30" height="20" rx="3" ry="3" fill="#00579F" opacity="0.9"/>
+    <rect x="5" y="15" width="20" height="4" rx="1" ry="1" fill="#FAA61A"/>
+    
+    <!-- Mastercard-like Card -->
+    <rect x="40" y="0" width="30" height="20" rx="3" ry="3" fill="#000000" opacity="0.8"/>
+    <circle cx="50" cy="10" r="6" fill="#EB001B" opacity="0.9"/>
+    <circle cx="60" cy="10" r="6" fill="#F79E1B" opacity="0.9"/>
+    
+    <!-- Bank Symbol -->
+    <g transform="translate(90, 0)">
+      <rect x="0" y="0" width="30" height="20" rx="3" ry="3" fill="#1890FF" opacity="0.9"/>
+      <rect x="5" y="8" width="20" height="8" rx="1" ry="1" fill="#F0F0F0" opacity="0.8"/>
+      <rect x="12" y="4" width="6" height="4" rx="1" ry="1" fill="#F0F0F0" opacity="0.8"/>
+    </g>
+    
+    <!-- Connection lines -->
+    <line x1="30" y1="10" x2="40" y2="10" stroke="#1890FF" stroke-width="2"/>
+    <line x1="70" y1="10" x2="90" y2="10" stroke="#1890FF" stroke-width="2"/>
+  </g>
+  
+  <!-- Invoice Elements -->
+  <g transform="translate(100, 85)">
+    <rect x="0" y="0" width="40" height="5" rx="1" ry="1" fill="#F0F0F0" opacity="0.6"/>
+    <rect x="0" y="8" width="40" height="5" rx="1" ry="1" fill="#F0F0F0" opacity="0.6"/>
+    <rect x="0" y="16" width="25" height="5" rx="1" ry="1" fill="#F0F0F0" opacity="0.6"/>
+    
+    <text x="50" y="16" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#1890FF">$</text>
+  </g>
+  
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="8.62538" y1="14.0888" x2="5.56721" y2="17.1469" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#023B95"/>
+      <stop offset="0.9637" stop-color="#096CD9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="26.2673" y1="14.1279" x2="28.7402" y2="16.938" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#023B95"/>
+      <stop offset="1" stop-color="#096DD9" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>

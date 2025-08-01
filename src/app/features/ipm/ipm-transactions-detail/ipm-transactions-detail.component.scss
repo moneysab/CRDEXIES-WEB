@@ -1,0 +1,125 @@
+// Mastercard brand colors
+$mastercard-primary: #f59e0b;
+$mastercard-secondary: #6b7280;
+
+.card {
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 0.25rem;
+}
+
+.card-header {
+  background-color: lighten($mastercard-primary, 48%);
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid $mastercard-primary;
+
+  h2, h3, h4, h5, h6 {
+    color: $mastercard-primary;
+  }
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.invoice-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid $mastercard-primary;
+  color: $mastercard-primary;
+}
+
+.table {
+  margin-bottom: 0;
+  
+  th {
+    width: 40%;
+    font-weight: 600;
+    background-color: lighten($mastercard-primary, 45%);
+    color: $mastercard-primary;
+  }
+  
+  td {
+    width: 60%;
+  }
+  
+  th, td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+    word-break: break-word;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  
+  i {
+    font-size: 1rem;
+  }
+}
+
+.btn-primary {
+  background-color: $mastercard-primary;
+  border-color: $mastercard-primary;
+  color: #ffffff;
+
+  &:hover, &:focus {
+    background-color: darken($mastercard-primary, 10%);
+    border-color: darken($mastercard-primary, 10%);
+    color: #ffffff;
+  }
+}
+
+.btn-secondary {
+  background-color: $mastercard-secondary;
+  border-color: $mastercard-secondary;
+  color: #ffffff;
+
+  &:hover, &:focus {
+    background-color: darken($mastercard-secondary, 10%);
+    border-color: darken($mastercard-secondary, 10%);
+    color: #ffffff;
+  }
+}
+
+.btn-outline-secondary {
+  color: $mastercard-secondary;
+  border-color: $mastercard-secondary;
+
+  &:hover {
+    color: #fff;
+    background-color: $mastercard-secondary;
+    border-color: $mastercard-secondary;
+  }
+}
+
+.btn-outline-primary {
+  color: $mastercard-primary;
+  border-color: $mastercard-primary;
+
+  &:hover {
+    color: #fff;
+    background-color: $mastercard-primary;
+    border-color: $mastercard-primary;
+  }
+}
+
+
+@media (max-width: 767.98px) {
+  .table th, .table td {
+    padding: 0.5rem;
+  }
+  
+  .section-title {
+    font-size: 1rem;
+  }
+}

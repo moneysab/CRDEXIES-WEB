@@ -1,0 +1,141 @@
+.table {
+  --bs-table-hover-bg: var(--bs-light);
+  margin-bottom: 0;
+  
+  &.table-align-center {
+    td,
+    th {
+      vertical-align: middle;
+    }
+  }
+  
+  thead {
+    th {
+      padding: 0.9rem 0.75rem;
+      font-weight: 600;
+      color: var(--pc-heading-color, $gray-800);
+      background-color: var(--bs-gray-100, $gray-100);
+      border-top: 1px solid var(--bs-gray-300, $gray-300);
+      border-bottom: 2px solid var(--bs-gray-300, $gray-300);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+
+      &:first-child {
+        padding-left: 24px;
+        border-top-left-radius: 8px;
+      }
+      
+      &:last-child {
+        padding-right: 24px;
+        border-top-right-radius: 8px;
+      }
+    }
+  }
+  
+  tbody {
+    td {
+      padding: 0.75rem;
+      vertical-align: middle;
+      color: var(--pc-sidebar-color, $gray-700);
+      border-color: var(--bs-border-color, $gray-300);
+
+      &:first-child {
+        padding-left: 24px;
+      }
+      
+      &:last-child {
+        padding-right: 24px;
+      }
+    }
+    
+    tr {
+      &:hover {
+        background-color: var(--bs-gray-200, $gray-200);
+      }
+      
+      &:last-child td {
+        border-bottom: 0;
+      }
+    }
+  }
+  
+  &.table-borderless {
+    td,
+    th {
+      border: none !important;
+    }
+  }
+  
+  &.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: var(--bs-gray-100, $gray-100);
+    color: var(--pc-sidebar-color, $gray-700);
+  }
+}
+
+// Status indicators in tables
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  
+  &.status-success {
+    background-color: var(--bs-success);
+  }
+  
+  &.status-warning {
+    background-color: var(--bs-warning);
+  }
+  
+  &.status-danger {
+    background-color: var(--bs-danger);
+  }
+  
+  &.status-info {
+    background-color: var(--bs-info);
+  }
+}
+
+// Table with cards
+.table-card {
+  border-spacing: 0 10px;
+  border-collapse: separate;
+  
+  thead th {
+    border: none;
+    background-color: transparent;
+    color: var(--pc-sidebar-caption-color, $gray-600);
+    font-size: 12px;
+    padding-bottom: 0.5rem;
+    padding-top: 0;
+  }
+  
+  tbody tr {
+    background-color: var(--pc-header-background, #fff);
+    box-shadow: var(--pc-card-box-shadow, 0 2px 10px 0 rgba(33, 150, 243, 0.1));
+    border-radius: 8px;
+    
+    td {
+      border: none;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      
+      &:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      
+      &:last-child {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+    
+    &:hover {
+      box-shadow: var(--pc-card-box-shadow, 0 4px 18px rgba(0, 0, 0, 0.08));
+    }
+  }
+}

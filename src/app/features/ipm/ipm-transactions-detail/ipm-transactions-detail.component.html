@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Mastercard IPM Transaction Details</h5>
+                        <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+                            <i class="ti ti-arrow-left"></i> Back to Transactions
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div *ngIf="isLoading" class="d-flex justify-content-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div *ngIf="!isLoading && !errorMessage && transaction">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="transaction-section">
+                                    <h6 class="section-title">General Information</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+
+                                                <tr>
+                                                    <th>Member ID</th>
+                                                    <td>{{ transaction.memberId || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>File ID</th>
+                                                    <td>{{ transaction.fileId || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Clearing Cycle</th>
+                                                    <td>{{ transaction.clearingCycle || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Acceptance Brand</th>
+                                                    <td>{{ transaction.acceptanceBrand || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Business Service Level</th>
+                                                    <td>{{ transaction.businessServiceLevel || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Business Service ID</th>
+                                                    <td>{{ transaction.businessServiceId || '–' }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="transaction-section">
+                                    <h6 class="section-title">Transaction Codes</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Transaction Type</th>
+                                                    <td>{{ transaction.transactionType || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Transaction Function</th>
+                                                    <td>{{ transaction.transactionFunction || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>IRD Code</th>
+                                                    <td>{{ transaction.irdCode || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Run Date</th>
+                                                    <td>{{ formatDate(transaction.runDate) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Processing Date</th>
+                                                    <td>{{ formatDate( transaction.processingDate) }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="transaction-section">
+                                    <h6 class="section-title">Amount Details</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Recon Amount</th>
+                                                    <td>{{ transaction.reconAmount || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Recon Indicator</th>
+                                                    <td>{{ transaction.reconCrDrIndicator || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Recon Currency Code</th>
+                                                    <td>{{ transaction.reconCurrencyCode || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fee Amount</th>
+                                                    <td>{{ transaction.feeAmount || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fee Indicator</th>
+                                                    <td>{{ transaction.feeCrDrIndicator || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fee Currency Code</th>
+                                                    <td>{{ transaction.feeCurrencyCode || '–' }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

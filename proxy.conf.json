@@ -1,0 +1,14 @@
+{
+    "/api": {
+      "target": "http://ec2-54-146-132-147.compute-1.amazonaws.com:8080",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    },
+    "/cardexis-settlement": {
+      "target": "http://ec2-35-180-74-185.eu-west-3.compute.amazonaws.com:8080",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }

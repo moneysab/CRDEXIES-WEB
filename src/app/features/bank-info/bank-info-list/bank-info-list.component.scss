@@ -1,0 +1,150 @@
+// Mastercard brand colors
+$bank-bleu: #3266d8;
+$bank-neutral: #2634b8;
+$bank-tea: #2340a1f3;
+
+// Custom styles for Mastercard invoice list
+:host {
+  display: block;
+}
+
+// Table header styling
+th {
+  cursor: pointer;
+  user-select: none;
+  background-color: lighten($bank-neutral, 45%);
+  
+  &:hover {
+    background-color: lighten($bank-neutral, 40%);
+  }
+  
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+// Currency column styling
+.currency-column {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+// Date column styling
+.date-column {
+  white-space: nowrap;
+}
+
+// Card header styling
+.card-header {
+  background-color: lighten($bank-neutral, 48%);
+  border-bottom: 2px solid $bank-neutral;
+  
+  h2 {
+    color: darken($bank-tea, 15%);
+  }
+}
+
+// Primary button styling
+.btn-primary {
+  background-color: $bank-bleu;
+  border-color: $bank-bleu;
+  
+  &:hover, &:focus {
+    background-color: darken($bank-bleu, 10%);
+    border-color: darken($bank-bleu, 10%);
+  }
+}
+
+.btn-update {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  color: white;
+  
+  &:hover, &:focus {
+    background-color: darken(#2ecc71, 10%);
+    border-color: darken(#2ecc71, 10%);
+  }
+}
+
+// Secondary button styling
+.btn-secondary {
+  background-color: #88b8e2;
+  border-color: #88b8e2;
+  
+  &:hover, &:focus {
+    background-color: darken(#88b8e2, 10%);
+    border-color: darken(#88b8e2, 10%);
+  }
+}
+
+// Info button styling
+.btn-info {
+  background-color: $bank-tea;
+  border-color: $bank-tea;
+  color: #212529;
+  
+  &:hover, &:focus {
+    background-color: darken($bank-tea, 10%);
+    border-color: darken($bank-tea, 10%);
+    color: #212529;
+  }
+}
+
+// Pagination styling
+.pagination {
+  .page-item {
+    &.active .page-link {
+      border-color: $bank-neutral;
+    }
+    
+    .page-link {
+      color: $bank-neutral;
+      
+      &:hover {
+        background-color: lighten($bank-neutral, 45%);
+      }
+    }
+  }
+}
+
+.badge {
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.user-badge {
+  background-color: $bank-bleu;
+  color: white;
+}
+// Table row hover effect
+tbody tr {
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: lighten($bank-tea, 40%) !important;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+    
+    .btn {
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem !important;
+    }
+  }
+  
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}

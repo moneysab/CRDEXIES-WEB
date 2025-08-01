@@ -1,0 +1,27 @@
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.35em 0.65em;
+}
+
+label.fw-bold {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #495057;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.border {
+  border-width: 1px !important;
+}

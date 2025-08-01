@@ -1,0 +1,31 @@
+/* Custom navigation styles */
+
+/* General styles for section headers */
+.section-header {
+  margin-top: 15px;
+  font-weight: bold;
+  border-radius: 4px;
+  
+  /* Add some spacing */
+  margin-bottom: 5px;
+}
+
+/* Disable the link behavior for section headers */
+.section-header > a {
+  pointer-events: none;
+}
+
+/* Animation for collapsible sections */
+.section-items {
+  transition: max-height 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* Rotate arrow when collapsed */
+.section-arrow {
+  transition: transform 0.3s ease;
+  
+  &.collapsed {
+    transform: rotate(-90deg);
+  }
+}

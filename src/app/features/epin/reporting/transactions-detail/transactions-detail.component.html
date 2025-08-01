@@ -1,0 +1,196 @@
+<div class="container-fluid px-4">
+    <div class="card visa-card p-3">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
+        <h4 class="visa-title mb-0">
+          <i class="ti ti-credit-card text-primary me-2"></i>
+          {{ 'VISA_TRANSACTIONS.BUSINESS_MODE_DETAILS' | translate }} - {{ 'FILTERS.SETTLEMENT_CURRENCY' | translate }}: {{ currency }}
+        </h4>
+        <button class="btn btn-primary" (click)="goBack()">
+          <i class="ti ti-arrow-left"></i> {{ 'DETAILS.BACK' | translate }}
+        </button>
+      </div>
+  
+      <div class="card-body pt-0">
+  
+        <div *ngIf="businessModeData" class="visa-details mt-3">
+  
+          <h5 class="section-title text-primary">{{ 'FILTERS.BUSINESS_MODE' | translate }} : {{businessModeData.businessMode}}</h5>
+          <div class="info-card row mb-4">
+
+            <div class="col-md-4 info-item">
+              <strong>Total Transactions:</strong>
+              <span class="text-primary">
+                {{ businessModeData.totalTransactionCount }}
+              </span>
+            </div>
+            <div class="col-md-4 info-item">
+              <strong>Transactions Crédit:</strong> 
+              <span class="text-success">
+                {{ businessModeData.totalCreditTransactionCount }}
+              </span>
+            </div>
+
+            <div class="col-md-4 info-item">
+              <strong>Transactions Débit:</strong>                
+               <span class="text-warning">
+                {{ businessModeData.totalDebitTransactionCount }}
+                </span>
+            </div>
+          
+            <div class="col-md-4 info-item mt-3">
+              <strong>Total Crédit:</strong> 
+              <span class="text-success">
+              {{   formatCurrency(businessModeData.totalCreditAmount,currency) }}
+              </span>
+            </div>
+
+            <div class="col-md-4 info-item mt-3">
+              <strong>Total Débit:</strong>
+              <span class="text-warning">
+                 {{   formatCurrency(businessModeData.totalDebitAmount,currency ) }}
+              </span>
+            </div>
+            <div class="col-md-4 info-item mt-3">
+                <strong>Net:</strong>
+                <span [ngClass]="{
+                  'text-success': businessModeData.totalCreditAmount - businessModeData.totalDebitAmount > 0,
+                  'text-warning': businessModeData.totalCreditAmount - businessModeData.totalDebitAmount < 0
+                }">
+                  {{
+                    formatCurrency(
+                      businessModeData.totalCreditAmount - businessModeData.totalDebitAmount,
+                      currency
+                    )
+                  }}
+                </span>
+              </div>
+          
+      
+            <div class="col-md-4 info-item mt-3">
+                <strong>Moyenne Crédit:</strong>
+                <span class="text-success">
+                  {{ formatCurrency(businessModeData.averageCreditAmount, currency) }}
+                </span>
+              </div>
+              
+              <div class="col-md-4 info-item mt-3">
+                <strong>Moyenne Débit:</strong>
+                <span class="text-warning">
+                  {{ formatCurrency(businessModeData.averageDebitAmount, currency) }}
+                </span>
+              </div>
+          
+          </div>
+
+          <div *ngFor="let bin of businessModeData.bins" class="card border-gold mb-4">
+            <div class="card-header bg-gold text-dark">
+              <h6 class="mb-0"><i class="ti ti-database me-1"></i> BIN: {{ bin.bin }}</h6>
+            </div>
+            <div class="card-body">
+  
+        
+              <div *ngFor="let type of bin.transactionTypes" class="card border-light-blue mb-3">
+                <div class="card-header bg-light-blue text-dark">
+                  <strong><i class="ti ti-list-details me-1"></i> {{ 'FILTERS.TRANSACTIONS_TYPE' | translate }}:</strong> {{ type.transactionType }}
+                </div>
+                <div class="card-body">
+                  <div class="info-card row mb-4">
+
+                    <div class="col-md-4 info-item">
+                      <strong>Total Transactions:</strong>
+                      <span class="text-primary">
+                        {{ type.totalTransactionCount }}
+                      </span>
+                    </div>
+                    <div class="col-md-4 info-item">
+                      <strong>Transactions Crédit:</strong>
+                      <span class="text-success">
+                        {{ type.totalCreditTransactionCount }}
+                      </span>
+                    </div>
+                    <div class="col-md-4 info-item">
+                      <strong>Transactions Débit:</strong>
+                      <span class="text-warning">
+                        {{ type.totalDebitTransactionCount }}
+                      </span>
+                    </div>
+                  
+                    <div class="col-md-4 info-item mt-3">
+                      <strong>Total Crédit:</strong>
+                      <span class="text-success">
+                        {{ formatCurrency(type.totalCreditAmount, currency) }}
+                      </span>
+                    </div>
+                    <div class="col-md-4 info-item mt-3">
+                      <strong>Total Débit:</strong>
+                      <span class="text-warning">
+                        {{ formatCurrency(type.totalDebitAmount, currency) }}
+                      </span>
+                    </div>
+                    <div class="col-md-4 info-item mt-3">
+                      <strong>Net:</strong>
+                      <span [ngClass]="{
+                        'text-success': type.totalCreditAmount - type.totalDebitAmount > 0,
+                        'text-warning': type.totalCreditAmount - type.totalDebitAmount < 0
+                      }">
+                        {{
+                          formatCurrency(
+                            type.totalCreditAmount - type.totalDebitAmount,
+                            currency
+                          )
+                        }}
+                      </span>
+                    </div>
+              
+                    <div class="col-md-4 info-item mt-3">
+                      <strong>Moyenne Crédit:</strong>
+                      <span class="text-success">
+                        {{ formatCurrency(type.averageCreditAmount, currency) }}
+                      </span>
+                    </div>
+                    <div class="col-md-4 info-item mt-3">
+                      <strong>Moyenne Débit:</strong>
+                      <span class="text-warning">
+                        {{ formatCurrency(type.averageDebitAmount, currency) }}
+                      </span>
+                    </div>
+                  
+                  </div>
+  
+          
+                  <div class="table-responsive mt-3">
+                    <table class="table table-bordered table-sm">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Clearing Currency</th>
+                          <th>TX Count</th>
+                          <th>Clearing Total</th>
+                          <th>Credit Total</th>
+                          <th>Debit Total</th>
+                          <th>Net Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let cc of type.clearingCurrencies">
+                          <td>{{ cc.clearingCurrency }}</td>
+                          <td>{{ cc.transactionCount }}</td>
+                          <td>{{ cc.clearingAmountTotal | number:'1.2-2' }}</td>
+                          <td>{{formatCurrency( cc.totalCreditAmount,currency )}}</td>
+                          <td>{{formatCurrency(cc.totalDebitAmount,currency) }}</td>
+                          <td>{{formatCurrency(cc.totalCreditAmount-cc.totalDebitAmount,currency) }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+  
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

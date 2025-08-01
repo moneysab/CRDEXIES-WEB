@@ -1,0 +1,103 @@
+<div class="auth-main">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="auth-header">
+        <a href="javascript:">
+          <img src="assets/images/logo-dark.svg" alt="logo img" />
+        </a>
+      </div>
+      <div class="card my-5">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-end mb-4">
+            <h3 class="mb-0">
+              <b>{{ 'SIGNUP.TITLE' | translate }}</b>
+            </h3>
+            <a [routerLink]="['/login']" class="link-primary">
+              {{ 'SIGNUP.ALREADY_HAVE_ACCOUNT' | translate }}
+            </a>
+          </div>
+
+          <!-- Messages de succès ou d'erreur -->
+          <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Nouveau message explicatif -->
+          <p class="mb-4">
+            {{ 'SIGNUP.CONTACT_MESSAGE' | translate }}
+          </p>
+
+          <!-- Nouveau formulaire de contact -->
+          <form [formGroup]="contactForm" (ngSubmit)="onContactSubmit()">
+            <div class="mb-3">
+              <label for="subject" class="form-label">
+                {{ 'SIGNUP.CONTACT_FORM.SUBJECT.LABEL' | translate }}*
+              </label>
+              <input
+                type="text"
+                id="subject"
+                formControlName="subject"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': contactForm.controls['subject'].invalid && contactForm.controls['subject'].touched
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="contactForm.controls['subject'].errors?.['required']">
+                {{ 'SIGNUP.CONTACT_FORM.SUBJECT.REQUIRED_ERROR' | translate }}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">
+                {{ 'SIGNUP.CONTACT_FORM.EMAIL.LABEL' | translate }}*
+              </label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': contactForm.controls['email'].invalid && contactForm.controls['email'].touched
+                }"
+              />
+              <div class="invalid-feedback" *ngIf="contactForm.controls['email'].errors?.['required']">
+                {{ 'SIGNUP.CONTACT_FORM.EMAIL.REQUIRED_ERROR' | translate }}
+              </div>
+              <div class="invalid-feedback" *ngIf="contactForm.controls['email'].errors?.['email']">
+                {{ 'SIGNUP.CONTACT_FORM.EMAIL.INVALID_ERROR' | translate }}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">
+                {{ 'SIGNUP.CONTACT_FORM.DESCRIPTION.LABEL' | translate }}*
+              </label>
+              <textarea
+                id="description"
+                formControlName="description"
+                rows="4"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': contactForm.controls['description'].invalid && contactForm.controls['description'].touched
+                }"
+              ></textarea>
+              <div class="invalid-feedback" *ngIf="contactForm.controls['description'].errors?.['required']">
+                {{ 'SIGNUP.CONTACT_FORM.DESCRIPTION.REQUIRED_ERROR' | translate }}
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+              <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">
+                {{ 'SIGNUP.CONTACT_FORM.SEND_BUTTON' | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<svg width="130" height="40" viewBox="0 0 130 35" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background container -->
+  <rect width="117" height="35" fill="#F8F9FA"/>
+  
+  <!-- MS-BILLING text -->
+  <g font-family="Arial, sans-serif" font-weight="bold">
+    <text x="10" y="22" font-size="16" fill="#1890FF">CARDEXIS</text>
+  </g>
+  
+  <!-- Financial symbols group -->
+  <g transform="translate(85 8)">
+    <!-- Credit card stack -->
+    <rect x="12" y="0" width="24" height="16" rx="3" fill="#EB001B" opacity="0.9"/>
+    <rect x="14" y="2" width="24" height="16" rx="3" fill="#FF9900" opacity="0.9"/>
+    <rect x="16" y="4" width="24" height="16" rx="3" fill="#00579F" opacity="0.9"/>
+    
+    <!-- Integrated dollar symbol -->
+    <text x="20" y="14" font-family="Arial" font-size="14" font-weight="bold" fill="#FFF">$</text>
+    
+    <!-- Connection lines -->
+<!--     <line x1="-35" y1="8" x2="-5" y2="8" stroke="#1890FF" stroke-width="1.2"/>
+    <line x1="28" y1="8" x2="38" y2="8" stroke="#1890FF" stroke-width="1.2"/> -->
+    
+    <!-- Minimal bank icon -->
+    <path transform="translate(45 3)" d="M0 5L4 0h2l4 5h-2v5H2V5H0Z" fill="#1890FF"/>
+  </g>
+</svg>

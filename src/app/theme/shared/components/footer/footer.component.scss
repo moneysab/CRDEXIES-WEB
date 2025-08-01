@@ -1,0 +1,20 @@
+.auth-footer {
+  margin-top: 1.5rem;
+  
+  .footer-link {
+    a {
+      color: var(--bs-body-color);
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    li:not(:last-child):after {
+      content: '|';
+      margin: 0 0.5rem;
+      color: var(--bs-secondary);
+    }
+  }
+}

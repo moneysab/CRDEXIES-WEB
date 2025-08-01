@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-body">
+    <h6 class="mb-2 f-w-400 text-muted">Total Order</h6>
+    <h4 class="mb-0 d-flex align-items-center gap-2">
+      18,800
+      <span class="badge bg-light-warning border border-warning">
+        <i antIcon type="fall" theme="outline"></i>
+        27.4%
+      </span>
+    </h4>
+  </div>
+  <div id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [plotOptions]="chartOptions.plotOptions"
+      [xaxis]="chartOptions.xaxis"
+      [colors]="chartOptions.colors"
+      [tooltip]="chartOptions.tooltip"
+    ></apx-chart>
+  </div>
+</div>

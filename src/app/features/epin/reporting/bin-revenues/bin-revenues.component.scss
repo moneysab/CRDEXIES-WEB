@@ -1,0 +1,61 @@
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table {
+  th, td {
+    vertical-align: middle;
+  }
+}
+
+.border {
+  border-width: 1px !important;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.pagination {
+  .page-link {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    
+    &:hover {
+      z-index: 2;
+      color: #0056b3;
+      text-decoration: none;
+      background-color: #e9ecef;
+      border-color: #dee2e6;
+    }
+  }
+  
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+  }
+}
+
+.text-success {
+  i {
+    font-size: 0.875rem;
+  }
+}
+
+.text-danger {
+  i {
+    font-size: 0.875rem;
+  }
+}

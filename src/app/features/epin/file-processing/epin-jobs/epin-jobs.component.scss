@@ -1,0 +1,79 @@
+$visa-blue: #1a1f71;
+$visa-gold: #F7B600;
+:host {
+    display: block;
+    padding: 1rem;
+  }
+   
+.card-header {
+  background-color: lighten($visa-blue, 70%);
+  border-bottom: 2px solid $visa-blue;
+  
+  h2 {
+    color: $visa-blue;
+  }
+}
+
+.btn-primary {
+  background-color: $visa-blue;
+  border-color: $visa-blue;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-blue, 10%);
+    border-color: darken($visa-blue, 10%);
+  }
+}
+
+
+.btn-secondary {
+  background-color: $visa-gold;
+  border-color: $visa-gold;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+  }
+}
+
+
+.btn-info {
+  background-color: $visa-gold;
+  border-color: $visa-gold;
+  color: #212529;
+  
+  &:hover, &:focus {
+    background-color: darken($visa-gold, 10%);
+    border-color: darken($visa-gold, 10%);
+    color: #212529;
+  }
+}
+  
+.cursor-pointer {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+.table {
+  th, td {
+    vertical-align: middle;
+  }
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.35em 0.65em;
+}
+
+.btn-group {
+  .btn {
+    padding: 0.25rem 0.5rem;
+    
+    i {
+      font-size: 1rem;
+    }
+  }
+}

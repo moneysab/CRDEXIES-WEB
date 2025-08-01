@@ -1,0 +1,164 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">{{ 'USER.UPDATE_TITLE' | translate }}</h2>
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary" (click)="resetForm()" [disabled]="isLoading">
+          <i class="ti ti-refresh"></i>
+          {{ 'BUTTONS.RESET' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary" (click)="navigateToUserList()">
+          <i class="bi bi-people"></i>
+          {{ 'BUTTONS.BACK_TO_LIST' | translate }}
+        </button>
+      </div>
+    </div>
+  
+    <div class="card-body">
+      <div *ngIf="isLoading" class="text-center my-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">
+            {{ 'LOADING.LOADING' | translate }}...
+          </span>
+        </div>
+        <p class="mt-2">{{ 'LOADING.LOADING' | translate }}...</p>
+      </div>
+  
+      <div *ngIf="successMessage && !isLoading" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+  
+      <div *ngIf="errorMessage && !isLoading" class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ errorMessage }}
+      </div>
+  
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="mb-4" *ngIf="!isLoading">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="username" class="form-label">{{ 'USER.USERNAME' | translate }}*</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control"
+              [ngClass]="{'is-invalid': userForm.controls['username'].invalid && userForm.controls['username'].touched}"
+              placeholder="{{ 'USER.USERNAME' | translate }}"
+            />
+            <div class="invalid-feedback" *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].touched">
+              <span *ngIf="userForm.controls['username'].errors?.['required']">{{ 'USER.USERNAME_REQUIRED' | translate }}</span>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <label for="email" class="form-label">{{ 'USER.EMAIL' | translate }}*</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{'is-invalid': userForm.controls['email'].invalid && userForm.controls['email'].touched}"
+              placeholder="{{ 'USER.EMAIL' | translate }}"
+            />
+            <div class="invalid-feedback" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+              <span *ngIf="userForm.controls['email'].errors?.['required']">{{ 'USER.EMAIL_REQUIRED' | translate }}</span>
+              <span *ngIf="userForm.controls['email'].errors?.['email']">{{ 'USER.EMAIL_INVALID' | translate }}</span>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <label for="firstName" class="form-label">{{ 'USER.FIRST_NAME' | translate }}*</label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="form-control"
+              [ngClass]="{'is-invalid': userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched}"
+              placeholder="{{ 'USER.FIRST_NAME' | translate }}"
+            />
+            <div class="invalid-feedback" *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched">
+              <span *ngIf="userForm.controls['firstName'].errors?.['required']">{{ 'USER.FIRST_NAME_REQUIRED' | translate }}</span>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <label for="lastName" class="form-label">{{ 'USER.LAST_NAME' | translate }}*</label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="form-control"
+              [ngClass]="{'is-invalid': userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched}"
+              placeholder="{{ 'USER.LAST_NAME' | translate }}"
+            />
+            <div class="invalid-feedback" *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched">
+              <span *ngIf="userForm.controls['lastName'].errors?.['required']">{{ 'USER.LAST_NAME_REQUIRED' | translate }}</span>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <label for="phoneNumber" class="form-label">{{ 'USER.PHONE_NUMBER' | translate }}</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              class="form-control"
+              placeholder="{{ 'USER.PHONE_NUMBER' | translate }}"
+            />
+          </div>
+  
+          <div class="col-md-6">
+            <label for="timezone" class="form-label">{{ 'USER.TIMEZONE' | translate }}</label>
+            <input
+              type="text"
+              id="timezone"
+              formControlName="timezone"
+              class="form-control"
+              placeholder="{{ 'USER.TIMEZONE' | translate }}"
+            />
+          </div>
+  
+          <div class="col-md-6">
+            <label for="locale" class="form-label">{{ 'USER.LOCALE' | translate }}</label>
+            <input
+              type="text"
+              id="locale"
+              formControlName="locale"
+              class="form-control"
+              placeholder="{{ 'USER.LOCALE' | translate }}"
+            />
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">{{ 'USER.GROUPS' | translate }}*</label>
+            <div class="form-check" *ngFor="let group of availableGroups">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [value]="group.id"
+                (change)="onGroupCheckboxChange($event)"
+                [checked]="userForm.controls['groupIds'].value?.includes(group.id)"
+                id="groupCheckbox{{ group.id }}"
+              />
+              <label class="form-check-label" [for]="'groupCheckbox' + group.id">
+                {{ group.name }}
+                <small class="text-muted d-block" *ngIf="group.description">
+                  {{ group.description }}
+                </small>
+              </label>
+            </div>
+            <div class="invalid-feedback d-block" *ngIf="userForm.controls['groupIds'].invalid && userForm.controls['groupIds'].touched">
+              <span *ngIf="userForm.controls['groupIds'].errors?.['minLengthArray']">{{ 'USER.GROUPS_REQUIRED' | translate }}</span>
+            </div>
+          </div>
+  
+          <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="userForm.invalid || isLoading">
+              <i class="bi bi-check-circle"></i>
+              {{ 'BANK.UPDATE' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,299 @@
+<div class="menu-styler">
+  <div class="style-block">
+    <div class="customize-header bg-primary align-items-center">
+      <h5 class="offcanvas-title text-white">Theme Customization</h5>
+      <a href="javascript:" class="wid-30 hei-30 d-flex align-items-center justify-content-center" (click)="this.Customize.emit()">
+        <i class="f-18 d-flex align-items-centert text-white" antIcon type="close-circle" theme="outline"></i>
+      </a>
+    </div>
+    <ng-scrollbar style="height: calc(100vh - 60px)" visibility="hover" >
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a class="btn border-0 text-start w-100" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div class="avatar avatar-xs bg-light-primary">
+                  <i class="ti ti-layout-sidebar f-18"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-1">Theme Layout</h6>
+                <span class="f-12">Choose your layout</span>
+              </div>
+              <i class="ti ti-chevron-down"></i>
+            </div>
+          </a>
+          <div class="collapse show" [(ngbCollapse)]="isCollapsed">
+            <div class="pct-content">
+              <div class="theme-color text-start themePreset-color boxwidthpreset">
+                <a [ngClass]="{ active: rtlLayout === false }" (click)="setLayout(false)" data-value="default">
+                  <span><img src="assets/images/customization/default.svg" alt="img" /></span>
+                  <span>Default</span>
+                </a>
+                <a [ngClass]="{ active: rtlLayout === true }" (click)="setLayout(true)" data-value="mantis-rtl">
+                  <span><img src="assets/images/customization/rtl.svg" alt="img" /></span>
+                  <span>RTL</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a
+            class="btn border-0 text-start w-100"
+            (click)="layoutIsCollapsed = !layoutIsCollapsed"
+            [attr.aria-expanded]="!layoutIsCollapsed"
+          >
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div href="javascript:" class="avatar avatar-xs bg-light-primary">
+                  <i class="ti ti-brush f-18"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-1">Theme Mode</h6>
+                <span class="f-12">Choose light or dark mode</span>
+              </div>
+              <i class="ti ti-chevron-down"></i>
+            </div>
+          </a>
+          <div class="collapse show" [(ngbCollapse)]="layoutIsCollapsed">
+            <div class="pct-content">
+              <div class="theme-color text-start themePreset-color">
+                <a
+                  [ngClass]="{ active: layoutType === false }"
+                  (click)="setDarkLayout(false)"
+                  data-value="light"
+                  ngbTooltip="Default Layout"
+                >
+                  <span><img src="assets/images/customization/default.svg" alt="img" /></span>
+                  <span>Light</span>
+                </a>
+                <a [ngClass]="{ active: layoutType === true }" (click)="setDarkLayout(true)" data-value="dark" ngbTooltip="Dark">
+                  <span><img src="assets/images/customization/dark.svg" alt="img" /></span>
+                  <span>Dark</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a
+            class="btn border-0 text-start w-100"
+            (click)="presetIsCollapsed = !presetIsCollapsed"
+            [attr.aria-expanded]="!presetIsCollapsed"
+          >
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div href="javascript:" class="avatar avatar-xs bg-light-primary">
+                  <i class="ti ti-color-swatch f-18"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-1">Color Scheme</h6>
+                <span class="f-12">Choose your primary theme color</span>
+              </div>
+              <i class="ti ti-chevron-down"></i>
+            </div>
+          </a>
+          <div class="collapse show" [(ngbCollapse)]="presetIsCollapsed">
+            <div class="pct-content">
+              <div class="theme-color text-start preset-color">
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-1' }"
+                  (click)="SetBodyColor('preset-1')"
+                  data-value="preset-1"
+                  ngbTooltip="Theme-1"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 1</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-2' }"
+                  (click)="SetBodyColor('preset-2')"
+                  data-value="preset-2"
+                  ngbTooltip="Theme-2"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 2</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-3' }"
+                  (click)="SetBodyColor('preset-3')"
+                  data-value="preset-3"
+                  ngbTooltip="Theme-3"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 3</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-4' }"
+                  (click)="SetBodyColor('preset-4')"
+                  data-value="preset-4"
+                  ngbTooltip="Theme-4"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 4</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-5' }"
+                  (click)="SetBodyColor('preset-5')"
+                  data-value="preset-5"
+                  ngbTooltip="Theme-5"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 5</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-6' }"
+                  (click)="SetBodyColor('preset-6')"
+                  data-value="preset-6"
+                  ngbTooltip="Theme-6"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 6</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-7' }"
+                  (click)="SetBodyColor('preset-7')"
+                  data-value="preset-7"
+                  ngbTooltip="Theme-7"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 7</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-8' }"
+                  (click)="SetBodyColor('preset-8')"
+                  data-value="preset-8"
+                  ngbTooltip="Theme-8"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 8</span>
+                </a>
+                <a
+                  [ngClass]="{ active: bodyColor === 'preset-9' }"
+                  (click)="SetBodyColor('preset-9')"
+                  data-value="preset-8"
+                  ngbTooltip="Theme-9"
+                >
+                  <span><img src="assets/images/customization/theme-color.svg" alt="img" /></span>
+                  <span>Theme 9</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item pc-boxcontainer">
+          <a
+            class="btn border-0 text-start w-100"
+            (click)="boxLayoutIsCollapsed = !boxLayoutIsCollapsed"
+            [attr.aria-expanded]="!boxLayoutIsCollapsed"
+          >
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div class="avatar avatar-xs bg-light-primary">
+                  <i class="ti ti-border-inner f-18"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-1">Layout Width</h6>
+                <span class="f-12">Choose fluid or container layout</span>
+              </div>
+              <i class="ti ti-chevron-down"></i>
+            </div>
+          </a>
+          <div class="collapse show" [(ngbCollapse)]="boxLayoutIsCollapsed">
+            <div class="pct-content">
+              <div class="theme-color text-start themePreset-color boxwidthpreset">
+                <a [ngClass]="{ active: boxLayout === false }" (click)="setBoxContainer(false)" data-value="fluid">
+                  <span><img src="assets/images/customization/default.svg" alt="img" /></span>
+                  <span>Fluid</span>
+                </a>
+                <a [ngClass]="{ active: boxLayout === true }" (click)="setBoxContainer(true)" data-value="container">
+                  <span><img src="assets/images/customization/container.svg" alt="img" /></span>
+                  <span>Container</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a class="btn border-0 text-start w-100" (click)="fontIsCollapsed = !fontIsCollapsed" [attr.aria-expanded]="!fontIsCollapsed">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <div href="javascript:" class="avatar avatar-xs bg-light-primary">
+                  <i class="ti ti-typography f-18"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-1">Font Family</h6>
+                <span class="f-12">Choose your font family.</span>
+              </div>
+              <i class="ti ti-chevron-down"></i>
+            </div>
+          </a>
+          <div class="collapse show" [(ngbCollapse)]="fontIsCollapsed">
+            <div class="pct-content">
+              <div class="theme-color text-start font-preset-color">
+                <a
+                  [ngClass]="{
+                    active: setFontFamily === 'public-sans'
+                  }"
+                  (click)="fontFamily('public-sans')"
+                  data-value="public-sans"
+                >
+                  <span>Aa</span>
+                  <span>Public Sans</span>
+                </a>
+                <a
+                  [ngClass]="{
+                    active: setFontFamily === 'Roboto'
+                  }"
+                  (click)="fontFamily('Roboto')"
+                  data-value="Roboto"
+                >
+                  <span>Aa</span>
+                  <span>Roboto</span>
+                </a>
+                <a
+                  [ngClass]="{
+                    active: setFontFamily === 'Poppins'
+                  }"
+                  (click)="fontFamily('Poppins')"
+                  data-value="Poppins"
+                >
+                  <span>Aa</span>
+                  <span>Poppins</span>
+                </a>
+                <a
+                  [ngClass]="{
+                    active: setFontFamily === 'Inter'
+                  }"
+                  (click)="fontFamily('Inter')"
+                  data-value="Inter"
+                >
+                  <span>Aa</span>
+                  <span>Inter</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item p-3">
+          <div class="d-grid">
+            <button
+              class="btn btn-light-danger"
+              [ngClass]="{ active: resetLayoutType === 'reset' }"
+              (click)="setColorLayout('reset')"
+              data-value="reset"
+              ngbTooltip="Reset"
+            >
+              Reset Layout
+            </button>
+          </div>
+        </li>
+      </ul>
+    </ng-scrollbar>
+  </div>
+</div>

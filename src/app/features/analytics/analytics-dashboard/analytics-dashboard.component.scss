@@ -1,0 +1,368 @@
+// Analytics Dashboard Styling
+// Using the same design system as the main dashboard
+
+// Filter section styling
+.filter-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.filter-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #616161;
+}
+
+// Date preset buttons
+.date-preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  
+  .btn-preset {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    color: #616161;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      border-color: #bbdefb;
+      color: #1976d2;
+    }
+    
+    &.active {
+      background-color: #e3f2fd;
+      border-color: #90caf9;
+      color: #1976d2;
+      font-weight: 500;
+    }
+  }
+}
+
+// Card type toggle buttons
+.card-type-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  
+  .btn-card-type {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &.visa {
+      &.active {
+        background-color: #1a1f71;
+        border-color: #1a1f71;
+        color: white;
+      }
+      
+      &:not(.active):hover {
+        border-color: #1a1f71;
+        color: #1a1f71;
+      }
+    }
+    
+    &.mastercard {
+      &.active {
+        background-color: #F79E1B;
+        border-color: #F79E1B;
+        color: white;
+      }
+      
+      &:not(.active):hover {
+        border-color: #F79E1B;
+        color: #FF5F00;
+      }
+    }
+  }
+}
+
+// Applied filters
+.applied-filters {
+  margin-top: 16px;
+  
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    font-weight: 500;
+    
+    i {
+      margin-left: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  }
+}
+
+// Growth indicators
+.text-success {
+  color: #43a047 !important;
+}
+
+.text-danger {
+  color: #e53935 !important;
+}
+
+.text-warning {
+  color: #ffa000 !important;
+}
+
+.text-neutral {
+  color: #757575 !important;
+}
+
+// Severity badges
+.badge {
+  &.bg-danger {
+    background-color: #ffebee !important;
+    color: #e53935 !important;
+  }
+  
+  &.bg-warning {
+    background-color: #fff8e1 !important;
+    color: #ffa000 !important;
+  }
+  
+  &.bg-info {
+    background-color: #e1f5fe !important;
+    color: #039be5 !important;
+  }
+}
+
+// Animation classes
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+// Cursor pointer for clickable elements
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .date-preset-buttons {
+    flex-wrap: wrap;
+    
+    .btn-preset {
+      flex: 1 0 calc(50% - 8px);
+    }
+  }
+}
+
+.description-cell {
+  white-space: normal;
+  word-break: break-word;
+}
+
+// Enhanced insights panel
+.insights-panel {
+  border-radius: var(--radius-md);
+  background-color: var(--neutral-50);
+  padding: var(--space-3);
+  
+  .insights-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+    
+    h5 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      font-size: 16px;
+      
+      i {
+        color: var(--primary-500);
+      }
+    }
+  }
+  
+  .insights-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-2);
+  }
+  
+  .insight-card {
+    background-color: white;
+    border-radius: var(--radius-sm);
+    padding: var(--space-2);
+    border-left: 3px solid var(--primary-500);
+    box-shadow: var(--shadow-sm);
+    
+    &.insight-trend {
+      border-left-color: var(--primary-500);
+    }
+    
+    &.insight-anomaly {
+      border-left-color: var(--danger);
+    }
+    
+    &.insight-opportunity {
+      border-left-color: var(--success);
+    }
+    
+    .insight-icon {
+      margin-right: 8px;
+      color: var(--neutral-600);
+    }
+    
+    .insight-text {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  }
+}
+
+// Loading states
+.skeleton {
+  background: linear-gradient(90deg, var(--neutral-200) 25%, var(--neutral-100) 50%, var(--neutral-200) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius-sm);
+  height: 16px;
+  margin-bottom: 8px;
+  
+  &.skeleton-title {
+    width: 60%;
+    height: 24px;
+  }
+  
+  &.skeleton-text {
+    width: 100%;
+  }
+  
+  &.skeleton-chart {
+    height: 300px;
+  }
+  
+  &.skeleton-card {
+    height: 120px;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// Animation effects
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.users{
+  max-height: 100px; 
+  overflow-y: auto;
+}
+
+
+.modal.d-block {
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.btn-violet {
+  background-color: purple; 
+  color: white;
+  border: none;
+}
+
+.btn-violet:hover {
+  background-color: darkviolet;
+  color: white;
+}
+
+
+// Responsive adjustments
+@media (max-width: 992px) {
+  .insights-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-section {
+    padding: var(--space-2);
+  }
+  
+  .card-header, .card-body {
+    padding: var(--space-2);
+  }
+  
+  .metric-card {
+    margin-bottom: var(--space-2);
+  }
+}
+
+/* 
+  -------------------------------------------------
+  Fix for the ng-select dropdown overlapping the checkbox
+  -------------------------------------------------
+*/
+.ng-select-sm {
+  --ng-select-height: 36px;
+  font-size: 0.875rem;
+
+  .ng-select-container {
+    min-height: 36px;
+    border-radius: 0.375rem;
+    border: 1.5px solid #ced4da;
+
+    &:focus-within {
+      border-color: var(--bs-primary);
+      box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .25);
+    }
+  }
+}
+

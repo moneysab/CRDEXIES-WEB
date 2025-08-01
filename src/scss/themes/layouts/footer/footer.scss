@@ -1,0 +1,47 @@
+.pc-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 995;
+  padding: 16px 0;
+  background-color: var(--pc-header-background, #fff);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  
+  .footer-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .footer-link {
+    .list-inline-item:not(:last-child) {
+      margin-right: 0.9rem;
+    }
+    
+    a {
+      color: var(--pc-header-color, #555);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      text-decoration: none;
+      
+      &:hover {
+        opacity: 1;
+        color: var(--bs-primary);
+      }
+    }
+  }
+  
+  @media (max-width: 767px) {
+    padding: 12px 0;
+    
+    .footer-wrapper {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+}
+
+/* Add padding to the bottom of the content to prevent it from being hidden behind the fixed footer */
+body {
+  padding-bottom: 60px; /* Adjust this value based on your footer height */
+}

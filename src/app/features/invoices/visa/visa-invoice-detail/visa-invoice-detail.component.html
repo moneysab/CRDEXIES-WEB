@@ -1,0 +1,117 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Visa Invoice Details</h5>
+          <button class="btn btn-outline-secondary" (click)="goBack()">
+            <i class="ti ti-arrow-left"></i> Back to List
+          </button>
+        </div>
+        <div class="card-body">
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <div *ngIf="isLoading" class="d-flex justify-content-center my-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+          <div *ngIf="!isLoading && !errorMessage && invoice" class="invoice-details">
+            <div class="invoice-section">
+              <h6 class="section-title">Invoice Information</h6>
+              <div class="info-card">
+                <div class="info-item">
+                  <div class="info-label">Billing Line</div>
+                  <div class="info-value">{{ invoice.billingLine || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Type </div>
+                  <div class="info-value">{{ invoice.type || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Invoice ID</div>
+                  <div class="info-value">{{ invoice.invoiceId || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Billing Period</div>
+                  <div class="info-value">{{ invoice.billingPeriod || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Invoice Date</div>
+                  <div class="info-value">{{ formatDate(invoice.invoiceDate) }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Invoice Account</div>
+                  <div class="info-value">{{ invoice.invoiceAccount || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Entity Type</div>
+                  <div class="info-value">{{ invoice.entityType || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Entity ID</div>
+                  <div class="info-value">{{ invoice.entityId || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Entity Name</div>
+                  <div class="info-value">{{ invoice.entityName || '–' }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="invoice-section">
+              <h6 class="section-title">Amount Details</h6>
+              <div class="info-card">
+                <div class="info-item">
+                  <div class="info-label">Rate</div>
+                  <div class="info-value">{{ invoice.rate || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Tax</div>
+                  <div class="info-value">{{ formatCurrency(invoice.tax) }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Total Amount</div>
+                  <div class="info-value fw-bold">{{ formatCurrency(invoice.total) }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Billing Currency</div>
+                  <div class="info-value">{{ invoice.billingCurrency || invoice.rateCur || 'USD' }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="invoice-section">
+              <h6 class="section-title">Additional Details</h6>
+              <div class="info-card">
+                <div class="info-item">
+                  <div class="info-label">Description</div>
+                  <div class="info-value">{{ invoice.description || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Settlement ID</div>
+                  <div class="info-value">{{ invoice.settlementId || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Network</div>
+                  <div class="info-value">{{ invoice.ntwk || 'Visa' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Rate Type</div>
+                  <div class="info-value">{{ invoice.rateType || '–' }}</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-label">Units</div>
+                  <div class="info-value">{{ invoice.units || '–' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

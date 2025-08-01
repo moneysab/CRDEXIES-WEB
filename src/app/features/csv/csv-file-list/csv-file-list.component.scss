@@ -1,0 +1,208 @@
+// Mastercard brand colors
+$csv-bleu: #3266d8;
+$csv-neutral: #2634b8;
+$csv-tea: #2340a1f3;
+
+// Custom styles for Mastercard invoice list
+:host {
+  display: block;
+}
+
+// Table header styling
+th {
+  cursor: pointer;
+  user-select: none;
+  background-color: lighten($csv-neutral, 45%);
+
+  &:hover {
+    background-color: lighten($csv-neutral, 40%);
+  }
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+// Currency column styling
+.currency-column {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+// Date column styling
+.date-column {
+  white-space: nowrap;
+}
+
+// Card header styling
+.card-header {
+  background-color: lighten($csv-neutral, 48%);
+  border-bottom: 2px solid $csv-neutral;
+
+  h2 {
+    color: darken($csv-tea, 15%);
+  }
+}
+
+// Primary button styling
+.btn-primary {
+  background-color: $csv-bleu;
+  border-color: $csv-bleu;
+
+  &:hover,
+  &:focus {
+    background-color: darken($csv-bleu, 10%);
+    border-color: darken($csv-bleu, 10%);
+  }
+}
+
+// Secondary button styling
+.btn-secondary {
+  background-color: #88b8e2;
+  border-color: #88b8e2;
+
+  &:hover,
+  &:focus {
+    background-color: darken(#88b8e2, 10%);
+    border-color: darken(#88b8e2, 10%);
+  }
+}
+
+// Info button styling
+.btn-info {
+  background-color: $csv-tea;
+  border-color: $csv-tea;
+  color: #212529;
+
+  &:hover,
+  &:focus {
+    background-color: darken($csv-tea, 10%);
+    border-color: darken($csv-tea, 10%);
+    color: #212529;
+  }
+}
+
+// Pagination styling
+.pagination {
+  .page-item {
+    &.active .page-link {
+      background-color: $csv-bleu;
+      border-color: $csv-neutral;
+    }
+
+    .page-link {
+      color: black;
+
+      &:hover {
+        background-color: lighten($csv-neutral, 45%);
+      }
+    }
+  }
+
+  .table th {
+    font-weight: 600;
+    background-color: #f8fafc;
+    color: #475569;
+    padding: 1rem 0.75rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    border-top: none;
+    border-bottom: 2px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .table th {
+    font-weight: 600;
+    background-color: #f8fafc;
+    color: #475569;
+    padding: 1rem 0.75rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    border-top: none;
+    border-bottom: 2px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.badge {
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.badge-visa {
+  background-color: #1a1f71;
+  color: white;
+}
+
+.badge-mastercard {
+  background-color: #F79E1B;
+  color: white;
+}
+.badge-user {
+  background-color: #2286f8;
+  color: white;
+}
+
+.action-column {
+  position: sticky;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: -4px 0 5px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1;
+}
+
+.user-badge {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+// Table row hover effect
+tbody tr {
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: lighten($csv-tea, 40%) !important;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+
+    .btn {
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem !important;
+    }
+  }
+
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}

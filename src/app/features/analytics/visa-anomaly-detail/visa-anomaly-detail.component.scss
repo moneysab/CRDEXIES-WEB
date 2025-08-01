@@ -1,0 +1,33 @@
+$visa-blue: #1a1f71;
+$visa-gold: #F7B600;
+
+.visa-title {
+  color: $visa-blue;
+  font-weight: 600;
+}
+
+.visa-card {
+  border-left: 4px solid $visa-blue;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.section-title {
+  color: $visa-gold;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.info-card {
+  background-color: #f8f9fc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}

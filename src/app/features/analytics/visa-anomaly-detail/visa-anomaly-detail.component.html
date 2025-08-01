@@ -1,0 +1,86 @@
+<div class="container-fluid px-4">
+    <div class="card visa-card p-3">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
+            <h4 class="visa-title mb-0">
+                <i class="ti ti-alert-triangle me-2 text-primary"></i>  {{ 'DETAILS.TITLE.VISA' | translate }}
+            </h4>
+            <button class="btn btn-outline-primary" (click)="goBack()">
+                <i class="ti ti-arrow-left"></i>{{ 'DETAILS.BACK' | translate }}
+            </button>
+        </div>
+
+        <div class="card-body pt-0">
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+
+            <div *ngIf="isLoading" class="d-flex justify-content-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">{{ 'DETAILS.LOADING' | translate }}</span>
+                </div>
+            </div>
+
+            <div *ngIf="!isLoading && anomaly" class="anomaly-details mt-3">
+                <h5 class="section-title">{{ 'DETAILS.ANOMALY_INFO' | translate }}</h5>
+                <div class="info-card row">
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.DESCRIPTION' | translate }}:</strong> {{ anomaly.description }}</div>
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.CATEGORY' | translate }}:</strong> {{ anomaly.category }}</div>
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.SEVERITY' | translate }}: </strong>
+                        <span [ngClass]="{
+                'text-danger': anomaly.severity === 'HIGH',
+                'text-warning': anomaly.severity === 'MEDIUM',
+                'text-success': anomaly.severity === 'LOW'
+              }">{{ anomaly.severity }}</span>
+                    </div>
+
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.DEVIATION' | translate }}:</strong>
+                        <span [ngClass]="getGrowthClass(anomaly.deviationPercentage)">
+                            <i class="ti ti-trending-{{ getGrowthIcon(anomaly.deviationPercentage) }}"></i>
+                            {{ anomaly.deviationPercentage }}%
+                        </span>
+                    </div>
+
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.EXPECTED' | translate }}:</strong> {{ formatCurrency(anomaly.expectedValue)
+                        }}</div>
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.ACTUAL' | translate }}:</strong> {{ formatCurrency(anomaly.actualValue) }}
+                    </div>
+
+                    <div class="col-md-6 info-item"><strong>{{ 'DETAILS.DETECTION_DATE' | translate }}:</strong> {{
+                        formatDate(anomaly.detectionDate) }}</div>
+
+                </div>
+
+                <div *ngIf="invoice" class="invoice-details mt-4">
+                    <h5 class="section-title">{{ 'DETAILS.INVOICE_INFO' | translate }}</h5>
+                    <div class="info-card row">
+                        <div class="col-md-6 info-item"><strong>Billing Line:</strong> {{ invoice.billingLine || '–' }}
+                        </div>
+                        <div class="col-md-6 info-item"><strong>Billing Period:</strong> {{ invoice.billingPeriod || '–'
+                            }}</div>
+                        <div class="col-md-6 info-item"><strong>Invoice Date:</strong> {{
+                            formatDate(invoice.invoiceDate) }}</div>
+                        <div class="col-md-6 info-item"><strong>Invoice Account:</strong> {{ invoice.invoiceAccount ||
+                            '–' }}</div>
+                        <div class="col-md-6 info-item"><strong>Name:</strong> {{ invoice.name || '–' }}</div>
+                        <div class="col-md-6 info-item"><strong>Invoice ID:</strong> {{ invoice.invoiceId || '–' }}
+                        </div>
+                        <div class="col-md-6 info-item"><strong>Sub Invoice:</strong> {{ invoice.subInvoice || '–' }}
+                        </div>
+                        <div class="col-md-6 info-item"><strong>Current/Previous:</strong> {{ invoice.currentOrPrevious
+                            || '–' }}</div>
+                        <div class="col-md-6 info-item"><strong>Entity Type:</strong> {{ invoice.entityType || '–' }}
+                        </div>
+                        <div class="col-md-6 info-item"><strong>Entity ID:</strong> {{ invoice.entityId || '–' }}</div>
+                        <div class="col-md-6 info-item"><strong>Entity Name:</strong> {{ invoice.entityName || '–' }}
+                        </div>
+                        <div class="col-md-6 info-item"><strong>Settlement ID:</strong> {{ invoice.settlementId || '–'
+                            }}</div>
+                        <div class="col-md-12 info-item"><strong>Description:</strong> {{ invoice.description || '–' }}
+                        </div>
+                        <div class="col-md-6 info-item"><strong>Billing Currency:</strong> {{ invoice.billingCurrency ||
+                            'USD' }}</div>
+                        <div class="col-md-6 info-item"><strong>Total Amount:</strong> {{ formatCurrency(invoice.total,
+                            invoice.billingCurrency) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

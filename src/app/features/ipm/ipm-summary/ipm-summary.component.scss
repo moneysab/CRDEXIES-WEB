@@ -1,0 +1,150 @@
+// Mastercard brand colors - Updated to match design
+$mastercard-primary: #f59e0b;
+$mastercard-orange: #f59e0b;
+$mastercard-secondary: #6b7280;
+
+// Custom styles for Mastercard invoice list
+:host {
+  display: block;
+}
+
+// Table header styling
+th {
+  cursor: pointer;
+  user-select: none;
+  background-color: lighten($mastercard-primary, 45%);
+
+  &:hover {
+    background-color: lighten($mastercard-primary, 40%);
+  }
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+// Currency column styling
+.currency-column {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+// Date column styling
+.date-column {
+  white-space: nowrap;
+}
+
+// Card header styling
+.card-header {
+  background-color: lighten($mastercard-primary, 48%);
+  border-bottom: 2px solid $mastercard-primary;
+
+  h2 {
+    color: $mastercard-primary;
+  }
+}
+
+// Primary button styling
+.btn-primary {
+  background-color: $mastercard-primary;
+  border-color: $mastercard-primary;
+  color: #ffffff;
+
+  &:hover, &:focus {
+    background-color: darken($mastercard-primary, 10%);
+    border-color: darken($mastercard-primary, 10%);
+    color: #ffffff;
+  }
+}
+
+// Secondary button styling
+.btn-secondary {
+  background-color: $mastercard-secondary;
+  border-color: $mastercard-secondary;
+  color: #ffffff;
+
+  &:hover, &:focus {
+    background-color: darken($mastercard-secondary, 10%);
+    border-color: darken($mastercard-secondary, 10%);
+    color: #ffffff;
+  }
+}
+
+// Info button styling
+.btn-info {
+  background-color: $mastercard-primary;
+  border-color: $mastercard-primary;
+  color: #ffffff;
+
+  &:hover, &:focus {
+    background-color: darken($mastercard-primary, 10%);
+    border-color: darken($mastercard-primary, 10%);
+    color: #ffffff;
+  }
+}
+
+// Pagination styling
+.pagination {
+  .page-item {
+    &.active .page-link {
+      background-color: $mastercard-primary;
+      border-color: $mastercard-primary;
+    }
+
+    .page-link {
+      color: black;
+
+      &:hover {
+        background-color: lighten($mastercard-primary, 45%);
+      }
+    }
+  }
+}
+
+// Table row hover effect
+tbody tr {
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: lighten($mastercard-primary, 40%) !important;
+  }
+}
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+
+  table {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  th, td {
+    vertical-align: middle;
+    padding: 0.75rem;
+  }
+
+  td.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+    
+    .btn {
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem !important;
+    }
+  }
+  
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}

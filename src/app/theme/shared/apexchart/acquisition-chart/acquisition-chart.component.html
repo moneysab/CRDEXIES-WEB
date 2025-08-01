@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <h6 class="mb-2">Acquisition Channels</h6>
+        <p class="mb-0 text-muted">Marketing</p>
+      </div>
+      <h4 class="text-primary">-128</h4>
+    </div>
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [legend]="chartOptions.legend"
+      [xaxis]="chartOptions.xaxis"
+      [colors]="chartOptions.colors"
+      [stroke]="chartOptions.stroke"
+      [yaxis]="chartOptions.yaxis"
+      [grid]="chartOptions.grid"
+      [tooltip]="chartOptions.tooltip"
+    ></apx-chart>
+  </div>
+  <div class="list-group list-group-flush">
+    @for (list of channels; track list) {
+      <a href="javascript:" class="list-group-item list-group-item-action">
+        <div class="d-flex">
+          <div class="flex-shrink-0">
+            <div class="avatar avatar-s rounded-circle {{ list.background }}">
+              <i class="{{ list.icon }} f-18"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h6 class="mb-1">{{ list.title }}</h6>
+            <p class="mb-0 text-muted">{{ list.time }}</p>
+          </div>
+          <div class="flex-shrink-0 text-end">
+            <h6 class="mb-1">{{ list.amount }}</h6>
+            <p class="mb-0 text-muted">{{ list.percentage }}</p>
+          </div>
+        </div>
+      </a>
+    }
+  </div>
+</div>

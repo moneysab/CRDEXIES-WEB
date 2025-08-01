@@ -1,0 +1,188 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">IPM Summary Details</h5>
+                        <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+                            <i class="ti ti-arrow-left"></i> Back to Summaries
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div *ngIf="isLoading" class="d-flex justify-content-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div *ngIf="!isLoading && !errorMessage && summary">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="summary-section">
+                                    <h6 class="section-title">General Information</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+
+                                                <tr>
+                                                    <th>Member ID</th>
+                                                    <td>{{ summary.memberId || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>File ID</th>
+                                                    <td>{{ summary.fileId || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Clearing Cycle</th>
+                                                    <td>{{ summary.clearingCycle || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Acceptance Brand</th>
+                                                    <td>{{ summary.acceptanceBrand || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Business Service Level</th>
+                                                    <td>{{ summary.businessServiceLevel || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Business Service ID</th>
+                                                    <td>{{ summary.businessServiceId || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Summary</th>
+                                                    <td>{{ summary.summaryType || '–' }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="transaction-section">
+                                    <h6 class="section-title">Additional Details</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Run Date</th>
+                                                    <td>{{ formatDate(summary.runDate) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Processing Date</th>
+                                                    <td>{{ formatDate( summary.processingDate) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Recon Amount</th>
+                                                    <td>{{ summary.reconAmount || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Recon Indicator</th>
+                                                    <td>{{ summary.reconCrDrIndicator || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fee Amount</th>
+                                                    <td>{{ summary.feeAmount || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fee Indicator</th>
+                                                    <td>{{ summary.feeCrDrIndicator || '–' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Currency Code</th>
+                                                    <td>{{ summary.currencyCode || '–' }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="transaction-section">
+                                    <h6 class="section-title">Transactions {{ summary.summaryType || '–' }}</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cycle</th>
+                                                    <th>Business Service</th>
+                                                    <th>Service Level</th>
+                                                    <th>Type</th>
+                                                    <th>Currency</th>
+                                                    <th>Run Date</th>
+                                                    <th>Reconciliation</th>
+                                                    <th>Fee</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let t of transactions">
+                                                    <td>{{ t.clearingCycle }}</td>
+                                                    <td>{{ t.businessServiceId }}</td>
+                                                    <td>{{ t.businessServiceLevel }}</td>
+                                                    <td>{{ t.transactionType }}</td>
+                                                    <td>{{ t.feeCurrencyCode }}</td>
+                                                    <td>{{ formatDate(t.runDate) }}</td>
+                                                    <td>
+                                                        {{ t.reconAmount | number:'1.2-2' }} {{ t.reconCrDrIndicator }}
+                                                    </td>
+                                                    <td>
+                                                        {{ t.feeAmount | number:'1.2-2' }} {{ t.feeCrDrIndicator }}
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <!-- Pagination -->
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div>
+                                            {{ 'PAGINATION.SHOWING' | translate:{count: transactions.length, total:
+                                            totalElements} }}
+                                        </div>
+                                        <div class="mb-2">
+                                            {{ 'PAGINATION.PAGE' | translate:{current: currentPage + 1, total:
+                                            totalPages} }}
+                                        </div>
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination">
+                                                <li class="page-item" [class.disabled]="currentPage === 0">
+                                                    <a class="page-link" href="javascript:void(0)"
+                                                        (click)="previousPage(); $event.preventDefault()">
+                                                        <i class="ti ti-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <span class="page-link">{{ currentPage + 1 }}</span>
+                                                </li>
+                                                <li class="page-item" [class.disabled]="currentPage + 1 >= totalPages">
+                                                    <a class="page-link" href="javascript:void(0)"
+                                                        (click)="nextPage(); $event.preventDefault()">
+                                                        <i class="ti ti-chevron-right"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

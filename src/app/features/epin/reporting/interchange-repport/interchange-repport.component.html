@@ -1,0 +1,126 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">{{ 'VISA_INTERCHANGE_DETAILS' | translate }}</h2>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)=" navigateToSumamry()">
+                <i class="bi bi-graph-up"></i> {{ 'Summary' | translate }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="navigateToReimbursementReport()">
+                <i class="bi bi-graph-up"></i> {{ 'BUTTONS.REIMBURSEMENT' | translate }}
+            </button>
+            <button type="button" class="btn btn-primary" (click)="navigateToChargesReport()">
+                <i class="bi bi-pie-chart"></i> {{ 'BUTTONS.CHARGES' | translate }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="exportInterchangeToCsv()">
+                <i class="bi bi-upload"></i>{{ 'BUTTONS.EXPORT' | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="kpiForm" (ngSubmit)="applyFilters()" class="row g-2 align-items-end">
+            <div class="col-md-2">
+                <label for="startDate" class="form-label">{{ 'FILTERS.START_DATE' | translate }}</label>
+                <input type="date" class="form-control" id="startDate" formControlName="startDate" [max]="getToday()" />
+            </div>
+            <div class="col-md-2">
+                <label for="endDate" class="form-label">{{ 'FILTERS.END_DATE' | translate }}</label>
+                <input type="date" class="form-control" id="endDate" formControlName="endDate" [max]="getToday()" />
+            </div>
+            <div class="col-md-2">
+                <label for="binCode" class="form-label">{{ 'FILTERS.BIN' | translate }}</label>
+                <input type="text" class="form-control" id="binCode" placeholder="Bin" formControlName="binCode" />
+              </div>
+            <div class="col-md-2">
+                <label for="currencyCode" class="form-label">{{ 'BANK.CURRENCY' | translate }}</label>
+                <select class="form-select" formControlName="currencyCode">
+                    <option value="978">EUR</option>
+                    <option value="840">USD</option>
+                </select>
+            </div>
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search me-1"></i> {{ 'BUTTONS.SEARCH' | translate }}
+                </button>
+            </div>
+
+            <div class="col-md-2 d-grid">
+                <button type="button" class="btn btn-secondary" (click)="resetFilters()">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> {{ 'BUTTONS.RESET' | translate }}
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center my-4">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger mt-3">
+        {{ error }}
+    </div>
+
+    <div *ngIf="interchangeData && interchangeData.businessModes?.length" class="mt-4">
+        <div *ngFor="let mode of interchangeData.businessModes" class="mb-5">
+            <h4 class="text-visa">Business Mode: {{ mode.businessMode }}</h4>
+
+            <table class="table table-bordered table-striped table-sm">
+                <thead class="table-light">
+                    <tr>
+                        <th>Transaction Type</th>
+                        <th>Cycle</th>
+                        <th>Rate Table</th>
+                        <th>Count</th>
+                        <th>Clearing Amount</th>
+                        <th>Interchange Credits</th>
+                        <th>Interchange Debits</th>
+                        <th>Net</th>
+                        <th>Sign</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let type of mode.transactionTypes">
+                        <ng-container *ngFor="let cycle of type.cycles">
+                            <tr>
+                                <td>{{ type.transactionType }}</td>
+                                <td>{{ cycle.transactionCycle }}</td>
+                                <td>{{ cycle.rateTableId }}</td>
+                                <td>{{ formatNumber(cycle.count) }}</td>
+                                <td>{{ cycle.clearingAmount }}</td>
+                                <td>{{ formatCurrency(cycle.interchangeCredits, currency) }}</td>
+                                <td>{{ formatCurrency(cycle.interchangeDebits, currency) }}</td>
+                                <td>{{ formatCurrency(cycle.netAmount, currency) }}</td>
+                                <td>{{ cycle.amountSign }}</td>
+                            </tr>
+                        </ng-container>
+                        <!-- Totaux par transaction type -->
+                        <tr class="table-active">
+                            <td><strong>Total {{ type.transactionType }}</strong></td>
+                            <td colspan="2"></td>
+                            <td>{{ formatNumber(type.totalCount) }}</td>
+                            <td>{{ type.totalClearingAmount }}</td>
+                            <td>{{ formatCurrency(type.totalInterchangeCredits, currency) }}</td>
+                            <td>{{ formatCurrency(type.totalInterchangeDebits, currency) }}</td>
+                            <td>{{ formatCurrency(type.netAmount, currency) }}</td>
+                            <td>{{ type.amountSign }}</td>
+                        </tr>
+                    </ng-container>
+                    <!-- Totaux par business mode -->
+                    <tr class="table-secondary">
+                        <td><strong>Total {{ mode.businessMode }}</strong></td>
+                        <td colspan="2"></td>
+                        <td>{{ formatNumber(mode.totalCount) }}</td>
+                        <td>{{ mode.totalClearingAmount }}</td>
+                        <td>{{ formatCurrency(mode.totalInterchangeCredits, currency) }}</td>
+                        <td>{{ formatCurrency(mode.totalInterchangeDebits, currency) }}</td>
+                        <td>{{ formatCurrency(mode.netAmount, currency) }}</td>
+                        <td>{{ mode.amountSign }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="interchangeData && !interchangeData.businessModes?.length" class="alert alert-info mt-4">
+        {{ 'MESSAGES.NO_INTERCHANGE_DATA_FOUND' | translate }}
+    </div>
+</div>

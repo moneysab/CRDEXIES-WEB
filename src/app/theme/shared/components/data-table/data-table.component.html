@@ -1,0 +1,84 @@
+<app-card [cardTitle]="cardTitle()" [cardClass]="cardClass()" [showHeader]="showHeader()" [headerClass]="headerClass()">
+  <!-- Custom header actions -->
+  <ng-template #headerOptionsTemplate>
+    <ng-container *ngTemplateOutlet="headerActionsTemplate"></ng-container>
+  </ng-template>
+
+  <!-- Loading state -->
+  @if (loading()) {
+    <div class="p-4 text-center">
+      @if (loadingTemplate) {
+        <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container>
+      } @else {
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Loading data...</p>
+      }
+    </div>
+  } @else if (errorMessage()) {
+    <!-- Error state -->
+    <div class="p-4 text-center">
+      @if (errorTemplate) {
+        <ng-container *ngTemplateOutlet="errorTemplate; context: { $implicit: errorMessage() }"></ng-container>
+      } @else {
+        <div class="alert alert-danger" role="alert">
+          <i class="ti ti-alert-circle me-2"></i>
+          {{ errorMessage() }}
+        </div>
+      }
+    </div>
+  } @else if (data().length === 0) {
+    <!-- Empty state -->
+    <div class="p-4 text-center">
+      @if (emptyTemplate) {
+        <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+      } @else {
+        <div class="empty-state">
+          <i class="ti ti-database-off text-muted" style="font-size: 3rem;"></i>
+          <p class="mt-2 text-muted">{{ noDataMessage() }}</p>
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- Data table -->
+    <div [class.table-responsive]="responsive()">
+      <table [class]="tableClass()">
+        <thead>
+          <tr>
+            @for (column of columns(); track column.key) {
+              <th [class]="column.class">{{ column.label }}</th>
+            }
+            @if (rowActionsTemplate) {
+              <th class="text-end">Actions</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of data(); track $index) {
+            <tr>
+              @for (column of columns(); track column.key) {
+                <td [class]="column.class">
+                  @if (cellTemplate) {
+                    <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: row, column: column }"></ng-container>
+                  } @else {
+                    @if (column.format) {
+                      {{ column.format(row[column.key], row) }}
+                    } @else {
+                      {{ row[column.key] }}
+                    }
+                  }
+                </td>
+              }
+              @if (rowActionsTemplate) {
+                <td class="text-end">
+                  <ng-container *ngTemplateOutlet="rowActionsTemplate; context: { $implicit: row }"></ng-container>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</app-card>

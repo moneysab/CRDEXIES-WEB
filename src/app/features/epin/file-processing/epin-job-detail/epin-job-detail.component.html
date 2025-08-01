@@ -1,0 +1,135 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">EPIN Job Details</h2>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" (click)="navigateToJobs()">
+              <i class="ti ti-list"></i> Back to Jobs
+            </button>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
+          
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+          
+          <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          <div *ngIf="!isLoading && job">
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="card border">
+                  <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Job Information</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <label class="fw-bold">Job ID:</label>
+                      <p>{{ job.id }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Client Id:</label>
+                      <p>{{ job.clientId }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Status:</label>
+                      <p><span [class]="getStatusClass(job.status)">{{ job.status }}</span></p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">File Name:</label>
+                      <p>{{ job.originalFilename }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Created:</label>
+                      <p>{{ formatDate(job.processingStartedAt) }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Report Format:</label>
+                      <p>{{ job.reportFormat }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="card border">
+                  <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Processing Details</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <label class="fw-bold">Total Records:</label>
+                      <p>{{ job.totalRecords  }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Processed Records:</label>
+                      <p>{{ job.processedRecords  }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Failed Record:</label>
+                      <p>{{ job.failedRecords  }}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label class="fw-bold">Success Rate:</label>
+                      <p *ngIf="job.totalRecords && job.processedRecords">
+                        {{ (job.processedRecords / job.totalRecords * 100).toFixed(2) }}%
+                      </p>
+                      <p *ngIf="!job.totalRecords || !job.processedRecords">0</p>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--
+            <div *ngIf="job.error" class="row mb-4">
+              <div class="col-12">
+                <div class="card border border-danger">
+                  <div class="card-header bg-danger text-white">
+                    <h5 class="card-title mb-0">Error Information</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <label class="fw-bold">Error Message:</label>
+                      <p>{{ job.errorMessage }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            -->
+            <div class="d-flex justify-content-end gap-2">
+              <button 
+                *ngIf="job.status === 'Failed'"
+                type="button" 
+                class="btn btn-warning" 
+                (click)="retryJob()"
+              >
+                <i class="ti ti-refresh"></i> Retry Job
+              </button>
+              <button 
+                *ngIf="job.status === 'Processing' || job.status === 'Pending'"
+                type="button" 
+                class="btn btn-danger" 
+                (click)="cancelJob()"
+              >
+                <i class="ti ti-x"></i> Cancel Job
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

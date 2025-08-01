@@ -1,0 +1,51 @@
+<h5 class="mb-3">Income Overview</h5>
+<div class="card">
+  <div class="card-body">
+    <div class="row mb-0 align-items-center">
+      <div class="col">
+        <p class="mb-1 text-danger">$1,12,900 (45.67%)</p>
+        <p class="mb-1 text-muted">Compare to : 01 Dec 2021-08 Jan 2022</p>
+      </div>
+      <div class="col-auto">
+        <div class="btn-group">
+          <button class="btn income-week week" [ngClass]="isDarkThemes === true ? 'btn-dark' : 'btn-light'" (click)="toggleActive('week')">
+            Week
+          </button>
+          <button
+            class="btn income-month month"
+            [ngClass]="isDarkThemes === true ? 'btn-dark' : 'btn-light'"
+            (click)="toggleActive('month')"
+          >
+            Month
+          </button>
+        </div>
+      </div>
+      <div class="col-auto">
+        <select class="form-select select-time" title="Select Item" [(ngModel)]="selectType" (change)="onOptionSelected()">
+          <option value="volume">By Volume</option>
+          <option value="margin">By Margin</option>
+          <option value="sales">By Sales</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <a href="javascript:" class="avatar avatar-xs btn btn-outline-secondary" title="Download">
+          <i antIcon type="download" theme="outline"></i>
+        </a>
+      </div>
+    </div>
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [colors]="chartOptions.colors"
+        [stroke]="chartOptions.stroke"
+        [fill]="chartOptions.fill"
+        [grid]="chartOptions.grid"
+        [tooltip]="chartOptions.tooltip"
+      ></apx-chart>
+    </div>
+  </div>
+</div>
