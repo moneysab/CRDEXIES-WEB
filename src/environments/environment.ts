@@ -7,8 +7,8 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: false,
-  apiUrl: 'http://84.234.31.171:8080',
-  epinApiUrl: 'http://84.234.31.171:8080/cardexis-settlement',
+  apiUrl: 'http://84.234.31.171:8081',
+  epinApiUrl: 'http://84.234.31.171:8082/cardexis-settlement',
 };
 
 /*
