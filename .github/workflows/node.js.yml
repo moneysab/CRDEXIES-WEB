@@ -119,6 +119,7 @@ jobs:
                docker run -d \
                  --name ${{ env.CONTAINER_NAME }} \
                  -p ${{ env.APP_PORT }}:80 \
+                 --network moneysab-network \
                  --restart unless-stopped \
                  ${{ env.DOCKER_IMAGE }}:${{ github.sha }}"
       
