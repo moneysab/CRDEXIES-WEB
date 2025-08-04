@@ -76,6 +76,8 @@ The application follows a feature-based architecture:
   - Dashboard
   - Bills management
   - User profile
+ 
+  - 
   
 - **shared**: Reusable components, directives, and pipes
   - UI components
