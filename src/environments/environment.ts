@@ -7,7 +7,7 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: false,
-  apiUrl: 'https://c-flow-api.moneysab.fr',
+  apiUrl: 'https://c-bill-api.moneysab.fr',
   epinApiUrl: 'http://84.234.31.171:8082/cardexis-settlement',
 };
 
