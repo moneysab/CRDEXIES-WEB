@@ -95,7 +95,7 @@ jobs:
                docker volume prune -f && \
                
                # Remove all unused networks
-               docker network prune -f && \
+               # docker network prune -f && \
                
                # Complete Docker system cleanup
                docker system prune -a -f && \
