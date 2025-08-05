@@ -63,7 +63,11 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           echo "${{ secrets.EC2_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-      
+      - name: Fix SSH host key change
+        run: |
+          ssh-keygen -f "$HOME/.ssh/known_hosts" -R "84.234.31.171"
+          ssh-keyscan -H 84.234.31.171 >> "$HOME/.ssh/known_hosts"
+          
       - name: Aggressive disk space cleanup
         run: |
           ssh -i ~/.ssh/deploy_key \
