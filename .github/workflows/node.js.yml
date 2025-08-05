@@ -100,6 +100,8 @@ jobs:
                # Complete Docker system cleanup
                docker system prune -a -f && \
                
+               docker network inspect moneysab-network >/dev/null 2>&1 || docker network create moneysab-network && \
+               
                # Clean up system logs (optional - be careful)
                sudo journalctl --vacuum-time=1d || true && \
                
